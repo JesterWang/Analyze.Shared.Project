@@ -9,7 +9,7 @@ namespace Analyze.Shared.DataAccess
     public partial class efc_db_01_DBContext : DbContext
     {
         public efc_db_01_DBContext()
-            : base("name=efc_db_01_DBContext")
+            : base("name=efc_db_01_Config")
         {
         }
 

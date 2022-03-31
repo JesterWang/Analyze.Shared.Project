@@ -3,12 +3,15 @@ using Analyze.Shared.Bussiness.Services;
 using Analyze.Shared.Common;
 using Analyze.Shared.Common.User;
 using Analyze.Shared.DataAccess;
+using Microsoft.Practices.Unity.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using Unity;
 
 namespace Analyze.Shared.Project.Controllers
 {
@@ -49,8 +52,18 @@ namespace Analyze.Shared.Project.Controllers
                 //} 
                 #endregion
 
+                //ISysUserservice sysUserservice = new SysUserservice(new efc_db_01_DBContext());
                 
-                ISysUserservice sysUserservice = new SysUserservice(new efc_db_01_DBContext());
+                //断开对细节的依赖--通过IOC容器来创建Unity
+                IUnityContainer _Container = new UnityContainer();
+                ExeConfigurationFileMap fileMap = new ExeConfigurationFileMap();
+                fileMap.ExeConfigFilename = Path.Combine(AppDomain.CurrentDomain.BaseDirectory+"CfgFiles\\Unity.Config");
+                Configuration configuration = ConfigurationManager.OpenMappedExeConfiguration(fileMap,ConfigurationUserLevel.None);
+                UnityConfigurationSection section = (UnityConfigurationSection)configuration.GetSection
+                    (UnityConfigurationSection.SectionName);
+                section.Configure(_Container, "AnalyzeContainer");
+
+                ISysUserservice sysUserservice = _Container.Resolve<ISysUserservice>();
                 CurrentUser currentUser = sysUserservice.GetUser(user);
                 if (currentUser != null)
                 {
