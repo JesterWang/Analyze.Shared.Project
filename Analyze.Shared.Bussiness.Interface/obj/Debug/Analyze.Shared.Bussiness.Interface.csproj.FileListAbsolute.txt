@@ -1,0 +1,13 @@
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Interface\bin\Debug\Analyze.Shared.Bussiness.Interface.dll.config
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Interface\bin\Debug\Analyze.Shared.Bussiness.Interface.dll
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Interface\bin\Debug\Analyze.Shared.Bussiness.Interface.pdb
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Interface\bin\Debug\Analyze.Shared.Common.dll
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Interface\bin\Debug\EntityFramework.dll
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Interface\bin\Debug\EntityFramework.SqlServer.dll
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Interface\bin\Debug\MySql.Data.dll
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Interface\bin\Debug\Analyze.Shared.Common.pdb
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Interface\bin\Debug\EntityFramework.xml
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Interface\bin\Debug\EntityFramework.SqlServer.xml
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Interface\obj\Debug\Analyze.Shared.Bussiness.Interface.csprojResolveAssemblyReference.cache
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Interface\obj\Debug\Analyze.Shared.Bussiness.Interface.dll
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Interface\obj\Debug\Analyze.Shared.Bussiness.Interface.pdb

@@ -1,0 +1,17 @@
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\Analyze.Shared.Bussiness.Services.dll.config
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\Analyze.Shared.Bussiness.Services.dll
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\Analyze.Shared.Bussiness.Services.pdb
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\Analyze.Shared.Bussiness.Interface.dll
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\Analyze.Shared.Common.dll
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\Analyze.Shared.DataAccess.dll
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\EntityFramework.dll
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\EntityFramework.SqlServer.dll
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\MySql.Data.dll
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\Analyze.Shared.Bussiness.Interface.pdb
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\Analyze.Shared.Common.pdb
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\Analyze.Shared.DataAccess.pdb
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\EntityFramework.xml
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\EntityFramework.SqlServer.xml
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\obj\Debug\Analyze.Shared.Bussiness.Services.csprojResolveAssemblyReference.cache
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\obj\Debug\Analyze.Shared.Bussiness.Services.dll
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\obj\Debug\Analyze.Shared.Bussiness.Services.pdb

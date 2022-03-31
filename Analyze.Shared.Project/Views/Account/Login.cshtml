@@ -1,0 +1,79 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = "登录";
+}
+<!doctype html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+    <title>WHP停线验证管理平台</title>
+    
+    <link href="~/Content/Login/style.css" rel="stylesheet" />
+    
+    <link href="~/Content/Login/iconfont.css" rel="stylesheet" />
+    
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="login-banner"></div>
+
+    <div class="login-box">
+
+        <div class="box-con tran">
+            @using Analyze.Shared.Common.User;
+            @model LoginUser
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post, 
+                new { @class="form-horizontal",role = "form" })) 
+            {
+                @Html.AntiForgeryToken()
+                <div class="login-con f-l">
+                    <div class="alert alert-danger display-hide">
+                        @*<button class="close" data-close="alert"></button>*@
+                        <span> @ViewBag.Message</span>
+                        @Html.ValidationSummary(true)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.username, new { @class = "control-label visible-ie8 visible-ie9" })
+                        <div class="input-icon">
+                            <i class="fa fa-user"></i>
+                            @Html.TextBoxFor(m => m.username, new { @class = "form-control placeholder-no-fix",
+                                @type = "text" , @autocomplete = "off" , @placeholder = "请输入用户名..."})
+                            @Html.ValidationMessage("Name", new { style = "color: red" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.password, new { @class = "control-label visible-ie8 visible-ie9" })
+                        <div class="input-icon">
+                            <i class="fa fa-user"></i>
+                            @Html.TextBoxFor(m => m.password, new{@class = "form-control placeholder-no-fix",
+                           @type = "text",@autocomplete = "off",@placeholder = "请输入密码..."})
+                            @Html.ValidationMessage("Password", new { style = "color: red" })
+                            @Html.ValidationMessage("failed", new { style = "color: red" })
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn green pull-right" >登录</button>
+                    </div>
+
+                    <div class="from-line"></div>
+
+            </div>
+            }
+        </div>
+
+    </div>
+</body>
+
+</html>
