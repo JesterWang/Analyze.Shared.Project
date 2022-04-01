@@ -3,6 +3,7 @@ using Analyze.Shared.Bussiness.Services;
 using Analyze.Shared.Common;
 using Analyze.Shared.Common.User;
 using Analyze.Shared.DataAccess;
+using Analyze.Shared.Project.Utility;
 using Microsoft.Practices.Unity.Configuration;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,11 @@ namespace Analyze.Shared.Project.Controllers
 {
     public class AccountController : Controller
     {
+        private ISysUserservice _ISysUserservice = null;
+        public AccountController(ISysUserservice iSysUserservice) 
+        {
+            _ISysUserservice = iSysUserservice;
+        }
         [HttpGet]//返回一个页面：这个页面是用来展示登录的页面
         public ActionResult Login() 
         {
@@ -28,7 +34,7 @@ namespace Analyze.Shared.Project.Controllers
         {
             if (ModelState.IsValid)//触发实体验证--如果返回true,验证通过
             {
-                
+
                 //连接数据库查询--EF6
                 #region 直接查询
                 //using (efc_db_01_DBContext context = new efc_db_01_DBContext())
@@ -53,18 +59,23 @@ namespace Analyze.Shared.Project.Controllers
                 #endregion
 
                 //ISysUserservice sysUserservice = new SysUserservice(new efc_db_01_DBContext());
-                
-                //断开对细节的依赖--通过IOC容器来创建Unity
-                IUnityContainer _Container = new UnityContainer();
-                ExeConfigurationFileMap fileMap = new ExeConfigurationFileMap();
-                fileMap.ExeConfigFilename = Path.Combine(AppDomain.CurrentDomain.BaseDirectory+"CfgFiles\\Unity.Config");
-                Configuration configuration = ConfigurationManager.OpenMappedExeConfiguration(fileMap,ConfigurationUserLevel.None);
-                UnityConfigurationSection section = (UnityConfigurationSection)configuration.GetSection
-                    (UnityConfigurationSection.SectionName);
-                section.Configure(_Container, "AnalyzeContainer");
 
-                ISysUserservice sysUserservice = _Container.Resolve<ISysUserservice>();
-                CurrentUser currentUser = sysUserservice.GetUser(user);
+                {
+                    //断开对细节的依赖--通过IOC容器来创建Unity
+                    //IUnityContainer _Container = new UnityContainer();
+                    //ExeConfigurationFileMap fileMap = new ExeConfigurationFileMap();
+                    //fileMap.ExeConfigFilename = Path.Combine(AppDomain.CurrentDomain.BaseDirectory+"CfgFiles\\Unity.Config");
+                    //Configuration configuration = ConfigurationManager.OpenMappedExeConfiguration(fileMap,ConfigurationUserLevel.None);
+                    //UnityConfigurationSection section = (UnityConfigurationSection)configuration.GetSection
+                    //    (UnityConfigurationSection.SectionName);
+                    //section.Configure(_Container, "AnalyzeContainer");
+
+                    //ISysUserservice sysUserservice = _Container.Resolve<ISysUserservice>();
+                }
+
+                //IUnityContainer unityContainer = CustomDIFactory.GetContainer();
+                //ISysUserservice sysUserservice = unityContainer.Resolve<ISysUserservice>();
+                CurrentUser currentUser = _ISysUserservice.GetUser(user);
                 if (currentUser != null)
                 {
                     {

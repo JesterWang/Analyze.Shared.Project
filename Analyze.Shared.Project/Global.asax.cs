@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Analyze.Shared.Project.Utility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +14,9 @@ namespace Analyze.Shared.Project
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            //给MVC框架设置一个控制器工厂
+            ControllerBuilder.Current.SetControllerFactory(new CustomControllerFactory());
         }
     }
 }
