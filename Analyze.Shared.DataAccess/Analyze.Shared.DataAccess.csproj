@@ -90,17 +90,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="efc_db_01_DBContext.cs" />
+    <Compile Include="par_be.cs" />
+    <Compile Include="par_ee.cs" />
+    <Compile Include="par_fae.cs" />
+    <Compile Include="par_file_category.cs" />
+    <Compile Include="par_file_upload.cs" />
+    <Compile Include="par_information_summary.cs" />
+    <Compile Include="par_materials.cs" />
+    <Compile Include="par_me.cs" />
+    <Compile Include="par_smt.cs" />
+    <Compile Include="par_test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\sys_dept.cs" />
-    <Compile Include="Models\sys_emp.cs" />
-    <Compile Include="Models\sys_job.cs" />
-    <Compile Include="Models\sys_role.cs" />
-    <Compile Include="Models\sys_user.cs" />
+    <Compile Include="sys_dept.cs" />
+    <Compile Include="sys_job.cs" />
+    <Compile Include="sys_role.cs" />
+    <Compile Include="sys_user.cs" />
+    <Compile Include="view_par_file.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

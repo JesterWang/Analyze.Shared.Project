@@ -84,7 +84,9 @@
   <ItemGroup>
     <Compile Include="AjaxResult.cs" />
     <Compile Include="IBaseService.cs" />
-    <Compile Include="ISysUserservice.cs" />
+    <Compile Include="IParFileService.cs" />
+    <Compile Include="IParMeService.cs" />
+    <Compile Include="ISysUserService.cs" />
     <Compile Include="PageResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace Analyze.Shared.Bussiness.Services
 {
-    public class SysUserservice : BaseService,ISysUserservice
+    public class SysUserService : BaseService,ISysUserService
     {
-        public SysUserservice(DbContext context):base(context) 
+        public SysUserService(DbContext context):base(context) 
         {
 
         }
@@ -28,14 +28,16 @@ namespace Analyze.Shared.Bussiness.Services
             string passwordMd5 = loginUser.password.ToMd5();
             CurrentUser user = Context.Set<sys_user>().Where(e => e.username == loginUser.username && e.password == passwordMd5)
                 .Select(e => new CurrentUser 
-                { 
-                    Id = e.id,
+                {
+                    id = e.id,
                     username = e.username,
                     password = e.password,
-                    emp_id = e.emp_id,
+                    emplyee_name = e.emplyee_name,
+                    emplyee_itcode=e.emplyee_itcode,
                     role_id = e.role_id,
+                    job_id=e.job_id,
+                    dept_id=e.dept_id,
                     status = e.status,
-                    create_time = e.create_time
                 }).FirstOrDefault();
             return user;
         }

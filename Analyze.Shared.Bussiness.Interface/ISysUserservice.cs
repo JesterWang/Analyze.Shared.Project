@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Analyze.Shared.Bussiness.Interface
 {
-    public interface ISysUserservice : IBaseService
+    public interface ISysUserService : IBaseService
     {
         /// <summary>
         /// 查询当前用户信息

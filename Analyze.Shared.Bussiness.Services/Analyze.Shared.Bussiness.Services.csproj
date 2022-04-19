@@ -83,7 +83,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseService.cs" />
-    <Compile Include="SysUserservice.cs" />
+    <Compile Include="ParFileService.cs" />
+    <Compile Include="ParMeService.cs" />
+    <Compile Include="SysUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,44 @@
+﻿@using Analyze.Shared.Common.Report;
+@model ParList
+@using (Html.BeginForm("Index", "Home", FormMethod.Post,
+                new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+
+        @foreach (var item in Model.ParEe)
+        {
+            <div class="form-horizontal">
+                <label>分析结论</label>
+
+                @Html.TextBoxFor(m => item.analysis_conclusion, new
+                        {
+                            @id = "txtAnalysis_conclusion",
+                            @class = "form-control placeholder-no-fix",
+                            @type = "text",
+                            @autocomplete = "off",
+                            @placeholder = "请输入分析结论..."
+                        })
+                @Html.ValidationMessage("analysis_conclusion", new { style = "color: red;" })
+            </div>
+            <div class="form-horizontal">
+                <label>分析步骤</label>
+                @Html.TextAreaFor(m => item.analysis_steps, new
+                    {
+                        @id = "txtAnalysis_steps",
+                        @class = "form-control placeholder-no-fix",
+                        @autocomplete = "off",
+                        @rows = "5",
+                        @placeholder = "请输入分析步骤..."
+                    })
+                @Html.ValidationMessage("analysis_steps", new { style = "color: red" })
+            </div>
+            <div class="form-horizontal">
+                <label>附件上传</label>
+                <input type="file" />
+                <p class="help-block">注意：1.多个附件请打包上传;2.新附件会覆盖旧附件</p>
+            </div>
+        }
+        <button type="button" class="btn btn-info" name="submitButton" value="SaveMe">保存</button>
+    </div>
+}

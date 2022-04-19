@@ -18,12 +18,12 @@ namespace Analyze.Shared.Project.Controllers
 {
     public class AccountController : Controller
     {
-        private ISysUserservice _ISysUserservice = null;
-        public AccountController(ISysUserservice iSysUserservice) 
+        private ISysUserService _ISysUserservice = null;
+        public AccountController(ISysUserService iSysUserservice) 
         {
             _ISysUserservice = iSysUserservice;
         }
-        [HttpGet]//返回一个页面：这个页面是用来展示登录的页面
+        [HttpGet]//返回登录页
         public ActionResult Login() 
         {
             return View();

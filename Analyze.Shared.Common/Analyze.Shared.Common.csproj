@@ -83,6 +83,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\ParEe.cs" />
+    <Compile Include="Report\ParFae.cs" />
+    <Compile Include="Report\ParFileUpload.cs" />
+    <Compile Include="Report\ParList.cs" />
+    <Compile Include="Report\ParMe.cs" />
+    <Compile Include="Report\ViewParFile.cs" />
     <Compile Include="SecurityMgr.cs" />
     <Compile Include="User\CurrentUser.cs" />
     <Compile Include="User\LoginUser.cs" />
@@ -90,6 +96,12 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Analyze.Shared.DataAccess\Analyze.Shared.DataAccess.csproj">
+      <Project>{51056200-65d0-47b1-b135-8e0e78b55ad9}</Project>
+      <Name>Analyze.Shared.DataAccess</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
