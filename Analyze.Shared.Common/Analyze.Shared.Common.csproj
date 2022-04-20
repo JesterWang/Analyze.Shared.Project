@@ -86,6 +86,7 @@
     <Compile Include="Report\ParEe.cs" />
     <Compile Include="Report\ParFae.cs" />
     <Compile Include="Report\ParFileUpload.cs" />
+    <Compile Include="Report\ParInformationSummary.cs" />
     <Compile Include="Report\ParList.cs" />
     <Compile Include="Report\ParMe.cs" />
     <Compile Include="Report\ViewParFile.cs" />
@@ -94,7 +95,9 @@
     <Compile Include="User\LoginUser.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

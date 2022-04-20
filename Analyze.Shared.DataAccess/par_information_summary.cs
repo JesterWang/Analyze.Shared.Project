@@ -62,7 +62,7 @@ namespace Analyze.Shared.DataAccess
 
         [Column(TypeName = "timestamp")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public DateTime? create_time { get; set; }
+        public DateTime create_time { get; set; }
 
         [Column(TypeName = "timestamp")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

@@ -1,0 +1,136 @@
+﻿@using Analyze.Shared.Common.Report;
+@model ParList
+
+@*基础信息保存*@
+@if (Model.ParMe != null)
+{
+    using (Html.BeginForm("Index", "AdminReportEdit", FormMethod.Post,
+                new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+
+            @foreach (var item in Model.ParMe)
+            {
+                <div class="text-center">
+                    <button class="btn btn-link btn-lg" type="button" onclick="showFile(2)">点击此处刷新当前模块</button>/
+                    <button class="btn btn-link btn-lg" type="button" data-toggle="collapse" data-parent="#accordion" href="#collapseMeLog">
+                        点击此处展开/收缩日志
+                    </button>
+                    <div id="collapseMeLog" class="panel-collapse collapse">
+                        @Html.TextAreaFor(m => item.log_result, new { @class = "form-control", @id = "txtLogResultMe", @autocomplete = "off", @readonly = "true", @rows = "5" })
+                    </div>
+                </div>
+                <div class="form-horizontal">
+                    <label>分析结论</label>
+
+                    @Html.TextBoxFor(m => item.analysis_conclusion, new
+                            {
+                                @id = "txtAnalysisConclusionMe",
+                                @class = "form-control placeholder-no-fix",
+                                @type = "text",
+                                @autocomplete = "off",
+                                @placeholder = "请输入分析结论..."
+                            })
+                    @Html.ValidationMessage("analysis_conclusion", new { style = "color: red;" })
+                </div>
+                <div class="form-horizontal">
+                    <label>分析步骤</label>
+                    @Html.TextAreaFor(m => item.analysis_steps, new
+                        {
+                            @id = "txtAnalysisStepsMe",
+                            @class = "form-control placeholder-no-fix",
+                            @autocomplete = "off",
+                            @rows = "5",
+                            @placeholder = "请输入分析步骤..."
+                        })
+                    @Html.ValidationMessage("analysis_steps", new { style = "color: red" })
+                </div>
+                <br />
+                <button type="button" id="btnSaveMe" class="btn btn-primary">确认保存</button>
+            }
+            <br />
+            @*执行成功/失败提示*@
+            <div id="saveAlert"><br /></div>
+
+            @if (Model.ParFileUpload != null)
+            {
+                <div class="form-horizontal">
+                    <br />
+                    <table class="table table-bordered table-hover">
+                        <caption class="text-center">附件列表</caption>
+                        <thead>
+                            <tr>
+                                <th>文件名称</th>
+                                <th>信息</th>
+                                <th colspan="2">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.ParFileUpload)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(m => item.file_name)</td>
+                                    <td>
+                                        @Html.DisplayFor(m => item.update_time)
+                                        <span>by</span>
+                                        @Html.DisplayFor(m => item.user_detailed)
+                                    </td>
+                                    <td>@Html.ActionLink("下载", "DownloadFile", new { filePath = item.file_url })</td>
+                                    <td>
+                                        @Ajax.ActionLink("删除", "DeleteFile", "AdminReportEdit", new { id = item.id, tracking_id = item.tracking_id, filePath = item.file_url, category_id = item.category_id },
+                                        new AjaxOptions() { UpdateTargetId = "collapseExampleMe", HttpMethod = "Post", Confirm = " 您确定要删除该记录吗？该操作不可恢复！" })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    }
+}
+
+@*文件列表*@
+@using (Html.BeginForm("Index", "AdminReportEdit", FormMethod.Post,
+    new { @class = "form-horizontal", id = "formFileMe", role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label>上传附件</label>@Html.Hidden("file_url", "", new { id = "file_url" })
+        @Html.TextBox("file", "", new { type = "file", name = "UpFile", id = "UpFile" })<br />
+        <button type="button" class="btn btn-primary" onclick='upFile(2)'>确认上传</button>
+    </div>
+}
+
+    <script type="text/javascript">
+        $("#btnSaveMe").click(function () {
+            var analysis_conclusion = $("#txtAnalysisConclusionMe").val();
+            var analysis_steps = $("#txtAnalysisStepsMe").val();
+            var log_result = $("#txtLogResultMe").val();
+            if (analysis_conclusion == "" || analysis_steps == "") {
+                var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>请填写完整后保存。</div>";
+                failAlert(boarddiv);
+                return;
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/AdminReportEdit/PaertViewIndexParMeUpdate',
+                data: '{tracking_id: ' + tracking_id + ',analysis_conclusion: "' + analysis_conclusion + '",analysis_steps: "' + analysis_steps + '",log_result: "' + log_result + '",user: "' + user_detailed + '"}',
+                dataType: "json",
+                contentType: 'application/json;charset=utf-8',
+                async: true,
+                beforeSend: beforeSend,//发送请求
+                success: function (data) {
+                    $("#txtLogResultMe").val(data);
+                    var boarddiv = "<div id='success-alert' class='alert alert-success'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>成功！</strong>填写结果已保存。</div>";
+                    successAlert(boarddiv);
+                },
+                error: function (data) {
+                    var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>服务器请求超时。</div>";
+                    failAlert(boarddiv);
+                },
+                complete: complete//请求完成
+            });
+        });
+    </script>

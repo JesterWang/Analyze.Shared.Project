@@ -15,5 +15,12 @@ namespace Analyze.Shared.Bussiness.Interface
         /// <param name="_tracking_id"></param>
         /// <returns></returns>
         ParMe GetQueryReport(int tracking_id);
+
+        /// <summary>
+        /// 修改ME问题分析报告
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        bool GetUpdateReport(ParMe parMe);
     }
 }

@@ -82,11 +82,6 @@ namespace Analyze.Shared.DataAccess
                 .Property(e => e.category_chil)
                 .IsUnicode(false);
 
-            //获取主键自增Id
-            //modelBuilder.Entity<par_file_upload>().Property(e => e.id)
-            //    .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-
-
             modelBuilder.Entity<par_file_upload>()
                 .Property(e => e.file_url)
                 .IsUnicode(false);

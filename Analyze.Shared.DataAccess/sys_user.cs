@@ -55,7 +55,6 @@ namespace Analyze.Shared.DataAccess
         public DateTime update_time { get; set; }
 
         [Column(TypeName = "usmallint")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
     }
 }

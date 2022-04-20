@@ -35,5 +35,25 @@ namespace Analyze.Shared.Bussiness.Services
                 }).FirstOrDefault();
             return par;
         }
+
+        /// <summary>
+        /// 修改ME问题分析报告
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool GetUpdateReport(ParMe parMe) 
+        {
+            par_me parContext = new par_me()
+            {
+                tracking_id = parMe.tracking_id,
+                analysis_conclusion = parMe.analysis_conclusion,
+                analysis_steps = parMe.analysis_steps,
+                log_result = parMe.log_result
+            };
+            Context.Set<par_me>().Attach(parContext);
+            Context.Entry<par_me>(parContext).State = EntityState.Modified;
+            Context.SaveChanges();
+            return true;
+        }
     }
 }

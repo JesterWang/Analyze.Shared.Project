@@ -1,0 +1,273 @@
+﻿@using Analyze.Shared.Common.Report;
+@model ParList
+@{
+    Layout = null;
+    ViewBag.Title = "问题分析报告-填写";
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>WHP停线验证管理平台</title>
+</head>
+
+<body>
+    <div class="container">
+        @*参数*@
+        @Html.Hidden("tracking_id", 1, new { id = "tracking_id" })
+        @Html.Hidden("username", "90150463", new { id = "username" })
+        @Html.Hidden("emplyee_name", "王强", new { id = "emplyee_name" })
+
+        <hr />
+        @*ME分析报告*@
+        <div class="form-group">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <a id="btnToMe" data-toggle="collapse" data-parent="#accordion" href="#collapseMe">
+                            ME分析报告
+                        </a>
+                    </h3>
+                </div>
+
+                <div id="collapseMe" class="panel-collapse collapse">
+                    <div id="collapseExampleMe" class="panel-body">
+                        @*返回分部视图*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <!-- loading -->
+        <div class="modal fade" id="loading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop='static'>
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">提示</h4>
+                    </div>
+                    <div class="modal-body">
+                        请稍候。。。<span id="result"></span>
+                        <img src="~/Content/Loading/loading.gif" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery.form.min-1.7.2.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        var tracking_id = $("#tracking_id").val();
+        var user_detailed = $("#username").val() + $("#emplyee_name").val();
+        $("#btnToMe").click(function () {
+            var category_id = 2;//文件类型-ParFileUpload.cs类
+            $.ajax({
+                type: 'POST',
+                url: '/AdminReportEdit/PaertViewIndexParMe',
+                data: '{tracking_id: ' + tracking_id + ',category_id: ' + category_id + '}',
+                dataType: "html",
+                contentType: 'application/json;charset=utf-8',
+                async: true,
+                beforeSend: beforeSend,//发送请求
+                success: function (data) {
+                    $("#collapseExampleMe").html(data);//ME分析报告展开页
+                },
+                error: function (data) {
+                    alert("失败:" + data[0])
+                },
+                complete: complete//请求完成
+            });
+            //click事件执行一次
+            $(this).unbind("click");
+        });
+        //upload
+        function upFile(category_id) {
+            var file = document.getElementById("UpFile").files[0];
+            if (!file) {
+                var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>请选择文件。</div>";
+                failAlert(boarddiv);
+                return;
+            }
+            var size = file.size / 1024 / 1024;
+            if (size > 50) {
+                var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>文件不能大于50M。</div>";
+                failAlert(boarddiv);
+                return;
+            }
+            var _id = "";
+            switch (category_id) {
+                case 1: _id = "#formFileMe"; break;
+                case 2: _id = "#formFileMe"; break;
+                case 3: _id = "#formFileMe"; break;
+                case 4: _id = "#formFileMe"; break;
+                case 5: _id = "#formFileMe"; break;
+                case 6: _id = "#formFileMe"; break;
+                case 7: _id = "#formFileMe"; break;
+                case 8: _id = "#formFileMe"; break;
+                case 9: _id = "#formFileMe"; break;
+                case 10: _id = "#formFileMe"; break;
+                case 11: _id = "#formFileMe"; break;
+                case 12: _id = "#formFileMe"; break;
+                case 13: _id = "#formFileMe"; break;
+                case 14: _id = "#formFileMe"; break;
+                case 15: _id = "#formFileMe"; break;
+                case 16: _id = "#formFileMe"; break;
+                case 17: _id = "#formFileMe"; break;
+                case 18: _id = "#formFileMe"; break;
+                case 19: _id = "#formFileMe"; break;
+            }
+            $(_id).ajaxSubmit({
+                url: "/AdminReportEdit/UploadFile",
+                type: "post",
+                dataType: "json",
+                beforeSend: beforeSend,//发送请求
+                success: function (data) {
+                    if (data == "0") {
+                        var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>文件上传失败，服务器请求超时。</div>";
+                        failAlert(boarddiv);
+                    }
+                    else {
+                        switch (category_id) {
+                            case 1: insertFile(1, data); break;
+                            case 2: insertFile(2, data); break;
+                            case 3: insertFile(3, data); break;
+                            case 4: insertFile(4, data); break;
+                            case 5: insertFile(5, data); break;
+                            case 6: insertFile(6, data); break;
+                            case 7: insertFile(7, data); break;
+                            case 8: insertFile(8, data); break;
+                            case 9: insertFile(9, data); break;
+                            case 10: insertFile(10, data); break;
+                            case 11: insertFile(11, data); break;
+                            case 12: insertFile(12, data); break;
+                            case 13: insertFile(13, data); break;
+                            case 14: insertFile(14, data); break;
+                            case 15: insertFile(15, data); break;
+                            case 16: insertFile(16, data); break;
+                            case 17: insertFile(17, data); break;
+                            case 18: insertFile(18, data); break;
+                            case 19: insertFile(19, data); break;
+                        }
+                    }
+                },
+                error: function (data) {
+                    var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>文件上传失败，服务器请求超时。</div>";
+                    failAlert(boarddiv);
+                }
+            });
+        }
+        //inset
+        function insertFile(category_id, file_url) {
+            $.ajax({
+                type: 'POST',
+                url: '/AdminReportEdit/InsertFile',//控制器活动,返回一个分部视图,并且给分部视图传递数据.
+                data: '{tracking_id: ' + tracking_id + ',user_detailed: "' + user_detailed + '",file_url: "' + file_url + '",category_id: "' + category_id + '"}',//传给服务器的数据(即后台方法的参数,参数类型要一致才可以)
+                dataType: "json",
+                contentType: 'application/json;charset=utf-8',
+                async: true,
+                success: function (data) {
+                    switch (data) {
+                        case 1: showFile(1); break;
+                        case 2: showFile(2); break;
+                        case 3: showFile(3); break;
+                        case 4: showFile(4); break;
+                        case 5: showFile(5); break;
+                        case 6: showFile(6); break;
+                        case 7: showFile(7); break;
+                        case 8: showFile(8); break;
+                        case 9: showFile(9); break;
+                        case 10: showFile(10); break;
+                        case 11: showFile(11); break;
+                        case 12: showFile(12); break;
+                        case 13: showFile(13); break;
+                        case 14: showFile(14); break;
+                        case 15: showFile(15); break;
+                        case 16: showFile(16); break;
+                        case 17: showFile(17); break;
+                        case 18: showFile(18); break;
+                        case 19: showFile(19); break;
+                    }
+                },
+                error: function (data) {
+                    var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>文件上传失败，服务器请求超时。</div>";
+                    failAlert(boarddiv);
+                }
+            });
+        }
+        //show
+        function showFile(category_id) {
+            var url = '';
+            switch (category_id) {
+                case 1: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
+                case 2: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
+                case 3: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
+                case 4: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
+                case 5: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
+                case 6: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
+                case 7: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
+                case 8: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
+                case 9: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
+                case 10: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
+                case 11: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
+                case 12: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
+                case 13: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
+                case 14: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
+                case 15: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
+                case 16: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
+                case 17: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
+                case 18: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
+                case 19: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: _url,//控制器活动,返回一个分部视图,并且给分部视图传递数据.
+                data: '{tracking_id: ' + tracking_id + ',category_id: ' + category_id + '}',//传给服务器的数据(即后台方法的参数,参数类型要一致才可以)
+                dataType: "html",
+                contentType: 'application/json;charset=utf-8',//数据类型
+                async: true,//异步
+                beforeSend: beforeSend,//发送请求
+                success: function (data) //成功后的回调方法
+                {
+                    $("#collapseExampleMe").html(data);//data--对应的分部视图页面内容.
+                    var boarddiv = "<div id='success-alert' class='alert alert-success'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>成功！</strong>操作成功。</div>";
+                    successAlert(boarddiv);
+                },
+                error: function (data) {
+                    var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>刷新失败，服务器请求超时。</div>";
+                    failAlert(boarddiv);
+                },
+                complete: complete//请求完成
+            });
+        }
+        //success
+        function successAlert(boarddiv) {
+            $(document.getElementById("saveAlert")).append(boarddiv);
+            window.setTimeout(function () {
+                $("#success-alert").alert('close');
+            }, 2000);
+        }
+        //warning
+        function failAlert(boarddiv) {
+            $(document.getElementById("saveAlert")).append(boarddiv);
+            window.setTimeout(function () {
+                $("#warning-alert").alert('close');
+            }, 2000);
+        }
+        //loading begin
+        function beforeSend(XMLHttpRequest) {
+            $('#loading').modal('show');
+        }
+        //loading end
+        function complete(XMLHttpRequest, textStatus) {
+            $('#loading').modal('hide');
+        }
+    </script>
+</body>
+
+</html>

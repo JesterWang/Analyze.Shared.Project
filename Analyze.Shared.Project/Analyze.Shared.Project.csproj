@@ -20,6 +20,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <NuGetPackageImportStamp>1b022396</NuGetPackageImportStamp>
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,6 +40,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -58,6 +63,10 @@
     </Reference>
     <Reference Include="MySql.Data.Entity.EF6, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.Entity.6.9.9\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.ComponentModel" />
@@ -109,6 +118,10 @@
       <HintPath>..\packages\Unity.Interception.Configuration.5.11.1\lib\net45\Unity.Interception.Configuration.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Razor">
@@ -133,10 +146,20 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Layouts\layout\css\layout.css" />
+    <Content Include="Content\Layouts\layout\css\layout.min.css" />
+    <Content Include="Content\Layouts\layout\themes\darkblue.css" />
+    <Content Include="Content\Layouts\layout\themes\darkblue.min.css" />
     <Content Include="Content\Loading\loading.gif" />
     <Content Include="Content\Login\font\iconfont.svg" />
     <Content Include="Content\Login\iconfont.css" />
     <Content Include="Content\Login\style.css" />
+    <Content Include="Content\Plugins\font-awesome\css\font-awesome.css" />
+    <Content Include="Content\Plugins\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Content\Plugins\font-awesome\font\fontawesome-webfont.svg" />
+    <Content Include="Content\Plugins\simple-line-icons\css\simple-line-icons.css" />
+    <Content Include="Content\Plugins\simple-line-icons\css\simple-line-icons.min.css" />
+    <Content Include="Content\Plugins\simple-line-icons\fonts\Simple-Line-Icons.svg" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -154,9 +177,11 @@
     <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\AdminReportEditController.cs" />
+    <Compile Include="Controllers\AdminReportHomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -165,7 +190,9 @@
     <Compile Include="Utility\CustomDIFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\web.config" />
+    <Content Include="Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="packages.config" />
     <Content Include="Content\Login\font\iconfont.eot" />
     <Content Include="Content\Login\font\iconfont.ttf" />
@@ -174,15 +201,22 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\Shared\_LayoutMaster.cshtml" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\PaertViewIndexParMe.cshtml" />
-    <Content Include="Views\Home\PaertViewIndexParEe.cshtml" />
+    <Content Include="Views\AdminReportHome\Index.cshtml" />
+    <Content Include="Content\Plugins\simple-line-icons\fonts\Simple-Line-Icons.eot" />
+    <Content Include="Content\Plugins\simple-line-icons\fonts\Simple-Line-Icons.ttf" />
+    <Content Include="Content\Plugins\simple-line-icons\fonts\Simple-Line-Icons.woff" />
+    <Content Include="Content\Plugins\simple-line-icons\fonts\Simple-Line-Icons.woff2" />
+    <Content Include="Content\Plugins\font-awesome\font\fontawesome-webfont.eot" />
+    <Content Include="Content\Plugins\font-awesome\font\fontawesome-webfont.ttf" />
+    <Content Include="Content\Plugins\font-awesome\font\fontawesome-webfont.woff" />
+    <Content Include="Content\Plugins\font-awesome\font\FontAwesome.otf" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\AdminReportEdit\Index.cshtml" />
+    <Content Include="Views\AdminReportEdit\PaertViewIndexParMe.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
