@@ -10,12 +10,33 @@ namespace Analyze.Shared.Common.Report
 {
     public class ParFileUpload
     {
+        /// <summary>
+        /// 主键Id
+        /// </summary>
         public int id { get; set; }
+        /// <summary>
+        /// 主键Id
+        /// </summary>
         public int tracking_id { get; set; }
+        /// <summary>
+        /// 文件路径
+        /// </summary>
         public string file_url { get; set; }
+        /// <summary>
+        /// 文件名称
+        /// </summary>
         public string file_name { get; set; }
+        /// <summary>
+        /// 文件上传日期
+        /// </summary>
         public DateTime create_time { get; set; }
+        /// <summary>
+        /// 文件更新日期
+        /// </summary>
         public DateTime update_time { get; set; }
+        /// <summary>
+        /// 文件上传用户名+姓名
+        /// </summary>
         public string user_detailed { get; set; }
 
         /// <summary>

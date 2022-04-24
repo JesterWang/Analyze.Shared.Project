@@ -9,13 +9,13 @@ namespace Analyze.Shared.Bussiness.Interface
     //分页
     public class PageResult<T> : AjaxResult
     {
-        public PageResult() 
-        {
-            Rows = new List<T>();
-        }
-
         public int Total { get; set; }
 
         public List<T> Rows { get; set; }
+
+        public PageResult()
+        {
+            Rows = new List<T>();
+        }
     }
 }

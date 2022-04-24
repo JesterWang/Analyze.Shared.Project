@@ -63,7 +63,7 @@ namespace Analyze.Shared.Common.Report
         /// <summary>
         /// 创建时间
         /// </summary>
-        public DateTime create_time { get; set; }
+        public string create_time { get; set; }
         /// <summary>
         /// 更新时间
         /// </summary>

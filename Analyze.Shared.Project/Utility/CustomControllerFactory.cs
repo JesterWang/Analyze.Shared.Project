@@ -15,7 +15,7 @@ namespace Analyze.Shared.Project.Utility
     public class CustomControllerFactory : DefaultControllerFactory
     {
         protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
-        {
+     {
             IUnityContainer unityContainer = CustomDIFactory.GetContainer();
             object oInstance = unityContainer.Resolve(controllerType);
             return (IController)oInstance;

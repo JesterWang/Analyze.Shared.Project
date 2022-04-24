@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WHP停线验证管理平台</title>
+    @Styles.Render("~/Content/bootstrap")
+    @Styles.Render("~/Plugins/css")
+    @Styles.Render("~/Layouts/css")
+</head>
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
+    @*@Html.Partial("PartialHeader")*@
+    
+
+    <div class="page-container">
+        @*@Html.Partial("PartialContainerMenue")*@
+
+
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                @*@Html.Partial("PartialContainerHeader")*@
+
+                @RenderBody()
+
+                @*@Html.Partial("PartialModal")*@
+
+            </div>
+        </div>
+    </div>
+    @*@Html.Partial("PartialFooter")*@
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts",required:false)
+    <script type="text/javascript">
+
+        //设置悬浮框
+        function OpenModal(title, mehtod){
+            if (mehtod) {
+                $("#submit").attr("onclick",mehtod);
+            }
+            $("#myModalLabel").text(title);
+            $("#myModal").modal();
+        }
+    </script>
+</body>
+</html>

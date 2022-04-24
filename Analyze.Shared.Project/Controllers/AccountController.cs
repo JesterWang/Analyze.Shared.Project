@@ -82,7 +82,7 @@ namespace Analyze.Shared.Project.Controllers
                         //写入Session
                         HttpContext.Session["CurrentUser"] = currentUser;
                     }
-                    return base.Redirect("/Home/Index");
+                    return base.Redirect("/AdminReportHome/Index");
                 }
                 else
                 {

@@ -14,5 +14,10 @@ namespace Analyze.Shared.Bussiness.Interface
         public string Message { get; set; }
 
         public object Data { get; set; }
+
+        public AjaxResult()
+        {
+            this.Success = true;
+        }
     }
 }

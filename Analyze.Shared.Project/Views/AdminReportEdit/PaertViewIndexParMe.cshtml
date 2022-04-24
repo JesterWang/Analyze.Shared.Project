@@ -103,34 +103,34 @@
     </div>
 }
 
-    <script type="text/javascript">
-        $("#btnSaveMe").click(function () {
-            var analysis_conclusion = $("#txtAnalysisConclusionMe").val();
-            var analysis_steps = $("#txtAnalysisStepsMe").val();
-            var log_result = $("#txtLogResultMe").val();
-            if (analysis_conclusion == "" || analysis_steps == "") {
-                var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>请填写完整后保存。</div>";
+<script type="text/javascript">
+    $("#btnSaveMe").click(function () {
+        var analysis_conclusion = $("#txtAnalysisConclusionMe").val();
+        var analysis_steps = $("#txtAnalysisStepsMe").val();
+        var log_result = $("#txtLogResultMe").val();
+        if (analysis_conclusion == "" || analysis_steps == "") {
+            var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>请填写完整后保存。</div>";
+            failAlert(boarddiv);
+            return;
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/AdminReportEdit/PaertViewIndexParMeUpdate',
+            data: '{tracking_id: ' + tracking_id + ',analysis_conclusion: "' + analysis_conclusion + '",analysis_steps: "' + analysis_steps + '",log_result: "' + log_result + '",user: "' + user_detailed + '"}',
+            dataType: "json",
+            contentType: 'application/json;charset=utf-8',
+            async: true,
+            beforeSend: beforeSend,//发送请求
+            success: function (data) {
+                $("#txtLogResultMe").val(data);
+                var boarddiv = "<div id='success-alert' class='alert alert-success'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>成功！</strong>填写结果已保存。</div>";
+                successAlert(boarddiv);
+            },
+            error: function (data) {
+                var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>服务器请求超时。</div>";
                 failAlert(boarddiv);
-                return;
-            }
-            $.ajax({
-                type: 'POST',
-                url: '/AdminReportEdit/PaertViewIndexParMeUpdate',
-                data: '{tracking_id: ' + tracking_id + ',analysis_conclusion: "' + analysis_conclusion + '",analysis_steps: "' + analysis_steps + '",log_result: "' + log_result + '",user: "' + user_detailed + '"}',
-                dataType: "json",
-                contentType: 'application/json;charset=utf-8',
-                async: true,
-                beforeSend: beforeSend,//发送请求
-                success: function (data) {
-                    $("#txtLogResultMe").val(data);
-                    var boarddiv = "<div id='success-alert' class='alert alert-success'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>成功！</strong>填写结果已保存。</div>";
-                    successAlert(boarddiv);
-                },
-                error: function (data) {
-                    var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>服务器请求超时。</div>";
-                    failAlert(boarddiv);
-                },
-                complete: complete//请求完成
-            });
+            },
+            complete: complete//请求完成
         });
-    </script>
+    });
+</script>

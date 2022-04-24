@@ -69,6 +69,7 @@ namespace Analyze.Shared.Bussiness.Services
             funcOrderby, bool isAsc = true) where T : class
         {
             var list = Set<T>();
+            
             if (funcWhere != null)
             {
                 list = list.Where<T>(funcWhere);

@@ -1,175 +1,207 @@
-﻿
-@{
-    ViewBag.Title = "问题分析报告-首页";
+﻿@{
+    ViewBag.Title = "Index";
 }
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-    <title>WHP停线验证管理平台</title>
-</head>
 
-<body>
-    <div class="container">
-        @*参数*@
-        @Html.Hidden("username", "90150463", new { id = "username" })
-        @Html.Hidden("emplyee_name", "王强", new { id = "emplyee_name" })
+<link href="~/Content/bootstrap-table.min.css" rel="stylesheet" />
 
-        <hr />
-        @*信息汇总表*@
-        <div class="form-group">
-           <div class="tab-content">
-               <article class="post block">
-                   <h2 class="h2"><small><a href="#">标题标题标题标题标题标题标题标题标题</a></small></h2>
-                   <div class="meta">
-                       <span>发生时间:2022-04-19 17:30:31</span>&nbsp;&nbsp;|&nbsp;&nbsp;
-                       <span>发生地点：BE16</span>&nbsp;&nbsp;|&nbsp;&nbsp;
-                       <span>产品型号：OAK</span>&nbsp;&nbsp;|&nbsp;&nbsp;
-                       <span>不良率：5.23%</span>&nbsp;&nbsp;|&nbsp;&nbsp;
-                       <i class="glyphicon glyphicon-eye-open eye"></i>
-                       <span>16</span>
-                   </div>
-                   <div class="readMore"><a href="#">[查看详细]</a></div>
-               </article>
-               @*<ul>
-                   <li>
-                       <div>
-                           <h3><a href="#">标题标题标题标题标题标题标题标题标题</a></h3>
-                       </div>
-                       <div>
-                           <p>
-                               <span>发生时间：2022-04-19 17:30:31</span>&nbsp;&nbsp;|&nbsp;&nbsp;
-                               <span>发生地点：BE16</span>&nbsp;&nbsp;|&nbsp;&nbsp;
-                           </p>
-                           <p>
-                               <span>产品型号：OAK</span>&nbsp;&nbsp;|&nbsp;&nbsp;
-                               <span>不良率：5.23%</span>
-                           </p>
-                           <p><a href="#">查看详细</a></p>
-                       </div>
-                   </li>
-               </ul>*@
-           </div> 
-        </div>
-        <hr />
-        <!-- loading -->
-        <div class="modal fade" id="loading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop='static'>
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel">提示</h4>
-                    </div>
-                    <div class="modal-body">
-                        请稍候。。。<span id="result"></span>
-                        <img src="~/Content/Loading/loading.gif" />
-                    </div>
+<h3>信息汇总表</h3>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light portlet-fit portlet-datatable bordered">
+            <div class="portlet-body">
+                <div class="table-contaoner">
+                    <table id="table"></table>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
+<div class="modal fade" id="ParInformationSummaryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+    <div class="modal-dialog" role="document" style="background-color:#fff">
+        <div class="modal-header">
+            <button type="button" class="close" data-dissmiss="modal" aria-label="Close">
+                <span aria-hidden="true"></span>
+            </button>
+            <h4 class="modal-title" id="ParInformationSummaryModalLabel"></h4>
+        </div>
+        <div class="modal-body" id="parInformationSummaryModal-body">
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dissmiss="modal">关闭</button>
+            <button type="button" class="btn btn-primary" id="submit" onclick="SubmitFrom()">提交</button>
+        </div>
     </div>
 
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
-    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-    <script src="~/Scripts/jquery.form.min-1.7.2.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    @*<script type="text/javascript">
-        var tracking_id = $("#tracking_id").val();
-        var user_detailed = $("#username").val() + $("#emplyee_name").val();
+</div>
 
-        $("#btnToMe").click(function () {
-            var category_id = 2;//文件类型-ParFileUpload.cs类
-            $.ajax({
-                type: 'POST',
-                url: '/AdminReportEdit/PaertViewIndexParMe',
-                data: '{tracking_id: ' + tracking_id + ',category_id: ' + category_id + '}',
-                dataType: "html",
-                contentType: 'application/json;charset=utf-8',
-                async: true,
-                beforeSend: beforeSend,//发送请求
-                success: function (data) {
-                    $("#collapseExampleMe").html(data);//ME分析报告展开页
-                },
-                error: function (data) {
-                    alert("失败:" + data[0])
-                },
-                complete: complete//请求完成
-            });
-            //click事件执行一次
-            $(this).unbind("click");
+@section Scripts{
+    <script src="~/Scripts/bootstrap-table.min.js"></script>
+    <script src="~/Scripts/bootstrap-table-zh-CN.min.js"></script>
+    <script>
+        $(function () {
+            Init();
         })
 
-        //show
-        function showFile(category_id) {
-            var url = '';
-            switch (category_id) {
-                case 1: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 2: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 3: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 4: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 5: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 6: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 7: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 8: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 9: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 10: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 11: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 12: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 13: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 14: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 15: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 16: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 17: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 18: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 19: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
+        function Init() {
+            $('#table').bootstrapTable({
+                url: "/AdminReportHome/ParPagingList",//数据源
+                dataField: "rows",//服务端返回数据键值
+                search: true,//是否搜索
+                pagination: true,//是否分页
+                pageSize: 10,//单页记录数
+                pageList: [5, 10],//分页步进值
+                sidePagination: "server",//服务端分页
+                contentType: "application/json",
+                dataType: "json",//期待返回数据类型
+                method: "post",//请求方式
+                searchAlign: "left",//查询框对齐方式
+                queryParamsType: "limit",//查询参数组织方式
+                queryParams: function getParams(params) {
+                    var temp = {
+                        PageSize: params.limit,//每页显示数量
+                        PageIndex: (params.offset / params.limit) + 1,//当前页码
+                        order: "asc",
+                        sort: params.sort,
+                        Search: params.search
+                    };
+                    return temp;
+                },
+                searchOnEnterKey: true,//回车搜索
+                showRefresh: true,//刷新按钮
+                showColumns: true,//列选择按钮
+                buttonsAlign: "left",//按钮对齐方式
+                toolbar: "#toolbar",//指定工具栏
+                toolbarAlign: "right",//工具栏对齐方式
+                columns: [
+                    {
+                        title: "全选",
+                        field: "select",
+                        checkox: true,
+                        width: 20,//宽度
+                        align: "center",//水平
+                        valign: "middle"//垂直
+                    },
+                    {
+                        field: "tracking_id",
+                        title: "单号"
+                    },
+                    {
+                        field: "title",
+                        title: "标题",
+                        titleTooltip: "标题"
+                    },
+                    {
+                        field: "create_time",
+                        title: "创建日期",
+                    },
+                    {
+                        field: "site",
+                        title: "发生地点",
+                    },
+                    {
+                        field: "model",
+                        title: "产品型号",
+                    },
+                    {
+                        field: "defect_rate",
+                        title: "不良率",
+                    },
+                    {
+                        field: 'operator',
+                        title: '操作',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            return '<a href="#" data-toggle="modal" title="设置角色">' +
+                                '<i class="glyphicon glyphicon-wrench"></i> ' +
+                                '</a>' +
+                                '<a href="#">' +
+                                '<a href="#editProject" data-toggle="modal" title="修改">' +
+                                '<i class="glyphicon glyphicon-pencil"></i>' +
+                                '</a>' +
+                                '<a href="javascript:void(0)" title="删除">' +
+                                '<i class="glyphicon glyphicon-trash text-danger"></i>' +
+                                '</a>';
+                        },
+                        events: {
+                            'click a[title=删除]': function (e, value, row, index) {
+                                if (confirm('此操作不可逆，请确认是否删除？')) {
+                                    var id = row.Id;
+                                    $.ajax({
+                                        url: "delete",
+                                        data: { id: id },
+                                        method: "get",
+                                        success: function (result) {
+                                            $("#table").bootstrapTable('refresh');
+                                            alert(result.Message);
+                                        }
+                                    });
+                                }
+                            },
+                            'click a[title=修改]': function (e, value, row, index) {
+                                
+                                var tracking_id = row.tracking_id;
+                                $.ajax({
+                                    url: "Update",
+                                    data: { tracking_id: tracking_id },
+                                    method: "get",
+                                    success: function (result) {
+                                        $("#parInformationSummaryModal-body").html(result);
+                                        $("#ParInformationSummaryModal").modal();
+                                    }
+                                });
+                            },
+                            'click a[title=设置角色]': function (e, value, row, index) {
+                                var id = row.Id;
+                                $.ajax({
+                                    url: "SetRole",
+                                    data: { userId: id },
+                                    method: "get",
+                                    success: function (result) {
+                                        $("#model-body").html(result);
+                                        OpenModal("修改", "SetCurrentSetRole()");
+                                    }
+                                });
+                            },
+                        }
+                    }
+                ],
+                onClickRow: function (row, $element) {
+                    $element.css("background-color", "238,241,245");
+                },
+                locale: "zh-CN",//中文支持
+                //detailView:true,//是否显示详情折叠
+                detailFormatter: function (index, row, element) {
+                    var html = '';
+                    $.each(row, function (key, val) {
+                        html += "<p>" + key + ":" + val + "</p>"
+                    });
+                    return html;
+                },
+                responseHandler: function (res) {
+                    if (res.Success == true) {
+                        var result = {
+                            total: res.Total,
+                            rows: res.Rows
+                        }
+                        return result;
+                    }
+                    else {
+                        location.href = "/Account/Login";
+                    }
+                }
+            })
+        }
+
+        function OpenModal(title, mehtod) {
+            if (mehtod) {
+                $("#submit").attr("onclick", mehtod);
             }
+            $("#myModalLabel").text(title);
+            $("#myModal").modal();
+        }
+    </script>
+}
 
-            $.ajax({
-                type: 'POST',
-                url: _url,//控制器活动,返回一个分部视图,并且给分部视图传递数据.
-                data: '{tracking_id: ' + tracking_id + ',category_id: ' + category_id + '}',//传给服务器的数据(即后台方法的参数,参数类型要一致才可以)
-                dataType: "html",
-                contentType: 'application/json;charset=utf-8',//数据类型
-                async: true,//异步
-                beforeSend: beforeSend,//发送请求
-                success: function (data) //成功后的回调方法
-                {
-                    $("#collapseExampleMe").html(data);//data--对应的分部视图页面内容.
-                    var boarddiv = "<div id='success-alert' class='alert alert-success'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>成功！</strong>操作成功。</div>";
-                    successAlert(boarddiv);
-                },
-                error: function (data) {
-                    var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>刷新失败，服务器请求超时。</div>";
-                    failAlert(boarddiv);
-                },
-                complete: complete//请求完成
-            });
-        }
-        //success
-        function successAlert(boarddiv) {
-            $(document.getElementById("saveAlert")).append(boarddiv);
-            window.setTimeout(function () {
-                $("#success-alert").alert('close');
-            }, 2000);
-        }
-        //warning
-        function failAlert(boarddiv) {
-            $(document.getElementById("saveAlert")).append(boarddiv);
-            window.setTimeout(function () {
-                $("#warning-alert").alert('close');
-            }, 2000);
-        }
-        //loading begin
-        function beforeSend(XMLHttpRequest) {
-            $('#loading').modal('show');
-        }
-        //loading end
-        function complete(XMLHttpRequest, textStatus) {
-            $('#loading').modal('hide');
-        }
-    </script>*@
-</body>
 
-</html>

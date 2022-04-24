@@ -1,4 +1,5 @@
 ﻿using Analyze.Shared.Bussiness.Interface;
+using Analyze.Shared.Common;
 using Analyze.Shared.Common.Report;
 using Analyze.Shared.DataAccess;
 using System;
@@ -10,7 +11,7 @@ using System.Web.Mvc;
 
 namespace Analyze.Shared.Project.Controllers
 {
-    public class AdminReportEditController : Controller
+    public class AdminReportEditController : BaseController
     {
         private IParMeService _IParMeService = null;
         private IParFileService _IParFileService = null;
@@ -63,8 +64,6 @@ namespace Analyze.Shared.Project.Controllers
 
 
 
-
-
         #region 文件操作
         [HttpPost]//文件删除-服务器接收&&数据库更新
         public ActionResult DeleteFile(int id, int tracking_id, string filePath, int category_id)
@@ -112,28 +111,35 @@ namespace Analyze.Shared.Project.Controllers
         [HttpPost]//文件上传-服务器接收
         public ActionResult UploadFile()
         {
-            HttpRequest request = System.Web.HttpContext.Current.Request;
-            HttpPostedFile imgFile = request.Files[0];
-            string fileName = imgFile.FileName;
-            string path = "";//文件的完整路径
-            //文件保存目录路径
-            string filePathName = DateTime.Now.ToString("yyyyMMdd");//以日期为文件存放的上层文件夹名
-            string savePath = "/UploadedFiles/" + filePathName + "/";//文件存放的完整路径
-            //如果文件路径不存在则创建文件夹
-            if (!Directory.Exists(Server.MapPath(savePath)))
+            try
             {
-                Directory.CreateDirectory(Server.MapPath(savePath));
+                HttpRequest request = System.Web.HttpContext.Current.Request;
+                HttpPostedFile imgFile = request.Files[0];
+                string fileName = imgFile.FileName;
+                string path = "";//文件的完整路径
+                //文件保存目录路径
+                string filePathName = DateTime.Now.ToString("yyyyMMdd");//以日期为文件存放的上层文件夹名
+                string savePath = "/UploadedFiles/" + filePathName + "/";//文件存放的完整路径
+                //如果文件路径不存在则创建文件夹
+                if (!Directory.Exists(Server.MapPath(savePath)))
+                {
+                    Directory.CreateDirectory(Server.MapPath(savePath));
+                }
+                string imgName = DateTime.Now.ToString("yyyyMMddhhmmss");//文件别名
+                string imgPath = savePath + imgName + "-" + imgFile.FileName;//构造文件保存路径 
+                string AbsolutePath = Server.MapPath(imgPath);
+                FileHelper.RequestUpload(imgFile, AbsolutePath);
+                path = imgPath;//获得文件完整路径并返回到前台页面
+                if (path != "")
+                {
+                    return Json(path);
+                }
+                else
+                {
+                    return Json("0");
+                }
             }
-            string imgName = DateTime.Now.ToString("yyyyMMddhhmmss");//文件别名
-            string imgPath = savePath + imgName + "-" + imgFile.FileName;//构造文件保存路径 
-            string AbsolutePath = Server.MapPath(imgPath);
-            imgFile.SaveAs(AbsolutePath);//将上传的东西保存 
-            path = imgPath;//获得文件完整路径并返回到前台页面
-            if (path != "")
-            {
-                return Json(path);
-            }
-            else
+            catch (Exception)
             {
                 return Json("0");
             }
@@ -147,7 +153,6 @@ namespace Analyze.Shared.Project.Controllers
             string path = Server.MapPath("~" + filePath);
             //Read the File data into Byte Array.
             byte[] bytes = System.IO.File.ReadAllBytes(path);
-
             //Send the File to Download.
             return File(bytes, "application/octet-stream", fileName);
         }
