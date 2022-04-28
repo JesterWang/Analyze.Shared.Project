@@ -13,20 +13,68 @@ namespace Analyze.Shared.Project.Controllers
 {
     public class AdminReportEditController : BaseController
     {
+        private IParFaeService _IParFaeService = null;
         private IParMeService _IParMeService = null;
+        private IParEeService _IParEeService = null;
         private IParFileService _IParFileService = null;
 
-        public AdminReportEditController(IParMeService iParMeService, IParFileService iParFileService)
+        public AdminReportEditController(IParFaeService iParFaeService,IParMeService iParMeService, IParFileService iParFileService,
+            IParEeService iParEeService)
         {
+            _IParFaeService = iParFaeService;
             _IParMeService = iParMeService;
+            _IParEeService = iParEeService;
             _IParFileService = iParFileService;
         }
 
         // GET: Home
         public ActionResult Index()
         {
+            // 获取路由数据
+            if (Request.QueryString["tracking_id"] != null)
+            {
+                string _id = Request.QueryString["tracking_id"].ToString();
+                ViewData["tracking_id"] = _id;
+                string _user = GetUserName() + GetUserEmplyeeName();
+                ViewData["user_detailed"] = _user;
+            }
             return View();
         }
+
+        
+
+        #region FAE分析报告
+        [HttpPost]//基础信息查询
+        public ActionResult PaertViewIndexParFae(int tracking_id, byte category_id)
+        {
+            int s = tracking_id;
+            ParList parlist = new ParList();
+            List<ParFae> listParFae = new List<ParFae>();
+            ParFae parFae = _IParFaeService.GetQueryReport(tracking_id);
+            listParFae.Add(parFae);
+            parlist.ParFae = listParFae;
+
+            List<ParFileUpload> listParFileUpload = _IParFileService.GetQuery(tracking_id, category_id);
+            parlist.ParFileUpload = listParFileUpload;
+
+            return base.PartialView("PaertViewIndexParFae", parlist);
+        }
+
+        [HttpPost]//基础信息修改
+        public ActionResult PaertViewIndexParFaeUpdate(int tracking_id, string analysis_conclusion, string analysis_steps, string log_result, string user)
+        {
+            string _log_result = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " by " + user + " update;" + "\r\n" + log_result;
+            ParFae parFae = new ParFae()
+            {
+                tracking_id = tracking_id,
+                analysis_conclusion = analysis_conclusion,
+                analysis_steps = analysis_steps,
+                log_result = _log_result
+            };
+            bool b = _IParFaeService.GetUpdateReport(parFae);
+            return Json(_log_result);
+        }
+        #endregion
 
         #region ME分析报告
         [HttpPost]//基础信息查询
@@ -61,7 +109,38 @@ namespace Analyze.Shared.Project.Controllers
         }
         #endregion
 
+        #region EE分析报告
+        [HttpPost]//基础信息查询
+        public ActionResult PaertViewIndexParEe(int tracking_id, byte category_id)
+        {
+            int s = tracking_id;
+            ParList parlist = new ParList();
+            List<ParEe> listParEe = new List<ParEe>();
+            ParEe parEe = _IParEeService.GetQueryReport(tracking_id);
+            listParEe.Add(parEe);
+            parlist.ParEe = listParEe;
 
+            List<ParFileUpload> listParFileUpload = _IParFileService.GetQuery(tracking_id, category_id);
+            parlist.ParFileUpload = listParFileUpload;
+
+            return base.PartialView("PaertViewIndexParEe", parlist);
+        }
+
+        [HttpPost]//基础信息修改
+        public ActionResult PaertViewIndexParEeUpdate(int tracking_id, string analysis_conclusion, string analysis_steps, string log_result, string user)
+        {
+            string _log_result = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " by " + user + " update;" + "\r\n" + log_result;
+            ParEe parEe = new ParEe()
+            {
+                tracking_id = tracking_id,
+                analysis_conclusion = analysis_conclusion,
+                analysis_steps = analysis_steps,
+                log_result = _log_result
+            };
+            bool b = _IParEeService.GetUpdateReport(parEe);
+            return Json(_log_result);
+        }
+        #endregion
 
 
         #region 文件操作
@@ -87,8 +166,9 @@ namespace Analyze.Shared.Project.Controllers
         }
 
         [HttpPost]//文件上传-数据库更新
-        public ActionResult InsertFile(int tracking_id, string user_detailed, string file_url, byte category_id)
+        public ActionResult InsertFile(int tracking_id, string file_url, byte category_id)
         {
+            string user_detailed = GetUserName() + GetUserEmplyeeName();
             ParFileUpload parFileUpload = new ParFileUpload()
             {
                 tracking_id = tracking_id,

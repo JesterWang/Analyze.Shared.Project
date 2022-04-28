@@ -57,66 +57,63 @@ namespace Analyze.Shared.Bussiness.Services
             return pagelist;
         }
 
+        /// <summary>
+        /// 查询Id
+        /// </summary>
+        /// <param name="tracking_id"></param>
+        /// <returns></returns>
+        public ParInformationSummary GetQueryReport(int tracking_id) 
+        {
+            ParInformationSummary par = Context.Set<par_information_summary>().Where(e => e.tracking_id == tracking_id)
+                .Select(e => new ParInformationSummary
+                {
+                    tracking_id = e.tracking_id,
+                    tracking_number = e.tracking_number,
+                    title = e.title,
+                    tracking_time = e.tracking_time,
+                    site = e.site,
+                    model = e.model,
+                    defect_rate = e.defect_rate,
+                    problem_description = e.problem_description,
+                    root_cause = e.root_cause,
+                    //defect_img_url = e.defect_img_url,
+                    //conclusion_img_url = e.conclusion_img_url,
+                    analysis_conclusion = e.analysis_conclusion,
+                    next_steps = e.next_steps,
+                    create_time = e.create_time.ToString("yyyy-MM-dd HH:mm:ss"),
+                    update_time = e.update_time,
+                    log_result = e.log_result
+                }).FirstOrDefault();
+            return par;
+        }
 
         /// <summary>
-        /// 查询整个信息汇总表
+        /// 修改ParInformationSummary表信息
         /// </summary>
-        /// <param name="_tracking_id"></param>
+        /// <param name="parInformationSummary"></param>
         /// <returns></returns>
-        //public List<ParInformationSummary> GetQuery() 
-        //{
-        //    List<ParInformationSummary> listParInformationSummary = new List<ParInformationSummary>();
-        //    listParInformationSummary = Context.Set<par_information_summary>().Select(e => new ParInformationSummary
-        //    {
-        //        tracking_id = e.tracking_id,
-        //        tracking_number = e.tracking_number,
-        //        title = e.title,
-        //        tracking_time = e.tracking_time,
-        //        site = e.site,
-        //        model = e.model,
-        //        defect_rate = e.defect_rate,
-        //        problem_description = e.problem_description,
-        //        root_cause = e.root_cause,
-        //        defect_img_url = e.defect_img_url,
-        //        conclusion_img_url = e.conclusion_img_url,
-        //        analysis_conclusion = e.analysis_conclusion,
-        //        next_steps = e.next_steps,
-        //        create_time = e.create_time,
-        //        update_time = e.update_time,
-        //        log_result = e.log_result
-        //    }).ToList();
-        //    return listParInformationSummary;
-        //}
-
-        /// <summary>
-        /// 查询整个信息汇总表-分页
-        /// </summary>
-        /// <param name="_tracking_id"></param>
-        /// <returns></returns>
-        //public List<ParInformationSummary> GetQuery(int pageIndex, int pageSize) 
-        //{
-        //    List<ParInformationSummary> listParInformationSummary = new List<ParInformationSummary>();
-        //    listParInformationSummary = Context.Set<par_information_summary>().Select(e => new ParInformationSummary
-        //    {
-        //        tracking_id = e.tracking_id,
-        //        tracking_number = e.tracking_number,
-        //        title = e.title,
-        //        tracking_time = e.tracking_time,
-        //        site = e.site,
-        //        model = e.model,
-        //        defect_rate = e.defect_rate,
-        //        problem_description = e.problem_description,
-        //        root_cause = e.root_cause,
-        //        defect_img_url = e.defect_img_url,
-        //        conclusion_img_url = e.conclusion_img_url,
-        //        analysis_conclusion = e.analysis_conclusion,
-        //        next_steps = e.next_steps,
-        //        create_time = e.create_time,
-        //        update_time = e.update_time,
-        //        log_result = e.log_result
-        //    }).OrderByDescending(e => e.tracking_id).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
-        //    return listParInformationSummary;
-        //}
-        
+        public bool Update(ParInformationSummary parInformationSummary, string log_result) 
+        {
+            par_information_summary parContext = new par_information_summary()
+            {
+                tracking_id = parInformationSummary.tracking_id,
+                tracking_number = parInformationSummary.tracking_number,
+                title = parInformationSummary.title,
+                tracking_time = parInformationSummary.tracking_time,
+                site = parInformationSummary.site,
+                model = parInformationSummary.model,
+                defect_rate = parInformationSummary.defect_rate,
+                problem_description = parInformationSummary.problem_description,
+                root_cause = parInformationSummary.root_cause,
+                analysis_conclusion = parInformationSummary.analysis_conclusion,
+                next_steps = parInformationSummary.next_steps,
+                update_time = DateTime.Now,
+                log_result = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " by " + log_result + " update;"
+            };
+            Context.Set<par_information_summary>().Attach(parContext);
+            Context.Entry<par_information_summary>(parContext).State = EntityState.Modified;
+            Context.SaveChanges();
+            return true;
+        }
     }
 }

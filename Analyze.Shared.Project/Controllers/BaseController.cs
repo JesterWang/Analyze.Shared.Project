@@ -35,7 +35,7 @@ namespace Analyze.Shared.Project.Controllers
         /// 获取当前用户名
         /// </summary>
         /// <returns></returns>
-        public string GetUserUserName()
+        public string GetUserName()
         {
             if (Session["CurrentUser"] != null)
             {

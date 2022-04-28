@@ -51,7 +51,7 @@
             }
             <br />
             @*执行成功/失败提示*@
-            <div id="saveAlert"><br /></div>
+            <div id="saveMeAlert"><br /></div>
 
             @if (Model.ParFileUpload != null)
             {
@@ -97,20 +97,21 @@
 {
     @Html.AntiForgeryToken()
     <div class="form-group">
-        <label>上传附件</label>@Html.Hidden("file_url", "", new { id = "file_url" })
-        @Html.TextBox("file", "", new { type = "file", name = "UpFile", id = "UpFile" })<br />
+        <label>上传附件</label>
+        @Html.TextBox("file", "", new { type = "file", id = "UpFileMe" })<br />
         <button type="button" class="btn btn-primary" onclick='upFile(2)'>确认上传</button>
     </div>
 }
 
 <script type="text/javascript">
     $("#btnSaveMe").click(function () {
+        var alertId = "saveMeAlert";
         var analysis_conclusion = $("#txtAnalysisConclusionMe").val();
         var analysis_steps = $("#txtAnalysisStepsMe").val();
         var log_result = $("#txtLogResultMe").val();
         if (analysis_conclusion == "" || analysis_steps == "") {
             var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>请填写完整后保存。</div>";
-            failAlert(boarddiv);
+            failAlert(boarddiv, alertId);
             return;
         }
         $.ajax({
@@ -124,11 +125,11 @@
             success: function (data) {
                 $("#txtLogResultMe").val(data);
                 var boarddiv = "<div id='success-alert' class='alert alert-success'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>成功！</strong>填写结果已保存。</div>";
-                successAlert(boarddiv);
+                successAlert(boarddiv, alertId);
             },
             error: function (data) {
                 var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>服务器请求超时。</div>";
-                failAlert(boarddiv);
+                failAlert(boarddiv, alertId);
             },
             complete: complete//请求完成
         });

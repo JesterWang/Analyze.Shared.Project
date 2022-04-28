@@ -17,23 +17,18 @@ namespace Analyze.Shared.DataAccess
         [StringLength(200)]
         public string password { get; set; }
 
-        [Required]
         [StringLength(20)]
         public string emplyee_name { get; set; }
 
-        [Required]
         [StringLength(20)]
         public string emplyee_itcode { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string sex { get; set; }
 
-        [Required]
         [StringLength(20)]
         public string tel { get; set; }
 
-        [Required]
         [StringLength(200)]
         public string email { get; set; }
 
@@ -54,7 +49,7 @@ namespace Analyze.Shared.DataAccess
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime update_time { get; set; }
 
-        [Column(TypeName = "usmallint")]
+        [Column(TypeName = "umediumint")]
         public int id { get; set; }
     }
 }

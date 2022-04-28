@@ -16,10 +16,27 @@
 <body>
     <div class="container">
         @*参数*@
-        @Html.Hidden("tracking_id", 1, new { id = "tracking_id" })
-        @Html.Hidden("username", "90150463", new { id = "username" })
-        @Html.Hidden("emplyee_name", "王强", new { id = "emplyee_name" })
+        @Html.Hidden("tracking_id", ViewData["tracking_id"], new { id = "tracking_id" })
+        @Html.Hidden("user_detailed", ViewData["user_detailed"], new { id = "user_detailed" })
+        <hr />
+        @*FAE分析报告*@
+        <div class="form-group">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <a id="btnToFae" data-toggle="collapse" data-parent="#accordion" href="#collapseFae">
+                            FAE分析报告
+                        </a>
+                    </h3>
+                </div>
 
+                <div id="collapseFae" class="panel-collapse collapse">
+                    <div id="collapseExampleFae" class="panel-body">
+                        @*返回分部视图*@
+                    </div>
+                </div>
+            </div>
+        </div>
         <hr />
         @*ME分析报告*@
         <div class="form-group">
@@ -34,6 +51,25 @@
 
                 <div id="collapseMe" class="panel-collapse collapse">
                     <div id="collapseExampleMe" class="panel-body">
+                        @*返回分部视图*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        @*EE分析报告*@
+        <div class="form-group">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <a id="btnToEe" data-toggle="collapse" data-parent="#accordion" href="#collapseEe">
+                            EE分析报告
+                        </a>
+                    </h3>
+                </div>
+
+                <div id="collapseEe" class="panel-collapse collapse">
+                    <div id="collapseExampleEe" class="panel-body">
                         @*返回分部视图*@
                     </div>
                 </div>
@@ -61,7 +97,30 @@
     @Scripts.Render("~/bundles/bootstrap")
     <script type="text/javascript">
         var tracking_id = $("#tracking_id").val();
-        var user_detailed = $("#username").val() + $("#emplyee_name").val();
+        var user_detailed = $("#user_detailed").val();
+        
+        //Fae Report
+        $("#btnToFae").click(function () {
+            var category_id = 1;
+            $.ajax({
+                type: 'POST',
+                url: '/AdminReportEdit/PaertViewIndexParFae',
+                data: '{tracking_id: ' + tracking_id + ',category_id: ' + category_id + '}',
+                dataType: "html",
+                contentType: 'application/json;charset=utf-8',
+                async: true,
+                beforeSend: beforeSend,
+                success: function (data) {
+                    $("#collapseExampleFae").html(data);
+                },
+                error: function (data) {
+                    alert("失败:" + data[0])
+                },
+                complete: complete
+            });
+            $(this).unbind("click");
+        });
+        //Me Report
         $("#btnToMe").click(function () {
             var category_id = 2;//文件类型-ParFileUpload.cs类
             $.ajax({
@@ -83,25 +142,37 @@
             //click事件执行一次
             $(this).unbind("click");
         });
+        //Ee Report
+        $("#btnToEe").click(function () {
+            var category_id = 3;
+            $.ajax({
+                type: 'POST',
+                url: '/AdminReportEdit/PaertViewIndexParEe',
+                data: '{tracking_id: ' + tracking_id + ',category_id: ' + category_id + '}',
+                dataType: "html",
+                contentType: 'application/json;charset=utf-8',
+                async: true,
+                beforeSend: beforeSend,
+                success: function (data) {
+                    $("#collapseExampleEe").html(data);
+                },
+                error: function (data) {
+                    alert("失败:" + data[0])
+                },
+                complete: complete
+            });
+            $(this).unbind("click");
+        });
+
         //upload
         function upFile(category_id) {
-            var file = document.getElementById("UpFile").files[0];
-            if (!file) {
-                var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>请选择文件。</div>";
-                failAlert(boarddiv);
-                return;
-            }
-            var size = file.size / 1024 / 1024;
-            if (size > 50) {
-                var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>文件不能大于50M。</div>";
-                failAlert(boarddiv);
-                return;
-            }
             var _id = "";
+            var alertId = "";
+            var _upfile_id = "";
             switch (category_id) {
-                case 1: _id = "#formFileMe"; break;
-                case 2: _id = "#formFileMe"; break;
-                case 3: _id = "#formFileMe"; break;
+                case 1: _id = "#formFileFae"; alertId = "saveFaeAlert"; _upfile_id = "UpFileFae"; break;
+                case 2: _id = "#formFileMe"; alertId = "saveMeAlert"; _upfile_id = "UpFileMe"; break;
+                case 3: _id = "#formFileEe"; alertId = "saveEeAlert"; _upfile_id = "UpFileEe"; break;
                 case 4: _id = "#formFileMe"; break;
                 case 5: _id = "#formFileMe"; break;
                 case 6: _id = "#formFileMe"; break;
@@ -119,6 +190,20 @@
                 case 18: _id = "#formFileMe"; break;
                 case 19: _id = "#formFileMe"; break;
             }
+
+            var file = document.getElementById(_upfile_id).files[0];
+            if (!file) {
+                var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>请选择文件。</div>";
+                failAlert(boarddiv,alertId);
+                return;
+            }
+            var size = file.size / 1024 / 1024;
+            if (size > 50) {
+                var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>文件不能大于50M。</div>";
+                failAlert(boarddiv, alertId);
+                return;
+            }
+            
             $(_id).ajaxSubmit({
                 url: "/AdminReportEdit/UploadFile",
                 type: "post",
@@ -127,7 +212,7 @@
                 success: function (data) {
                     if (data == "0") {
                         var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>文件上传失败，服务器请求超时。</div>";
-                        failAlert(boarddiv);
+                        failAlert(boarddiv, alertId);
                     }
                     else {
                         switch (category_id) {
@@ -155,7 +240,7 @@
                 },
                 error: function (data) {
                     var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>文件上传失败，服务器请求超时。</div>";
-                    failAlert(boarddiv);
+                    failAlert(boarddiv, alertId);
                 }
             });
         }
@@ -164,7 +249,7 @@
             $.ajax({
                 type: 'POST',
                 url: '/AdminReportEdit/InsertFile',//控制器活动,返回一个分部视图,并且给分部视图传递数据.
-                data: '{tracking_id: ' + tracking_id + ',user_detailed: "' + user_detailed + '",file_url: "' + file_url + '",category_id: "' + category_id + '"}',//传给服务器的数据(即后台方法的参数,参数类型要一致才可以)
+                data: '{tracking_id: ' + tracking_id + ',file_url: "' + file_url + '",category_id: "' + category_id + '"}',//传给服务器的数据(即后台方法的参数,参数类型要一致才可以)
                 dataType: "json",
                 contentType: 'application/json;charset=utf-8',
                 async: true,
@@ -200,26 +285,28 @@
         //show
         function showFile(category_id) {
             var url = '';
+            var alertId = "";
+            var collapseExample = "";
             switch (category_id) {
-                case 1: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 2: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 3: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 4: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 5: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 6: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 7: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 8: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 9: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 10: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 11: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 12: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 13: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 14: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 15: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 16: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 17: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 18: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
-                case 19: _url = '/AdminReportEdit/PaertViewIndexParMe'; break;
+                case 1: _url = '/AdminReportEdit/PaertViewIndexParFae'; alertId = "saveFaeAlert"; collapseExample = "#collapseExampleFae"; break;
+                case 2: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; collapseExample = "#collapseExampleMe"; break;
+                case 3: _url = '/AdminReportEdit/PaertViewIndexParEe'; alertId = "saveEeAlert"; collapseExample = "#collapseExampleEe"; break;
+                case 4: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
+                case 5: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
+                case 6: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
+                case 7: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
+                case 8: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
+                case 9: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
+                case 10: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
+                case 11: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
+                case 12: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
+                case 13: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
+                case 14: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
+                case 15: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
+                case 16: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
+                case 17: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
+                case 18: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
+                case 19: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
             }
 
             $.ajax({
@@ -232,27 +319,27 @@
                 beforeSend: beforeSend,//发送请求
                 success: function (data) //成功后的回调方法
                 {
-                    $("#collapseExampleMe").html(data);//data--对应的分部视图页面内容.
+                    $(collapseExample).html(data);//data--对应的分部视图页面内容.
                     var boarddiv = "<div id='success-alert' class='alert alert-success'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>成功！</strong>操作成功。</div>";
-                    successAlert(boarddiv);
+                    successAlert(boarddiv,alertId);
                 },
                 error: function (data) {
                     var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>刷新失败，服务器请求超时。</div>";
-                    failAlert(boarddiv);
+                    failAlert(boarddiv,alertId);
                 },
                 complete: complete//请求完成
             });
         }
         //success
-        function successAlert(boarddiv) {
-            $(document.getElementById("saveAlert")).append(boarddiv);
+        function successAlert(boarddiv,alertId) {
+            $(document.getElementById(alertId)).append(boarddiv);
             window.setTimeout(function () {
                 $("#success-alert").alert('close');
             }, 2000);
         }
         //warning
-        function failAlert(boarddiv) {
-            $(document.getElementById("saveAlert")).append(boarddiv);
+        function failAlert(boarddiv,alertId) {
+            $(document.getElementById(alertId)).append(boarddiv);
             window.setTimeout(function () {
                 $("#warning-alert").alert('close');
             }, 2000);

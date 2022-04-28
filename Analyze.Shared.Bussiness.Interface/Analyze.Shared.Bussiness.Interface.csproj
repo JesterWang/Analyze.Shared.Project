@@ -93,6 +93,8 @@
   <ItemGroup>
     <Compile Include="AjaxResult.cs" />
     <Compile Include="IBaseService.cs" />
+    <Compile Include="IParEeService.cs" />
+    <Compile Include="IParFaeService.cs" />
     <Compile Include="IParFileService.cs" />
     <Compile Include="IParInformationSummaryService.cs" />
     <Compile Include="IParMeService.cs" />

@@ -21,6 +21,10 @@ namespace Analyze.Shared.Project.App_Start
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                 "~/Scripts/bootstrap.min.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/datetimepicker").Include(
+                "~/Scripts/Datepicker/bootstrap-datetimepicker.min.js",
+                "~/Scripts/Datepicker/moment-with-locales.min.js"));
+
             //--------------------------------------------------------------------
 
             bundles.Add(new ScriptBundle("~/Content/bootstrap").Include(
@@ -30,10 +34,12 @@ namespace Analyze.Shared.Project.App_Start
                 "~/Content/Plugins/font-awesome/css/font-awesome.min.css",
                 "~/Content/Plugins/simple-line-icons/css/simple-line-icons.min.css"));
 
-
             bundles.Add(new ScriptBundle("~/Layouts/css").Include(
             "~/Content/Layouts/layout/css/layout.min.css",
             "~/Content/Layouts/layout/themes/darkblue.min.css"));
+
+            bundles.Add(new ScriptBundle("~/Datepicker/css").Include(
+               "~/Content/bootstrap-datetimepicker.min.css"));
         }
     }
 }

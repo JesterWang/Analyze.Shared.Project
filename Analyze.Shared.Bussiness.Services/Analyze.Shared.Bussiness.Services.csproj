@@ -92,6 +92,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseService.cs" />
+    <Compile Include="ParEeService.cs" />
+    <Compile Include="ParFaeService.cs" />
     <Compile Include="ParFileService.cs" />
     <Compile Include="ParInformationSummaryService.cs" />
     <Compile Include="ParMeService.cs" />

@@ -10,7 +10,7 @@ namespace Analyze.Shared.DataAccess
     public partial class par_me
     {
         [Key]
-        [Column(TypeName = "usmallint")]
+        [Column(TypeName = "umediumint")]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int tracking_id { get; set; }
 

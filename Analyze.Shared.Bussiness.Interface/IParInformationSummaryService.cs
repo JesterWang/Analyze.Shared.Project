@@ -17,5 +17,19 @@ namespace Analyze.Shared.Bussiness.Interface
         /// <param name="query"></param>
         /// <returns></returns>
         PageResult<ParInformationSummary> ParPagingList(PageQuery query);
+
+        /// <summary>
+        /// 查询Id
+        /// </summary>
+        /// <param name="tracking_id"></param>
+        /// <returns></returns>
+        ParInformationSummary GetQueryReport(int tracking_id);
+
+        /// <summary>
+        /// 修改ParInformationSummary表信息
+        /// </summary>
+        /// <param name="parInformationSummary"></param>
+        /// <returns></returns>
+        bool Update(ParInformationSummary parInformationSummary, string log_result);
     }
 }

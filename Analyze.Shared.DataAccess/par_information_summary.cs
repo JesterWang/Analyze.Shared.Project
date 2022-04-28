@@ -10,10 +10,9 @@ namespace Analyze.Shared.DataAccess
     public partial class par_information_summary
     {
         [Key]
-        [Column(TypeName = "usmallint")]
+        [Column(TypeName = "umediumint")]
         public int tracking_id { get; set; }
 
-        [Required]
         [StringLength(20)]
         public string tracking_number { get; set; }
 
@@ -43,14 +42,6 @@ namespace Analyze.Shared.DataAccess
         [Column(TypeName = "text")]
         [StringLength(65535)]
         public string root_cause { get; set; }
-
-        [Required]
-        [StringLength(200)]
-        public string defect_img_url { get; set; }
-
-        [Required]
-        [StringLength(200)]
-        public string conclusion_img_url { get; set; }
 
         [Column(TypeName = "text")]
         [StringLength(65535)]

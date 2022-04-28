@@ -123,14 +123,6 @@ namespace Analyze.Shared.DataAccess
                 .IsUnicode(false);
 
             modelBuilder.Entity<par_information_summary>()
-                .Property(e => e.defect_img_url)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<par_information_summary>()
-                .Property(e => e.conclusion_img_url)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<par_information_summary>()
                 .Property(e => e.analysis_conclusion)
                 .IsUnicode(false);
 

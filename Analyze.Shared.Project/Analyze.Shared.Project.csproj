@@ -159,6 +159,7 @@
     <Content Include="Content\bootstrap-table.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Datepicker\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\Layouts\layout\css\layout.css" />
     <Content Include="Content\Layouts\layout\css\layout.min.css" />
     <Content Include="Content\Layouts\layout\themes\darkblue.css" />
@@ -169,9 +170,11 @@
     <Content Include="Content\Login\style.css" />
     <Content Include="Scripts\bootstrap-table-zh-CN.min.js" />
     <Content Include="Scripts\bootstrap-table.min.js" />
+    <Content Include="Scripts\Datepicker\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\Datepicker\moment-with-locales.min.js" />
     <Content Include="Scripts\Pagination\kkpager\kkpager.js" />
     <Content Include="Scripts\Pagination\kkpager\kkpager.min.js" />
     <Content Include="Content\Plugins\font-awesome\css\font-awesome.css" />
@@ -191,6 +194,8 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Content\Pagination\kkpager\kkpager_blue.css" />
     <Content Include="Content\Pagination\kkpager\kkpager_orange.css" />
+    <Content Include="Scripts\Validate\jquery.validate.min.js" />
+    <Content Include="Scripts\Validate\jquery.validate.unobtrusive.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -241,6 +246,8 @@
     <Content Include="Views\Shared\_LayoutMaster.cshtml" />
     <Content Include="Views\Shared\PartialModal.cshtml" />
     <Content Include="Views\AdminReportHome\Update.cshtml" />
+    <Content Include="Views\AdminReportEdit\PaertViewIndexParFae.cshtml" />
+    <Content Include="Views\AdminReportEdit\PaertViewIndexParEe.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
