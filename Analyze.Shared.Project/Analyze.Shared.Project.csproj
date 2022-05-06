@@ -162,12 +162,19 @@
     <Content Include="Content\Datepicker\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\Layouts\layout\css\layout.css" />
     <Content Include="Content\Layouts\layout\css\layout.min.css" />
+    <Content Include="Content\Layouts\layout\img\avatar-8.png" />
     <Content Include="Content\Layouts\layout\themes\darkblue.css" />
     <Content Include="Content\Layouts\layout\themes\darkblue.min.css" />
+    <Content Include="Content\Loading\emptyimg.png" />
+    <Content Include="Content\Loading\error.png" />
     <Content Include="Content\Loading\loading.gif" />
     <Content Include="Content\Login\font\iconfont.svg" />
     <Content Include="Content\Login\iconfont.css" />
+    <Content Include="Content\Login\img\login-background.387950de.jpg" />
+    <Content Include="Content\Login\img\pie_report_icon.ico" />
+    <Content Include="Content\Login\img\pie_report_icon_24px.png" />
     <Content Include="Content\Login\style.css" />
+    <Content Include="Content\Modal\modal-image.css" />
     <Content Include="Scripts\bootstrap-table-zh-CN.min.js" />
     <Content Include="Scripts\bootstrap-table.min.js" />
     <Content Include="Scripts\Datepicker\bootstrap-datetimepicker.min.js" />
@@ -208,6 +215,8 @@
     <Compile Include="Controllers\AdminReportEditController.cs" />
     <Compile Include="Controllers\AdminReportHomeController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\EmployeeReportReadController.cs" />
+    <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -248,6 +257,15 @@
     <Content Include="Views\AdminReportHome\Update.cshtml" />
     <Content Include="Views\AdminReportEdit\PaertViewIndexParFae.cshtml" />
     <Content Include="Views\AdminReportEdit\PaertViewIndexParEe.cshtml" />
+    <Content Include="Views\AdminReportEdit\PaertViewIndexParMaterials.cshtml" />
+    <Content Include="Views\AdminReportEdit\PaertViewIndexParSmt.cshtml" />
+    <Content Include="Views\AdminReportEdit\PaertViewIndexParBe.cshtml" />
+    <Content Include="Views\AdminReportEdit\PaertViewIndexParTest.cshtml" />
+    <Content Include="Views\AdminReportEdit\PaertViewIndexParGroup.cshtml" />
+    <Content Include="Views\AdminReportHome\Insert.cshtml" />
+    <Content Include="Views\Shared\PartialHeader.cshtml" />
+    <Content Include="Views\Shared\PartialContainerMenue.cshtml" />
+    <Content Include="Views\Shared\PartialFooter.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -260,6 +278,7 @@
     <Folder Include="Models\" />
     <Folder Include="UploadedFiles\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\EmployeeReportRead\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Analyze.Shared.Bussiness.Interface\Analyze.Shared.Bussiness.Interface.csproj">

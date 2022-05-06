@@ -17,7 +17,7 @@ namespace Analyze.Shared.Bussiness.Interface
         ParFae GetQueryReport(int tracking_id);
 
         /// <summary>
-        /// 修改ME问题分析报告
+        /// 修改Fae问题分析报告
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

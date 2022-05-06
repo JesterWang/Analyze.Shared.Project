@@ -1,0 +1,366 @@
+﻿@using Analyze.Shared.Common.Report;
+@model ParList
+<link href="~/Content/Modal/modal-image.css" rel="stylesheet" />
+@*基础信息保存*@
+@if (Model.ParInformationSummary != null)
+{
+    using (Html.BeginForm("Index", "AdminReportEdit", FormMethod.Post,
+                new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+
+            @foreach (var item in Model.ParInformationSummary)
+            {
+                @Html.HiddenFor(m => item.tracking_number, new { id = "txtTracking_number" })
+                <div class="text-center">
+                    <button class="btn btn-link btn-lg" type="button" onclick="showFile(20)">点击此处刷新当前模块</button>/
+                    <button class="btn btn-link btn-lg" type="button" data-toggle="collapse" data-parent="#accordion" href="#collapseGroupLog">
+                        点击此处展开/收缩日志
+                    </button>
+                    <div id="collapseGroupLog" class="panel-collapse collapse">
+                        @Html.TextAreaFor(m => item.log_result, new { @class = "form-control", @id = "txtLogResultGroup", @autocomplete = "off", @readonly = "true", @rows = "5" })
+                    </div>
+                </div>
+                <div class="form-horizontal">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td><label>标题</label></td>
+                                <td colspan="4">
+                                    @Html.TextBoxFor(m => item.title, new
+                                            {
+                                                @id = "txtTitle",
+                                                @class = "form-control placeholder-no-fix",
+                                                @type = "text",
+                                                @autocomplete = "off",
+                                                @placeholder = "请输入标题..."
+                                            })
+                                    @Html.ValidationMessage("title", new { style = "color: red;" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2"><label>基础信息*</label></td>
+                                <td colspan="2">
+                                    <label>发生时间*</label>
+                                    @Html.TextBoxFor(m => item.tracking_time, new
+                                        {
+                                            @id = "txtTracking_time",
+                                            @class = "form-control placeholder-no-fix",
+                                            @type = "text",
+                                            @autocomplete = "off",
+                                            @placeholder = "请输入发生时间..."
+                                        })
+                                    @Html.ValidationMessage("tracking_time", new { style = "color: red;" })
+                                </td>
+                                <td colspan="2">
+                                    <label>发生地点*</label>
+                                    @Html.TextBoxFor(m => item.site, new
+                                    {
+                                        @id = "txtSite",
+                                        @class = "form-control placeholder-no-fix",
+                                        @type = "text",
+                                        @autocomplete = "off",
+                                        @placeholder = "请输入发生地点..."
+                                    })
+                                    @Html.ValidationMessage("site", new { style = "color: red;" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <label>产品型号*</label>
+                                    @Html.TextBoxFor(m => item.model, new
+                                    {
+                                        @id = "txtModel",
+                                        @class = "form-control placeholder-no-fix",
+                                        @type = "text",
+                                        @autocomplete = "off",
+                                        @placeholder = "请输入发生地点..."
+                                    })
+                                    @Html.ValidationMessage("model", new { style = "color: red;" })
+                                </td>
+                                <td colspan="2">
+                                    <label>不良率*</label>
+                                    @Html.TextBoxFor(m => item.defect_rate, new
+                                    {
+                                        @id = "txtDefect_rate",
+                                        @class = "form-control placeholder-no-fix",
+                                        @type = "text",
+                                        @autocomplete = "off",
+                                        @placeholder = "请输入发生地点..."
+                                    })
+                                    @Html.ValidationMessage("defect_rate", new { style = "color: red;" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>是否停线</label></td>
+                                <td colspan="4">
+                                    @Html.RadioButtonFor(m => item.isline, 0, new { @id = "isline0", @name = "isline"})否
+                                    @Html.RadioButtonFor(m => item.isline, 1, new { @id = "isline1", @name = "isline"})是
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>问题描述</label></td>
+                                <td colspan="4">
+                                    @Html.TextAreaFor(m => item.problem_description, new
+                                        {
+                                            @id = "txtProblem_descriptionGroup",
+                                            @class = "form-control placeholder-no-fix",
+                                            @autocomplete = "off",
+                                            @rows = "5",
+                                            @placeholder = "请输入问题描述..."
+                                        })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>不良原因</label></td>
+                                <td colspan="4">
+                                    @Html.TextAreaFor(m => item.root_cause, new
+                                        {
+                                            @id = "txtRoot_causeGroup",
+                                            @class = "form-control placeholder-no-fix",
+                                            @autocomplete = "off",
+                                            @rows = "5",
+                                            @placeholder = "请输入不良原因..."
+                                        })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5">
+                                    <div style="width:100%;height:400px;text-align:center;">
+                                        @Html.Hidden("group_image", item.group_image, new { id = "group_image" })
+                                        <img id="groupImg" src="@Url.Content(item.group_image ?? "~/Content/Loading/error.png")" style="width:auto;height:auto;max-width:100%;max-height:100%;margin:auto;" class="img-thumbnail" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>分析结论</label></td>
+                                <td colspan="4">
+                                    @Html.TextAreaFor(m => item.analysis_conclusion, new
+                                        {
+                                            @id = "txtAnalysis_conclusionGroup",
+                                            @class = "form-control placeholder-no-fix",
+                                            @autocomplete = "off",
+                                            @rows = "5",
+                                            @placeholder = "请输入分析结论..."
+                                        })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>下一步计划</label></td>
+                                <td colspan="4">
+                                    @Html.TextAreaFor(m => item.next_steps, new
+                                        {
+                                            @id = "txtNext_stepsGroup",
+                                            @class = "form-control placeholder-no-fix",
+                                            @autocomplete = "off",
+                                            @rows = "5",
+                                            @placeholder = "请输入下一步计划..."
+                                        })
+                                </td>
+                            </tr>
+                            <tr><td><button type="button" id="btnSaveGroup" class="btn btn-primary">确认保存</button></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            }
+            <br />
+            @*执行成功/失败提示*@
+            <div id="saveGroupAlert"><br /></div>
+
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+                <span class="close">×</span>
+                <img class="modal-content" id="img01">
+                <div id="caption"></div>
+            </div>
+
+            @if (Model.ParFileUpload != null)
+            {
+                <div class="form-horizontal">
+                    <br />
+                    <table class="table table-bordered table-hover">
+                        <caption class="text-center">附件列表</caption>
+                        <thead>
+                            <tr>
+                                <th>文件名称</th>
+                                <th>信息</th>
+                                <th colspan="2">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.ParFileUpload)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(m => item.file_name)</td>
+                                    <td>
+                                        @Html.DisplayFor(m => item.update_time)
+                                        <span>by</span>
+                                        @Html.DisplayFor(m => item.user_detailed)
+                                    </td>
+                                    <td>@Html.ActionLink("下载", "DownloadFile", new { filePath = item.file_url })</td>
+                                    <td>
+                                        @Ajax.ActionLink("删除", "DeleteFile", "AdminReportEdit", new { id = item.id, tracking_id = item.tracking_id, filePath = item.file_url, category_id = item.category_id },
+                                     new AjaxOptions() { UpdateTargetId = "collapseExampleGroup", HttpMethod = "Post", Confirm = " 您确定要删除该记录吗？该操作不可恢复！" })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    }
+}
+
+        @*文件列表*@
+        @using (Html.BeginForm("Index", "AdminReportEdit", FormMethod.Post,
+    new { @class = "form-horizontal", id = "formFileGroup", role = "form", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <i class="glyphicon glyphicon-file"></i><label>上传附件</label>
+                @Html.TextBox("file", "", new { type = "file", id = "UpFileGroup" })<br />
+                <button type="button" class="btn btn-primary" onclick='upFile(20)'>确认上传</button>
+            </div>
+            <div class="form-group">
+                <i class="glyphicon glyphicon-picture"></i><label>上传图片</label>
+                @Html.TextBox("file", "", new { type = "file", accept = "image/png,image/jpeg,image/gif", id = "UpFileGroupImg" })<br />
+                <button id="btnSaveGroupImg" type="button" class="btn btn-primary">确认上传</button>
+            </div>
+        }
+
+        <script type="text/javascript">
+        var alertId = "saveGroupAlert";
+        var tracking_number = $("#txtTracking_number").val();
+        var title = $("#txtTitle").val();
+        var tracking_time = $("#txtTracking_time").val();
+        var site = $("#txtSite").val();
+        var model = $("#txtModel").val();
+        var defect_rate = $("#txtDefect_rate").val();
+
+        var reserve = null;
+        if (document.getElementById("isline0").checked) {
+            reserve = "0";
+        }
+        else if (document.getElementById("isline1").checked) {
+            reserve = "1";
+        }
+        var isline = reserve;
+        var group_image = $("#group_image").val();
+        var group_image_old = $("#group_image").val();
+        var problem_description = $("#txtProblem_descriptionGroup").val();
+        var root_cause = $("#txtRoot_causeGroup").val();
+        var analysis_conclusion = $("#txtAnalysis_conclusionGroup").val();
+        var next_steps = $("#txtNext_stepsGroup").val();
+        var log_result = $("#txtLogResultGroup").val();
+        
+
+        $("#btnSaveGroup").click(function () {
+            if (title == "" || tracking_time == "" || site == "" || model == "" || defect_rate == "") {
+                var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>请将必填项填写完整后保存。</div>";
+                failAlert(boarddiv, alertId);
+                return;
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/AdminReportEdit/PaertViewIndexParGroupUpdate',
+                data: '{tracking_id: ' + tracking_id + ',tracking_number: "' + tracking_number + '",title: "' + title + '",title: "' + title + '",tracking_time: "' + tracking_time + '",site: "' + site + '",model: "' + model + '",defect_rate: "' + defect_rate + '",isline: "' + isline + '",group_image: "' + group_image + '",group_image_old: "' + group_image_old + '",problem_description: "' + problem_description + '",root_cause: "' + root_cause + '",analysis_conclusion: "' + analysis_conclusion + '",next_steps: "' + next_steps + '",log_result: "' + log_result + '",user: "' + user_detailed + '"}',
+                dataType: "json",
+                contentType: 'application/json;charset=utf-8',
+                async: true,
+                beforeSend: beforeSend,//发送请求
+                success: function (data) {
+                    $("#txtLogResultGroup").val(data);
+                    var boarddiv = "<div id='success-alert' class='alert alert-success'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>成功！</strong>填写结果已保存。</div>";
+                    successAlert(boarddiv, alertId);
+                },
+                error: function (data) {
+                    var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>服务器请求超时。</div>";
+                    failAlert(boarddiv, alertId);
+                },
+                complete: complete//请求完成
+            });
+        });
+        $("#btnSaveGroupImg").click(function () {
+
+            var file = document.getElementById("UpFileGroupImg").files[0];
+            if (!file) {
+                var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>请选择文件。</div>";
+                failAlert(boarddiv, "saveGroupAlert");
+                return;
+            }
+            var size = file.size / 1024 / 1024;
+            if (size > 50) {
+                var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>文件不能大于50M。</div>";
+                failAlert(boarddiv, "saveGroupAlert");
+                return;
+            }
+
+            $("#formFileGroup").ajaxSubmit({
+                url: "/AdminReportEdit/UploadFile",
+                type: "post",
+                dataType: "json",
+                beforeSend: beforeSend,
+                success: function (data) {
+                    if (data == "0") {
+                        var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>文件上传失败，服务器请求超时。</div>";
+                        failAlert(boarddiv, "saveGroupAlert");
+                    }
+                    else {
+                        updateGroupImg(data);
+                    }
+                },
+                error: function (data) {
+                    var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>文件上传失败，服务器请求超时。</div>";
+                    failAlert(boarddiv, "saveGroupAlert");
+                }
+            });
+
+            function updateGroupImg(group_image)
+            {
+                $.ajax({
+                    type: 'POST',
+                    url: '/AdminReportEdit/PaertViewIndexParGroupUpdate',
+                    data: '{tracking_id: ' + tracking_id + ',tracking_number: "' + tracking_number + '",title: "' + title + '",tracking_time: "' + tracking_time + '",site: "' + site + '",model: "' + model + '",defect_rate: "' + defect_rate + '",isline: "' + isline + '",group_image: "' + group_image + '",group_image_old: "' + group_image_old + '",problem_description: "' + problem_description + '",root_cause: "' + root_cause + '",analysis_conclusion: "' + analysis_conclusion + '",next_steps: "' + next_steps + '",log_result: "' + log_result + '",user: "' + user_detailed + '"}',
+                    dataType: "json",
+                    contentType: 'application/json;charset=utf-8',
+                    async: true,
+                    success: function (data) {
+                        showFile(20);
+                    },
+                    error: function (data) {
+                        var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>文件上传失败，服务器请求超时。</div>";
+                        failAlert(boarddiv);
+                    }
+                });
+            }
+        });
+
+        $("#groupImg").click(function () {
+            var modal = document.getElementById('myModal');
+
+            // 获取图片模态框，alt 属性作为图片弹出中文本描述
+            var img = document.getElementById('groupImg');
+            var modalImg = document.getElementById("img01");
+            var captionText = document.getElementById("caption");
+            img.onclick = function () {
+                // 获取模态窗口
+
+                modal.style.display = "block";
+                modalImg.src = this.src;
+                modalImg.alt = this.alt;
+                captionText.innerHTML = this.alt;
+            }
+            // 获取 <span> 元素，设置关闭模态框按钮
+            var span = document.getElementsByClassName("close")[0];
+
+            // 点击 <span> 元素上的 (x), 关闭模态框
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+        });
+        
+
+        
+        </script>

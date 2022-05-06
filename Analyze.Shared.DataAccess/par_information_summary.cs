@@ -11,6 +11,7 @@ namespace Analyze.Shared.DataAccess
     {
         [Key]
         [Column(TypeName = "umediumint")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int tracking_id { get; set; }
 
         [StringLength(20)]
@@ -21,7 +22,8 @@ namespace Analyze.Shared.DataAccess
         public string title { get; set; }
 
         [Column(TypeName = "timestamp")]
-        public DateTime? tracking_time { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public DateTime tracking_time { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -34,6 +36,10 @@ namespace Analyze.Shared.DataAccess
         [Required]
         [StringLength(32)]
         public string defect_rate { get; set; }
+
+        [Column(TypeName = "char")]
+        [StringLength(1)]
+        public string isline { get; set; }
 
         [Column(TypeName = "text")]
         [StringLength(65535)]
@@ -50,6 +56,9 @@ namespace Analyze.Shared.DataAccess
         [Column(TypeName = "text")]
         [StringLength(65535)]
         public string next_steps { get; set; }
+
+        [StringLength(200)]
+        public string group_image { get; set; }
 
         [Column(TypeName = "timestamp")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

@@ -27,7 +27,6 @@ namespace Analyze.Shared.Project.Controllers
             }
             else
             {
-
                 return 0;
             }
         }

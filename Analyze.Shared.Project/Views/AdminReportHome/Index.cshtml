@@ -10,6 +10,9 @@
         <div class="portlet light portlet-fit portlet-datatable bordered">
             <div class="portlet-body">
                 <div class="table-contaoner">
+                    <div>
+                        <a href="#" data-toggle="modal" id="createProject" class="btn btn-default" role="button">新建单据&nbsp;<i class="glyphicon glyphicon-plus-sign"></i></a>
+                    </div>
                     <table id="table"></table>
                 </div>
             </div>
@@ -23,7 +26,7 @@
             <button type="button" class="close" data-dissmiss="modal" aria-label="Close">
                 <span aria-hidden="true"></span>
             </button>
-            <h4 class="modal-title" id="ParInformationSummaryModalLabel">修改信息</h4>
+            <h4 class="modal-title" id="ParInformationSummaryModalLabel">新建单据</h4>
         </div>
         <div class="modal-body" id="parInformationSummaryModal-body">
 
@@ -39,6 +42,17 @@
     <script src="~/Scripts/bootstrap-table.min.js"></script>
     <script src="~/Scripts/bootstrap-table-zh-CN.min.js"></script>
     <script>
+        $("#createProject").click(function () {
+            $.ajax({
+                    url: "Insert",
+                    method: "get",
+                    success: function (result) {
+                    $("#parInformationSummaryModal-body").html(result);
+                    $("#ParInformationSummaryModal").modal();
+                    }
+            });
+        });
+
         $(function () {
             Init();
         })
@@ -114,44 +128,45 @@
                         formatter: function (value, row, index) {
                             return '<a href="/AdminReportEdit/Index?tracking_id=' + row.tracking_id + '" data-toggle="modal" title="查看">' +
                                 '<i class="glyphicon glyphicon-eye-open"></i> ' +
-                                '</a>' +
-                                '<a href="#">' +
-                                '<a href="#editProject" data-toggle="modal" title="修改">' +
-                                '<i class="glyphicon glyphicon-pencil"></i>' +
-                                '</a>' +
-                                '<a href="javascript:void(0)" title="删除">' +
-                                '<i class="glyphicon glyphicon-trash text-danger"></i>' +
                                 '</a>';
+                                //+
+                                //'<a href="#">' +
+                                //'<a href="#editProject" data-toggle="modal" title="修改">' +
+                                //'<i class="glyphicon glyphicon-pencil"></i>' +
+                                //'</a>' +
+                                //'<a href="javascript:void(0)" title="删除">' +
+                                //'<i class="glyphicon glyphicon-trash text-danger"></i>' +
+                                //'</a>';
                         },
-                        events: {
-                            'click a[title=删除]': function (e, value, row, index) {
-                                if (confirm('此操作不可逆，请确认是否删除？')) {
-                                    var id = row.Id;
-                                    $.ajax({
-                                        url: "delete",
-                                        data: { id: id },
-                                        method: "get",
-                                        success: function (result) {
-                                            $("#table").bootstrapTable('refresh');
-                                            alert(result.Message);
-                                        }
-                                    });
-                                }
-                            },
-                            'click a[title=修改]': function (e, value, row, index) {
+                        //events: {
+                        //    'click a[title=删除]': function (e, value, row, index) {
+                        //        if (confirm('此操作不可逆，请确认是否删除？')) {
+                        //            var id = row.Id;
+                        //            $.ajax({
+                        //                url: "delete",
+                        //                data: { id: id },
+                        //                method: "get",
+                        //                success: function (result) {
+                        //                    $("#table").bootstrapTable('refresh');
+                        //                    alert(result.Message);
+                        //                }
+                        //            });
+                        //        }
+                        //    },
+                        //    'click a[title=修改]': function (e, value, row, index) {
                                 
-                                var tracking_id = row.tracking_id;
-                                $.ajax({
-                                    url: "Update",
-                                    data: { tracking_id: tracking_id },
-                                    method: "get",
-                                    success: function (result) {
-                                        $("#parInformationSummaryModal-body").html(result);
-                                        $("#ParInformationSummaryModal").modal();
-                                    }
-                                });
-                            } 
-                        }
+                        //        var tracking_id = row.tracking_id;
+                        //        $.ajax({
+                        //            url: "Update",
+                        //            data: { tracking_id: tracking_id },
+                        //            method: "get",
+                        //            success: function (result) {
+                        //                $("#parInformationSummaryModal-body").html(result);
+                        //                $("#ParInformationSummaryModal").modal();
+                        //            }
+                        //        });
+                        //    } 
+                        //}
                     }
                 ],
                 onClickRow: function (row, $element) {
@@ -181,17 +196,40 @@
             })
         }
 
+        //function ParInformationSummarySubmit()
+        //{
+        //    $.ajax({
+        //        type: "POST",
+        //        dataType: "json",
+        //        url: "Update",
+        //        data: $("#from").serialize(),
+        //        success: function (result) {
+        //            if (result.Success == true) {
+        //                $("#ParInformationSummaryModal").modal('hide');
+        //                alert(result.Message);
+        //            }
+        //            if (result.Success == false) {
+        //                alert(result.Message);
+        //            }
+        //        },
+        //        error: function (event) {
+        //            alert("异常！");
+        //        }
+        //    });
+        //}
+
         function ParInformationSummarySubmit()
         {
             $.ajax({
                 type: "POST",
                 dataType: "json",
-                url: "Update",
+                url: "Insert",
                 data: $("#from").serialize(),
                 success: function (result) {
                     if (result.Success == true) {
                         $("#ParInformationSummaryModal").modal('hide');
                         alert(result.Message);
+                        $('#table').bootstrapTable('refresh', { pageNumber: 1 });
                     }
                     if (result.Success == false) {
                         alert(result.Message);
@@ -207,6 +245,8 @@
         {
             $("#ParInformationSummaryModal").modal('hide');
         }
+
+        
     </script>
 }
 

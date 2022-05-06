@@ -10,30 +10,35 @@ namespace Analyze.Shared.DataAccess
     public partial class view_par_file
     {
         [Key]
-        [Column(Order = 0, TypeName = "usmallint")]
+        [Column(Order = 0, TypeName = "umediumint")]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int id { get; set; }
+
+        [Key]
+        [Column(Order = 1, TypeName = "usmallint")]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int tracking_id { get; set; }
 
         [Key]
-        [Column(Order = 1)]
+        [Column(Order = 2)]
         [StringLength(200)]
         public string file_url { get; set; }
 
         [Key]
-        [Column(Order = 2)]
+        [Column(Order = 3)]
         [StringLength(200)]
         public string file_name { get; set; }
 
         [Key]
-        [Column(Order = 3, TypeName = "timestamp")]
+        [Column(Order = 4, TypeName = "timestamp")]
         public DateTime create_time { get; set; }
 
         [Key]
-        [Column(Order = 4, TypeName = "timestamp")]
+        [Column(Order = 5, TypeName = "timestamp")]
         public DateTime update_time { get; set; }
 
         [Key]
-        [Column(Order = 5)]
+        [Column(Order = 6)]
         [StringLength(20)]
         public string user_detailed { get; set; }
 

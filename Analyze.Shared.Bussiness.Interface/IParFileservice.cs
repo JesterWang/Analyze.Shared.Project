@@ -17,6 +17,13 @@ namespace Analyze.Shared.Bussiness.Interface
         List<ParFileUpload> GetQuery(int tracking_id, int category_id);
 
         /// <summary>
+        /// 查询视图报表
+        /// </summary>
+        /// <param name="_tracking_id"></param>
+        /// <returns></returns>
+        List<ViewParFile> GetQueryView(int tracking_id, int category_id_1, int category_id_2, int category_id_3, int category_id_4);
+
+        /// <summary>
         /// 添加文件信息-单条
         /// </summary>
         /// <param name="parFileUpload"></param>

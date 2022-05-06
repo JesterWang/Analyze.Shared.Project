@@ -1,0 +1,209 @@
+﻿@using Analyze.Shared.Common.Report;
+@model ParList
+
+@*基础信息保存*@
+@if (Model.ParBe != null)
+{
+    using (Html.BeginForm("Index", "AdminReportEdit", FormMethod.Post,
+                new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+
+            @foreach (var item in Model.ParBe)
+            {
+                <div class="text-center">
+                    <button class="btn btn-link btn-lg" type="button" onclick="showFile(12)">点击此处刷新当前模块</button>/
+                    <button class="btn btn-link btn-lg" type="button" data-toggle="collapse" data-parent="#accordion" href="#collapseBeLog">
+                        点击此处展开/收缩日志
+                    </button>
+                    <div id="collapseBeLog" class="panel-collapse collapse">
+                        @Html.TextAreaFor(m => item.log_result, new { @class = "form-control", @id = "txtLogResultBe", @autocomplete = "off", @readonly = "true", @rows = "5" })
+                    </div>
+                </div>
+                <div class="form-horizontal">
+                    <label>人员排查</label>
+                    @Html.TextAreaFor(m => item.man, new
+                        {
+                            @id = "txtBe_man",
+                            @class = "form-control placeholder-no-fix",
+                            @autocomplete = "off",
+                            @rows = "5",
+                            @placeholder = "请输入人员排查步骤..."
+                        })
+                    @Html.ValidationMessage("man", new { style = "color: red" })
+                </div>
+                <div class="form-horizontal">
+                    <label>设备排查</label>
+                    @Html.TextAreaFor(m => item.machine, new
+                                    {
+                                        @id = "txtBe_machine",
+                                        @class = "form-control placeholder-no-fix",
+                                        @autocomplete = "off",
+                                        @rows = "5",
+                                        @placeholder = "请输入设备排查步骤..."
+                                    })
+                    @Html.ValidationMessage("machine", new { style = "color: red" })
+                </div>
+                <div class="form-horizontal">
+                    <label>方法排查</label>
+                    @Html.TextAreaFor(m => item.method, new
+                                    {
+                                        @id = "txtBe_method",
+                                        @class = "form-control placeholder-no-fix",
+                                        @autocomplete = "off",
+                                        @rows = "5",
+                                        @placeholder = "请输入方法排查步骤..."
+                                    })
+                    @Html.ValidationMessage("method", new { style = "color: red" })
+                </div>
+                <div class="form-horizontal">
+                    <label>环境排查</label>
+                    @Html.TextAreaFor(m => item.environments, new
+                                    {
+                                        @id = "txtBe_environments",
+                                        @class = "form-control placeholder-no-fix",
+                                        @autocomplete = "off",
+                                        @rows = "5",
+                                        @placeholder = "请输入环境排查步骤..."
+                                    })
+                    @Html.ValidationMessage("environments", new { style = "color: red" })
+                </div>
+                <br />
+                <button type="button" id="btnSaveBe" class="btn btn-primary">确认保存</button>
+            }
+            <br />
+            @*执行成功/失败提示*@
+            <div id="saveBeAlert"><br /></div>
+
+            @if (Model.ViewParFile != null)
+            {
+                <div class="form-horizontal">
+                    <br />
+                    <table class="table table-bordered table-hover" id="table_Be">
+                        <caption class="text-center">
+                            <div class="input-group">
+                                <span class="input-group-addon">附件分类：</span>
+                                <select class="form-control" style="width:150px" onchange="onSearch(this)" value="">
+                                    <option value="">全选</option>
+                                    <option value="人员排查">人员排查</option>
+                                    <option value="设备排查">设备排查</option>
+                                    <option value="方法排查">方法排查</option>
+                                    <option value="环境排查">环境排查</option>
+                                </select>
+                            </div>
+                            附件列表
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th>文件名称</th>
+                                <th>分类</th>
+                                <th>信息</th>
+                                <th colspan="2">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.ViewParFile)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(m => item.file_name)</td>
+                                    <td>@Html.DisplayFor(m => item.category_chil)</td>
+                                    <td>
+                                        @Html.DisplayFor(m => item.update_time)
+                                        <span>by</span>
+                                        @Html.DisplayFor(m => item.user_detailed)
+                                    </td>
+                                    <td>@Html.ActionLink("下载", "DownloadFile", new { filePath = item.file_url })</td>
+                                    <td>
+                                        @Ajax.ActionLink("删除", "DeleteFile", "AdminReportEdit", new { id = item.id, tracking_id = item.tracking_id, filePath = item.file_url, category_id = item.category_id },
+                                     new AjaxOptions() { UpdateTargetId = "collapseExampleBe", HttpMethod = "Post", Confirm = " 您确定要删除该记录吗？该操作不可恢复！" })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    }
+}
+
+        @*文件列表*@
+        @using (Html.BeginForm("Index", "AdminReportEdit", FormMethod.Post,
+    new { @class = "form-horizontal", id = "formFileBe", role = "form", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <label>上传附件-人员排查</label>
+                @Html.TextBox("file", "", new { type = "file", id = "UpFileBe_man" })<br />
+                <button type="button" class="btn btn-primary" onclick='upFile(12)'>确认上传</button><hr />
+            </div>
+            <div class="form-group">
+                <label>上传附件-设备排查</label>
+                @Html.TextBox("file", "", new { type = "file", id = "UpFileBe_machine" })<br />
+                <button type="button" class="btn btn-primary" onclick='upFile(13)'>确认上传</button><hr />
+            </div>
+            <div class="form-group">
+                <label>上传附件-方法排查</label>
+                @Html.TextBox("file", "", new { type = "file", id = "UpFileBe_method" })<br />
+                <button type="button" class="btn btn-primary" onclick='upFile(14)'>确认上传</button><hr />
+            </div>
+            <div class="form-group">
+                <label>上传附件-环境排查</label>
+                @Html.TextBox("file", "", new { type = "file", id = "UpFileBe_environments" })<br />
+                <button type="button" class="btn btn-primary" onclick='upFile(15)'>确认上传</button>
+            </div>
+        }
+
+        <script type="text/javascript">
+            $("#btnSaveBe").click(function () {
+                var alertId = "saveBeAlert";
+                var man = $("#txtBe_man").val();
+                var machine = $("#txtBe_machine").val();
+                var method = $("#txtBe_method").val();
+                var environments = $("#txtBe_environments").val();
+                var log_result = $("#txtLogResultBe").val();
+                if (man == "" && machine == "" && method == "" && environments == "") {
+                    var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>请最少填写一条信息保存。</div>";
+                    failAlert(boarddiv, alertId);
+                    return;
+                }
+                $.ajax({
+                    type: 'POST',
+                    url: '/AdminReportEdit/PaertViewIndexParBeUpdate',
+                    data: '{tracking_id: ' + tracking_id + ',man: "' + man + '",machine: "' + machine + '",method: "' + method + '",environments: "' + environments + '",log_result: "' + log_result + '",user: "' + user_detailed + '"}',
+                    dataType: "json",
+                    contentType: 'application/json;charset=utf-8',
+                    async: true,
+                    beforeSend: beforeSend,//发送请求
+                    success: function (data) {
+                        $("#txtLogResultBe").val(data);
+                        var boarddiv = "<div id='success-alert' class='alert alert-success'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>成功！</strong>填写结果已保存。</div>";
+                        successAlert(boarddiv, alertId);
+                    },
+                    error: function (data) {
+                        var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>服务器请求超时。</div>";
+                        failAlert(boarddiv, alertId);
+                    },
+                    complete: complete//请求完成
+                });
+            });
+
+            //下拉筛选
+            function onSearch(obj) {//js函数开始
+                setTimeout(function () {//因为是即时查询，需要用setTimeout进行延迟，让值写入到input内，再读取
+                    var storeId = document.getElementById('table_Be');//获取table的id标识
+                    var rowsLength = storeId.rows.length;//表格总共有多少行
+                    var key = obj.value;//获取输入框的值
+                    var searchCol = 1;//要搜索的哪一列，这里是第一列，从0开始数起
+                    for (var i = 1; i < rowsLength; i++) {//按表的行数进行循环，第一行是标题，所以i=1，从第二行开始筛选（从0数起）
+                        var searchText = storeId.rows[i].cells[searchCol].innerHTML;//取得table行，列的值
+                        if (searchText.match(key)) {//用match函数进行筛选，如果input的值，即变量 key的值为空，返回的是ture，
+                            storeId.rows[i].style.display = '';//显示行操作，
+                        } else {
+                            storeId.rows[i].style.display = 'none';//隐藏行操作
+                        }
+                    }
+                }, 200);//200为延时时间
+            }
+        </script>

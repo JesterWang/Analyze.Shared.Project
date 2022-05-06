@@ -4,18 +4,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WHP停线验证管理平台</title>
+    <link href="~/Content/Login/img/pie_report_icon.ico" rel="icon" type="image/x-icon" />
     @Styles.Render("~/Content/bootstrap")
     @Styles.Render("~/Plugins/css")
     @Styles.Render("~/Layouts/css")
 </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
-    @*@Html.Partial("PartialHeader")*@
+    @Html.Partial("PartialHeader")
     
 
     <div class="page-container">
-        @*@Html.Partial("PartialContainerMenue")*@
+        @Html.Partial("PartialContainerMenue")
 
-
+        
         <div class="page-content-wrapper">
             <div class="page-content">
                 @*@Html.Partial("PartialContainerHeader")*@
@@ -27,7 +28,7 @@
             </div>
         </div>
     </div>
-    @*@Html.Partial("PartialFooter")*@
+    @Html.Partial("PartialFooter")
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

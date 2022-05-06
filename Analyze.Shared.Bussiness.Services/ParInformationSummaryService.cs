@@ -64,8 +64,9 @@ namespace Analyze.Shared.Bussiness.Services
         /// <returns></returns>
         public ParInformationSummary GetQueryReport(int tracking_id) 
         {
+                        
             ParInformationSummary par = Context.Set<par_information_summary>().Where(e => e.tracking_id == tracking_id)
-                .Select(e => new ParInformationSummary
+                .AsEnumerable().Select(e => new ParInformationSummary
                 {
                     tracking_id = e.tracking_id,
                     tracking_number = e.tracking_number,
@@ -74,12 +75,12 @@ namespace Analyze.Shared.Bussiness.Services
                     site = e.site,
                     model = e.model,
                     defect_rate = e.defect_rate,
+                    isline=e.isline,
                     problem_description = e.problem_description,
                     root_cause = e.root_cause,
-                    //defect_img_url = e.defect_img_url,
-                    //conclusion_img_url = e.conclusion_img_url,
                     analysis_conclusion = e.analysis_conclusion,
                     next_steps = e.next_steps,
+                    group_image=e.group_image,
                     create_time = e.create_time.ToString("yyyy-MM-dd HH:mm:ss"),
                     update_time = e.update_time,
                     log_result = e.log_result
@@ -99,19 +100,47 @@ namespace Analyze.Shared.Bussiness.Services
                 tracking_id = parInformationSummary.tracking_id,
                 tracking_number = parInformationSummary.tracking_number,
                 title = parInformationSummary.title,
-                tracking_time = parInformationSummary.tracking_time,
+                tracking_time = Convert.ToDateTime(parInformationSummary.tracking_time),
                 site = parInformationSummary.site,
                 model = parInformationSummary.model,
                 defect_rate = parInformationSummary.defect_rate,
+                isline=parInformationSummary.isline,
                 problem_description = parInformationSummary.problem_description,
                 root_cause = parInformationSummary.root_cause,
                 analysis_conclusion = parInformationSummary.analysis_conclusion,
                 next_steps = parInformationSummary.next_steps,
+                group_image = parInformationSummary.group_image,
                 update_time = DateTime.Now,
                 log_result = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " by " + log_result + " update;"
             };
             Context.Set<par_information_summary>().Attach(parContext);
             Context.Entry<par_information_summary>(parContext).State = EntityState.Modified;
+            Context.SaveChanges();
+            return true;
+        }
+
+        /// <summary>
+        /// 添加ParInformationSummary表信息
+        /// </summary>
+        /// <param name="parInformationSummary"></param>
+        /// <returns></returns>
+        public bool Insert(ParInformationSummary parInformationSummary) 
+        {
+            par_information_summary parContext = new par_information_summary()
+            {
+                tracking_number=parInformationSummary.tracking_number,
+                title = parInformationSummary.title,
+                tracking_time = Convert.ToDateTime(parInformationSummary.tracking_time),
+                site = parInformationSummary.site,
+                model = parInformationSummary.model,
+                defect_rate = parInformationSummary.defect_rate,
+                isline = parInformationSummary.isline,
+                problem_description = parInformationSummary.problem_description,
+                root_cause = parInformationSummary.root_cause,
+                analysis_conclusion = parInformationSummary.analysis_conclusion,
+                next_steps = parInformationSummary.next_steps
+            };
+            Context.Set<par_information_summary>().Add(parContext);
             Context.SaveChanges();
             return true;
         }

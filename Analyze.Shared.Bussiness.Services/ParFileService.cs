@@ -36,7 +36,7 @@ namespace Analyze.Shared.Bussiness.Services
                     update_time=e.update_time,
                     user_detailed = e.user_detailed,
                     category_id = e.category_id
-                }).ToList();
+                }).OrderByDescending(e => e.create_time).ToList();
             return listParFileUpload;
         }
 
@@ -72,5 +72,31 @@ namespace Analyze.Shared.Bussiness.Services
             Context.SaveChanges();
             return true;
         }
+
+        /// <summary>
+        /// 查询视图报表
+        /// </summary>
+        /// <param name="_tracking_id"></param>
+        /// <returns></returns>
+        public List<ViewParFile> GetQueryView(int tracking_id, int category_id_1,int category_id_2,int category_id_3,int category_id_4)
+        {
+            List<ViewParFile> listViewParFile = new List<ViewParFile>();
+            listViewParFile = Context.Set<view_par_file>().Where(e => e.tracking_id == tracking_id && (e.category_id == category_id_1 || e.category_id == category_id_2 || e.category_id == category_id_3 || e.category_id == category_id_4))
+                .Select(e => new ViewParFile
+                {
+                    id = e.id,
+                    tracking_id = e.tracking_id,
+                    file_url = e.file_url,
+                    file_name = e.file_name,
+                    create_time = e.create_time,
+                    update_time = e.update_time,
+                    user_detailed = e.user_detailed,
+                    category=e.category,
+                    category_chil=e.category_chil,
+                    category_id = e.category_id
+                }).OrderByDescending(e => e.create_time).ToList();
+            return listViewParFile;
+        }
+
     }
 }

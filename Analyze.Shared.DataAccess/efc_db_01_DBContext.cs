@@ -115,6 +115,10 @@ namespace Analyze.Shared.DataAccess
                 .IsUnicode(false);
 
             modelBuilder.Entity<par_information_summary>()
+                .Property(e => e.isline)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<par_information_summary>()
                 .Property(e => e.problem_description)
                 .IsUnicode(false);
 
@@ -128,6 +132,10 @@ namespace Analyze.Shared.DataAccess
 
             modelBuilder.Entity<par_information_summary>()
                 .Property(e => e.next_steps)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<par_information_summary>()
+                .Property(e => e.group_image)
                 .IsUnicode(false);
 
             modelBuilder.Entity<par_information_summary>()

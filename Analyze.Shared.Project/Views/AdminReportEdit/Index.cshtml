@@ -10,7 +10,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     <title>WHP停线验证管理平台</title>
+    <link href="~/Content/Login/img/pie_report_icon.ico" rel="icon" type="image/x-icon" />
     @Styles.Render("~/Content/bootstrap")
+    
 </head>
 
 <body>
@@ -18,9 +20,32 @@
         @*参数*@
         @Html.Hidden("tracking_id", ViewData["tracking_id"], new { id = "tracking_id" })
         @Html.Hidden("user_detailed", ViewData["user_detailed"], new { id = "user_detailed" })
+        
+        @*标题*@
+        @*<div class="form-group">
+            <h1>@Html.Display("title", "", new { @id = "Title" })</h1>
+        </div>*@
+        @*总结报告*@
+        <div class="form-group" id="divGroup">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <a id="btnToGroup" data-toggle="collapse" data-parent="#accordion" href="#collapseGroup">
+                            总结报告
+                        </a>
+                    </h3>
+                </div>
+
+                <div id="collapseGroup" class="panel-collapse collapse">
+                    <div id="collapseExampleGroup" class="panel-body">
+                        @*返回分部视图*@
+                    </div>
+                </div>
+            </div>
+        </div>
         <hr />
         @*FAE分析报告*@
-        <div class="form-group">
+        <div class="form-group" id="divFae">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title">
@@ -39,7 +64,7 @@
         </div>
         <hr />
         @*ME分析报告*@
-        <div class="form-group">
+        <div class="form-group" id="divMe">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title">
@@ -58,7 +83,7 @@
         </div>
         <hr />
         @*EE分析报告*@
-        <div class="form-group">
+        <div class="form-group" id="divEe">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title">
@@ -70,6 +95,82 @@
 
                 <div id="collapseEe" class="panel-collapse collapse">
                     <div id="collapseExampleEe" class="panel-body">
+                        @*返回分部视图*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        @*物料信息排查*@
+        <div class="form-group" id="divMaterials">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <a id="btnToMaterials" data-toggle="collapse" data-parent="#accordion" href="#collapseMaterials">
+                            物料信息排查
+                        </a>
+                    </h3>
+                </div>
+
+                <div id="collapseMaterials" class="panel-collapse collapse">
+                    <div id="collapseExampleMaterials" class="panel-body">
+                        @*返回分部视图*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        @*SMT信息排查*@
+        <div class="form-group" id="divSmt">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <a id="btnToSmt" data-toggle="collapse" data-parent="#accordion" href="#collapseSmt">
+                            SMT信息排查
+                        </a>
+                    </h3>
+                </div>
+
+                <div id="collapseSmt" class="panel-collapse collapse">
+                    <div id="collapseExampleSmt" class="panel-body">
+                        @*返回分部视图*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        @*组装信息排查*@
+        <div class="form-group" id="divBe">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <a id="btnToBe" data-toggle="collapse" data-parent="#accordion" href="#collapseBe">
+                            组装信息排查
+                        </a>
+                    </h3>
+                </div>
+
+                <div id="collapseBe" class="panel-collapse collapse">
+                    <div id="collapseExampleBe" class="panel-body">
+                        @*返回分部视图*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        @*测试信息排查*@
+        <div class="form-group" id="divTest">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <a id="btnToTest" data-toggle="collapse" data-parent="#accordion" href="#collapseTest">
+                            测试信息排查
+                        </a>
+                    </h3>
+                </div>
+
+                <div id="collapseTest" class="panel-collapse collapse">
+                    <div id="collapseExampleTest" class="panel-body">
                         @*返回分部视图*@
                     </div>
                 </div>
@@ -93,12 +194,47 @@
 
     </div>
 
+    <div class="btn-group-vertical" style="position:absolute;right:20px;top:20px;">
+        <div id="divLocationGroup" class="btn btn-primary">总结报告</div>
+        <div id="divLocationFae" class="btn btn-primary">FAE分析报告</div>
+        <div id="divLocationMe" class="btn btn-primary">ME分析报告</div>
+        <div id="divLocationEe" class="btn btn-primary">EE分析报告</div>
+        <div id="divLocationMaterials" class="btn btn-primary">物料信息排查</div>
+        <div id="divLocationSmt" class="btn btn-primary">SMT信息排查</div>
+        <div id="divLocationBe" class="btn btn-primary">组装信息排查</div>
+        <div id="divLocationTest" class="btn btn-primary">测试信息排查</div>
+    </div>
+    
+
     @Scripts.Render("~/bundles/jqueryAjax")
     @Scripts.Render("~/bundles/bootstrap")
     <script type="text/javascript">
+        
+
         var tracking_id = $("#tracking_id").val();
         var user_detailed = $("#user_detailed").val();
         
+        //Group Report
+        $("#btnToGroup").click(function () {
+            var category_id = 20;
+            $.ajax({
+                type: 'POST',
+                url: '/AdminReportEdit/PaertViewIndexParGroup',
+                data: '{tracking_id: ' + tracking_id + ',category_id: ' + category_id + '}',
+                dataType: "html",
+                contentType: 'application/json;charset=utf-8',
+                async: true,
+                beforeSend: beforeSend,
+                success: function (data) {
+                    $("#collapseExampleGroup").html(data);
+                },
+                error: function (data) {
+                    alert("失败:" + data[0])
+                },
+                complete: complete
+            });
+            $(this).unbind("click");
+        });
         //Fae Report
         $("#btnToFae").click(function () {
             var category_id = 1;
@@ -163,7 +299,90 @@
             });
             $(this).unbind("click");
         });
-
+        //Materials Report
+        $("#btnToMaterials").click(function () {
+            var category_id = 4;
+            $.ajax({
+                type: 'POST',
+                url: '/AdminReportEdit/PaertViewIndexParMaterials',
+                data: '{tracking_id: ' + tracking_id + ',category_id: ' + category_id + '}',
+                dataType: "html",
+                contentType: 'application/json;charset=utf-8',
+                async: true,
+                beforeSend: beforeSend,
+                success: function (data) {
+                    $("#collapseExampleMaterials").html(data);
+                },
+                error: function (data) {
+                    alert("失败:" + data[0])
+                },
+                complete: complete
+            });
+            $(this).unbind("click");
+        });
+        //Smt Report
+        $("#btnToSmt").click(function () {
+            var category_id = 8;
+            $.ajax({
+                type: 'POST',
+                url: '/AdminReportEdit/PaertViewIndexParSmt',
+                data: '{tracking_id: ' + tracking_id + ',category_id: ' + category_id + '}',
+                dataType: "html",
+                contentType: 'application/json;charset=utf-8',
+                async: true,
+                beforeSend: beforeSend,
+                success: function (data) {
+                    $("#collapseExampleSmt").html(data);
+                },
+                error: function (data) {
+                    alert("失败:" + data[0])
+                },
+                complete: complete
+            });
+            $(this).unbind("click");
+        });
+        //Be Report
+        $("#btnToBe").click(function () {
+            var category_id = 12;
+            $.ajax({
+                type: 'POST',
+                url: '/AdminReportEdit/PaertViewIndexParBe',
+                data: '{tracking_id: ' + tracking_id + ',category_id: ' + category_id + '}',
+                dataType: "html",
+                contentType: 'application/json;charset=utf-8',
+                async: true,
+                beforeSend: beforeSend,
+                success: function (data) {
+                    $("#collapseExampleBe").html(data);
+                },
+                error: function (data) {
+                    alert("失败:" + data[0])
+                },
+                complete: complete
+            });
+            $(this).unbind("click");
+        });
+        //Test Report
+        $("#btnToTest").click(function () {
+            var category_id = 16;
+            $.ajax({
+                type: 'POST',
+                url: '/AdminReportEdit/PaertViewIndexParTest',
+                data: '{tracking_id: ' + tracking_id + ',category_id: ' + category_id + '}',
+                dataType: "html",
+                contentType: 'application/json;charset=utf-8',
+                async: true,
+                beforeSend: beforeSend,
+                success: function (data) {
+                    $("#collapseExampleTest").html(data);
+                },
+                error: function (data) {
+                    alert("失败:" + data[0])
+                },
+                complete: complete
+            });
+            $(this).unbind("click");
+        });
         //upload
         function upFile(category_id) {
             var _id = "";
@@ -173,22 +392,23 @@
                 case 1: _id = "#formFileFae"; alertId = "saveFaeAlert"; _upfile_id = "UpFileFae"; break;
                 case 2: _id = "#formFileMe"; alertId = "saveMeAlert"; _upfile_id = "UpFileMe"; break;
                 case 3: _id = "#formFileEe"; alertId = "saveEeAlert"; _upfile_id = "UpFileEe"; break;
-                case 4: _id = "#formFileMe"; break;
-                case 5: _id = "#formFileMe"; break;
-                case 6: _id = "#formFileMe"; break;
-                case 7: _id = "#formFileMe"; break;
-                case 8: _id = "#formFileMe"; break;
-                case 9: _id = "#formFileMe"; break;
-                case 10: _id = "#formFileMe"; break;
-                case 11: _id = "#formFileMe"; break;
-                case 12: _id = "#formFileMe"; break;
-                case 13: _id = "#formFileMe"; break;
-                case 14: _id = "#formFileMe"; break;
-                case 15: _id = "#formFileMe"; break;
-                case 16: _id = "#formFileMe"; break;
-                case 17: _id = "#formFileMe"; break;
-                case 18: _id = "#formFileMe"; break;
-                case 19: _id = "#formFileMe"; break;
+                case 4: _id = "#formFileMaterials"; alertId = "saveMaterialsAlert"; _upfile_id = "UpFileMaterials_1"; break;
+                case 5: _id = "#formFileMaterials"; alertId = "saveMaterialsAlert"; _upfile_id = "UpFileMaterials_2"; break;
+                case 6: _id = "#formFileMaterials"; alertId = "saveMaterialsAlert"; _upfile_id = "UpFileMaterials_3"; break;
+                case 7: _id = "#formFileMaterials"; alertId = "saveMaterialsAlert"; _upfile_id = "UpFileMaterials_4"; break;
+                case 8: _id = "#formFileSmt"; alertId = "saveSmtAlert"; _upfile_id = "UpFileSmt_man"; break;
+                case 9: _id = "#formFileSmt"; alertId = "saveSmtAlert"; _upfile_id = "UpFileSmt_machine"; break;
+                case 10: _id = "#formFileSmt"; alertId = "saveSmtAlert"; _upfile_id = "UpFileSmt_method"; break;
+                case 11: _id = "#formFileSmt"; alertId = "saveSmtAlert"; _upfile_id = "UpFileSmt_environments"; break;
+                case 12: _id = "#formFileBe"; alertId = "saveBeAlert"; _upfile_id = "UpFileBe_man"; break;
+                case 13: _id = "#formFileBe"; alertId = "saveBeAlert"; _upfile_id = "UpFileBe_machine"; break;
+                case 14: _id = "#formFileBe"; alertId = "saveBeAlert"; _upfile_id = "UpFileBe_method"; break;
+                case 15: _id = "#formFileBe"; alertId = "saveBeAlert"; _upfile_id = "UpFileBe_environments"; break;
+                case 16: _id = "#formFileTest"; alertId = "saveTestAlert"; _upfile_id = "UpFileTest_fe"; break;
+                case 17: _id = "#formFileTest"; alertId = "saveTestAlert"; _upfile_id = "UpFileTest_be"; break;
+                case 18: _id = "#formFileTest"; alertId = "saveTestAlert"; _upfile_id = "UpFileTest_cfc"; break;
+                case 19: _id = "#formFileTest"; alertId = "saveTestAlert"; _upfile_id = "UpFileTest_sdbu"; break;
+                case 20: _id = "#formFileGroup"; alertId = "saveGroupAlert"; _upfile_id = "UpFileGroup"; break;
             }
 
             var file = document.getElementById(_upfile_id).files[0];
@@ -235,6 +455,7 @@
                             case 17: insertFile(17, data); break;
                             case 18: insertFile(18, data); break;
                             case 19: insertFile(19, data); break;
+                            case 20: insertFile(20, data); break;
                         }
                     }
                 },
@@ -274,6 +495,7 @@
                         case 17: showFile(17); break;
                         case 18: showFile(18); break;
                         case 19: showFile(19); break;
+                        case 20: showFile(20); break;
                     }
                 },
                 error: function (data) {
@@ -291,22 +513,23 @@
                 case 1: _url = '/AdminReportEdit/PaertViewIndexParFae'; alertId = "saveFaeAlert"; collapseExample = "#collapseExampleFae"; break;
                 case 2: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; collapseExample = "#collapseExampleMe"; break;
                 case 3: _url = '/AdminReportEdit/PaertViewIndexParEe'; alertId = "saveEeAlert"; collapseExample = "#collapseExampleEe"; break;
-                case 4: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
-                case 5: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
-                case 6: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
-                case 7: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
-                case 8: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
-                case 9: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
-                case 10: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
-                case 11: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
-                case 12: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
-                case 13: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
-                case 14: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
-                case 15: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
-                case 16: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
-                case 17: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
-                case 18: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
-                case 19: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; break;
+                case 4: _url = '/AdminReportEdit/PaertViewIndexParMaterials'; alertId = "saveMaterialsAlert"; collapseExample = "#collapseExampleMaterials"; break;
+                case 5: _url = '/AdminReportEdit/PaertViewIndexParMaterials'; alertId = "saveMaterialsAlert"; collapseExample = "#collapseExampleMaterials"; break;
+                case 6: _url = '/AdminReportEdit/PaertViewIndexParMaterials'; alertId = "saveMaterialsAlert"; collapseExample = "#collapseExampleMaterials"; break;
+                case 7: _url = '/AdminReportEdit/PaertViewIndexParMaterials'; alertId = "saveMaterialsAlert"; collapseExample = "#collapseExampleMaterials"; break;
+                case 8: _url = '/AdminReportEdit/PaertViewIndexParSmt'; alertId = "saveSmtAlert"; collapseExample = "#collapseExampleSmt"; break;
+                case 9: _url = '/AdminReportEdit/PaertViewIndexParSmt'; alertId = "saveSmtAlert"; collapseExample = "#collapseExampleSmt"; break;
+                case 10: _url = '/AdminReportEdit/PaertViewIndexParSmt'; alertId = "saveSmtAlert"; collapseExample = "#collapseExampleSmt"; break;
+                case 11: _url = '/AdminReportEdit/PaertViewIndexParSmt'; alertId = "saveSmtAlert"; collapseExample = "#collapseExampleSmt"; break;
+                case 12: _url = '/AdminReportEdit/PaertViewIndexParBe'; alertId = "saveBeAlert"; collapseExample = "#collapseExampleBe"; break;
+                case 13: _url = '/AdminReportEdit/PaertViewIndexParBe'; alertId = "saveBeAlert"; collapseExample = "#collapseExampleBe"; break;
+                case 14: _url = '/AdminReportEdit/PaertViewIndexParBe'; alertId = "saveBeAlert"; collapseExample = "#collapseExampleBe"; break;
+                case 15: _url = '/AdminReportEdit/PaertViewIndexParBe'; alertId = "saveBeAlert"; collapseExample = "#collapseExampleBe"; break;
+                case 16: _url = '/AdminReportEdit/PaertViewIndexParTest'; alertId = "saveTestAlert"; collapseExample = "#collapseExampleTest"; break;
+                case 17: _url = '/AdminReportEdit/PaertViewIndexParTest'; alertId = "saveTestAlert"; collapseExample = "#collapseExampleTest"; break;
+                case 18: _url = '/AdminReportEdit/PaertViewIndexParTest'; alertId = "saveTestAlert"; collapseExample = "#collapseExampleTest"; break;
+                case 19: _url = '/AdminReportEdit/PaertViewIndexParTest'; alertId = "saveTestAlert"; collapseExample = "#collapseExampleTest"; break;
+                case 20: _url = '/AdminReportEdit/PaertViewIndexParGroup'; alertId = "saveGroupAlert"; collapseExample = "#collapseExampleGroup"; break;
             }
 
             $.ajax({
@@ -344,6 +567,17 @@
                 $("#warning-alert").alert('close');
             }, 2000);
         }
+
+        $(window).scroll(function (e) {
+            console.log($(window).scrollTop());
+            if ($(window).scrollTop() > $('#divGroup').offset().top) {
+                $('.nav').css({ 'position': 'fixed' });
+                console.log('ss');
+            } else {
+                $('.nav').css({ 'position': 'absolute' });
+            }
+        })
+
         //loading begin
         function beforeSend(XMLHttpRequest) {
             $('#loading').modal('show');
@@ -352,6 +586,41 @@
         function complete(XMLHttpRequest, textStatus) {
             $('#loading').modal('hide');
         }
+
+        $(window).scroll(function (e) {
+            console.log($(window).scrollTop());
+            if ($(window).scrollTop() > $('#divGroup').offset().top) {
+                $('.btn-group-vertical').css({ 'position': 'fixed' });
+                console.log('ss');
+            } else {
+                $('.btn-group-vertical').css({ 'position': 'absolute' });
+            }
+        })
+
+        $("#divLocationGroup").click(function () {
+            $('body,html').animate({ scrollTop: $('#divGroup').offset().top }, 500);
+        });
+        $("#divLocationFae").click(function () {
+            $('body,html').animate({ scrollTop: $('#divFae').offset().top }, 500);
+        });
+        $("#divLocationMe").click(function () {
+            $('body,html').animate({ scrollTop: $('#divMe').offset().top }, 500);
+        });
+        $("#divLocationEe").click(function () {
+            $('body,html').animate({ scrollTop: $('#divEe').offset().top }, 500);
+        });
+        $("#divLocationMaterials").click(function () {
+            $('body,html').animate({ scrollTop: $('#divMaterials').offset().top }, 500);
+        });
+        $("#divLocationSmt").click(function () {
+            $('body,html').animate({ scrollTop: $('#divSmt').offset().top }, 500);
+        });
+        $("#divLocationBe").click(function () {
+            $('body,html').animate({ scrollTop: $('#divBe').offset().top }, 500);
+        });
+        $("#divLocationTest").click(function () {
+            $('body,html').animate({ scrollTop: $('#divTest').offset().top }, 500);
+        });
     </script>
 </body>
 

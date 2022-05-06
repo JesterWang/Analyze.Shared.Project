@@ -92,11 +92,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseService.cs" />
+    <Compile Include="ParBeService.cs" />
     <Compile Include="ParEeService.cs" />
     <Compile Include="ParFaeService.cs" />
     <Compile Include="ParFileService.cs" />
     <Compile Include="ParInformationSummaryService.cs" />
+    <Compile Include="ParMaterialsService.cs" />
     <Compile Include="ParMeService.cs" />
+    <Compile Include="ParSmtService.cs" />
+    <Compile Include="ParTestService.cs" />
     <Compile Include="SysUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

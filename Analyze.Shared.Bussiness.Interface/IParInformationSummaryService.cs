@@ -31,5 +31,12 @@ namespace Analyze.Shared.Bussiness.Interface
         /// <param name="parInformationSummary"></param>
         /// <returns></returns>
         bool Update(ParInformationSummary parInformationSummary, string log_result);
+
+        /// <summary>
+        /// 添加ParInformationSummary表信息
+        /// </summary>
+        /// <param name="parInformationSummary"></param>
+        /// <returns></returns>
+        bool Insert(ParInformationSummary parInformationSummary);
     }
 }

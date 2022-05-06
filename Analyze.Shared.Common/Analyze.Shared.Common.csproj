@@ -97,12 +97,16 @@
     <Compile Include="FileHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query\PageQuery.cs" />
+    <Compile Include="Report\ParBe.cs" />
     <Compile Include="Report\ParEe.cs" />
     <Compile Include="Report\ParFae.cs" />
     <Compile Include="Report\ParFileUpload.cs" />
     <Compile Include="Report\ParInformationSummary.cs" />
     <Compile Include="Report\ParList.cs" />
+    <Compile Include="Report\ParMaterials.cs" />
     <Compile Include="Report\ParMe.cs" />
+    <Compile Include="Report\ParSmt.cs" />
+    <Compile Include="Report\ParTest.cs" />
     <Compile Include="Report\ViewParFile.cs" />
     <Compile Include="SecurityMgr.cs" />
     <Compile Include="User\CurrentUser.cs" />

@@ -93,11 +93,15 @@
   <ItemGroup>
     <Compile Include="AjaxResult.cs" />
     <Compile Include="IBaseService.cs" />
+    <Compile Include="IParBeService.cs" />
     <Compile Include="IParEeService.cs" />
     <Compile Include="IParFaeService.cs" />
     <Compile Include="IParFileService.cs" />
     <Compile Include="IParInformationSummaryService.cs" />
+    <Compile Include="IParMaterialsService.cs" />
     <Compile Include="IParMeService.cs" />
+    <Compile Include="IParSmtService.cs" />
+    <Compile Include="IParTestService.cs" />
     <Compile Include="ISysUserService.cs" />
     <Compile Include="PageResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

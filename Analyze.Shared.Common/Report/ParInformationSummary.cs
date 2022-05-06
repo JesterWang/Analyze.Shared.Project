@@ -52,6 +52,12 @@ namespace Analyze.Shared.Common.Report
         [Display(Name = "不良率")]
         public string defect_rate { get; set; }
         /// <summary>
+        /// 是否停线
+        /// </summary>
+        [Column(TypeName = "char")]
+        [StringLength(1)]
+        public string isline { get; set; }
+        /// <summary>
         /// 问题描述
         /// </summary>
         [Display(Name = "问题描述")]
@@ -71,6 +77,12 @@ namespace Analyze.Shared.Common.Report
         /// </summary>
         [Display(Name = "下一步计划")]
         public string next_steps { get; set; }
+        /// <summary>
+        /// 问题总结图片
+        /// </summary>
+        [Display(Name = "问题总结图片")]
+        [StringLength(200)]
+        public string group_image { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>
