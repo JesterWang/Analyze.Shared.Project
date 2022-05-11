@@ -10,8 +10,8 @@ namespace Analyze.Shared.Common.User
     {
         public string username { get; set; }
         public string password { get; set; }
-        public string emplyee_name { get; set; }
-        public string emplyee_itcode { get; set; }
+        public string employee_name { get; set; }
+        public string employee_itcode { get; set; }
         public string sex { get; set; }
         public string tel { get; set; }
         public string email { get; set; }

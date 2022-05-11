@@ -29,7 +29,7 @@ namespace Analyze.Shared.Project.Controllers
             return View();
         }
 
-        [HttpPost]//提交登录--开始登录的时候，需要去处理的业务逻辑
+        [HttpPost]//提交登录
         public ActionResult Login(LoginUser user)
         {
             if (ModelState.IsValid)//触发实体验证--如果返回true,验证通过
@@ -69,7 +69,7 @@ namespace Analyze.Shared.Project.Controllers
                     //UnityConfigurationSection section = (UnityConfigurationSection)configuration.GetSection
                     //    (UnityConfigurationSection.SectionName);
                     //section.Configure(_Container, "AnalyzeContainer");
-
+                    
                     //ISysUserservice sysUserservice = _Container.Resolve<ISysUserservice>();
                 }
 
@@ -78,10 +78,13 @@ namespace Analyze.Shared.Project.Controllers
                 CurrentUser currentUser = _ISysUserservice.GetUser(user);
                 if (currentUser != null)
                 {
-                    {
-                        //写入Session
-                        HttpContext.Session["CurrentUser"] = currentUser;
-                    }
+                    //写入Session
+                    HttpContext.Session["CurrentUser"] = currentUser;
+
+                    //查询当前用户的菜单
+                    //List<Tuple<string, string, string>> tuples = new List<Tuple<string, string, string>>();
+                    //List<>
+
                     return base.Redirect("/AdminReportHome/Index");
                 }
                 else
@@ -94,6 +97,13 @@ namespace Analyze.Shared.Project.Controllers
             {
                 return View();
             }
+        }
+
+        //登出
+        public ActionResult LoginOut() 
+        {
+            HttpContext.Session.Clear();
+            return base.Redirect("/Account/Login");
         }
     }
 }

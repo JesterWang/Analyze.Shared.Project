@@ -15,9 +15,10 @@ namespace Analyze.Shared.Project
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            //FilterConfig
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
 
             //给MVC框架设置一个控制器工厂
             ControllerBuilder.Current.SetControllerFactory(new CustomControllerFactory());
@@ -26,6 +27,24 @@ namespace Analyze.Shared.Project
             AutoMapper.Mapper.Initialize(config=>{
                 config.AddProfile(new AutoMapperConfig());
             });
+
+            //访问量统计
+            Application["OnLineUserCount"] = 0;
+            AreaRegistration.RegisterAllAreas();
+        }
+
+        protected void Session_Start(object sender, EventArgs e)
+        {
+            Application.Lock();
+            Application["OnLineUserCount"] = Convert.ToInt32(Application["OnLineUserCount"]) + 1;
+            Application.UnLock();
+        }
+
+        protected void Session_End(object sender, EventArgs e)
+        {
+            //Application.Lock();
+            //Application["OnLineUserCount"] = Convert.ToInt32(Application["OnLineUserCount"]) - 1;
+            //Application.UnLock();
         }
     }
 }

@@ -239,11 +239,11 @@ namespace Analyze.Shared.DataAccess
                 .IsUnicode(false);
 
             modelBuilder.Entity<sys_user>()
-                .Property(e => e.emplyee_name)
+                .Property(e => e.employee_name)
                 .IsUnicode(false);
 
             modelBuilder.Entity<sys_user>()
-                .Property(e => e.emplyee_itcode)
+                .Property(e => e.employee_itcode)
                 .IsUnicode(false);
 
             modelBuilder.Entity<sys_user>()

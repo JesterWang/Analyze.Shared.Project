@@ -13,7 +13,7 @@ namespace Analyze.Shared.Project.Utility
     {
         private static IUnityContainer _Container = new UnityContainer();
 
-        static CustomDIFactory() 
+        static CustomDIFactory()
         {
             ExeConfigurationFileMap fileMap = new ExeConfigurationFileMap();
             fileMap.ExeConfigFilename = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "CfgFiles\\Unity.Config");

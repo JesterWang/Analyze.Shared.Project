@@ -1,0 +1,18 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>错误</title>
+</head>
+<body>
+    <div>
+        @*通过HandleErrorAttribute异常过滤器捕获到的异常信息存储在Model属性中*@
+        @Model.Exception.Message
+    </div>
+</body>
+</html>

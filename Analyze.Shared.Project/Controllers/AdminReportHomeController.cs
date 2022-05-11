@@ -2,6 +2,7 @@
 using Analyze.Shared.Common.Query;
 using Analyze.Shared.Common.Report;
 using Analyze.Shared.DataAccess;
+using Analyze.Shared.Project.Utility.Filters;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ using System.Web.Mvc;
 
 namespace Analyze.Shared.Project.Controllers
 {
+    [CustomAuthorizeAttribute]
     public class AdminReportHomeController : BaseController
     {
         private IParInformationSummaryService _IParInformationSummaryService = null;
@@ -20,11 +22,18 @@ namespace Analyze.Shared.Project.Controllers
         {
             _IParInformationSummaryService = iParInformationSummaryService;
         }
+
         // GET: AdminReportHome
         public ActionResult Index()
         {
-            string _username = GetUserEmplyeeName();
-            ViewData["emplyee_name"] = _username;
+            if (GetUser()!= null) 
+            {
+                string _username = GetUserName();
+                ViewData["username"] = _username;
+                string _role_id = GetUser().role_id.ToString();
+                ViewData["role_id"] = _role_id;
+                ViewData["visitcount"] = HttpContext.Application["OnLineUserCount"].ToString();
+            }
             return View();
         }
         

@@ -18,10 +18,10 @@ namespace Analyze.Shared.DataAccess
         public string password { get; set; }
 
         [StringLength(20)]
-        public string emplyee_name { get; set; }
+        public string employee_name { get; set; }
 
         [StringLength(20)]
-        public string emplyee_itcode { get; set; }
+        public string employee_itcode { get; set; }
 
         [StringLength(50)]
         public string sex { get; set; }

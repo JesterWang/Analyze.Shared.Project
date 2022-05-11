@@ -13,6 +13,10 @@
             @foreach (var item in Model.ParInformationSummary)
             {
                 @Html.HiddenFor(m => item.tracking_number, new { id = "txtTracking_number" })
+                @*标题*@
+                <div class="form-group">
+                    <h1 class="text-center">@Html.DisplayFor(m => item.title)</h1>
+                </div>
                 <div class="text-center">
                     <button class="btn btn-link btn-lg" type="button" onclick="showFile(20)">点击此处刷新当前模块</button>/
                     <button class="btn btn-link btn-lg" type="button" data-toggle="collapse" data-parent="#accordion" href="#collapseGroupLog">
@@ -34,7 +38,7 @@
                                                 @class = "form-control placeholder-no-fix",
                                                 @type = "text",
                                                 @autocomplete = "off",
-                                                @placeholder = "请输入标题..."
+                                                @placeholder = "请输入标题..."    
                                             })
                                     @Html.ValidationMessage("title", new { style = "color: red;" })
                                 </td>

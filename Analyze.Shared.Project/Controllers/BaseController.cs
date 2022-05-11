@@ -55,7 +55,7 @@ namespace Analyze.Shared.Project.Controllers
             if (Session["CurrentUser"] != null)
             {
                 CurrentUser user = (CurrentUser)Session["CurrentUser"];
-                return user.emplyee_name;
+                return user.employee_name;
             }
             else
             {

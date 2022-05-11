@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     <title>WHP停线验证管理平台</title>
     <link href="~/Content/Login/img/pie_report_icon.ico" rel="icon" type="image/x-icon" />
+    <link href="~/Content/BootStrap/metismenu.min.css" rel="stylesheet" />
     @Styles.Render("~/Content/bootstrap")
     
 </head>
@@ -20,18 +21,14 @@
         @*参数*@
         @Html.Hidden("tracking_id", ViewData["tracking_id"], new { id = "tracking_id" })
         @Html.Hidden("user_detailed", ViewData["user_detailed"], new { id = "user_detailed" })
-        
-        @*标题*@
-        @*<div class="form-group">
-            <h1>@Html.Display("title", "", new { @id = "Title" })</h1>
-        </div>*@
+
         @*总结报告*@
         <div class="form-group" id="divGroup">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         <a id="btnToGroup" data-toggle="collapse" data-parent="#accordion" href="#collapseGroup">
-                            总结报告
+                            <span class="span_sanjiaor"></span><strong>总结</strong>报告
                         </a>
                     </h3>
                 </div>
@@ -50,7 +47,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         <a id="btnToFae" data-toggle="collapse" data-parent="#accordion" href="#collapseFae">
-                            FAE分析报告
+                            <span class="span_sanjiaor"></span><strong>FAE</strong>分析报告
                         </a>
                     </h3>
                 </div>
@@ -69,7 +66,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         <a id="btnToMe" data-toggle="collapse" data-parent="#accordion" href="#collapseMe">
-                            ME分析报告
+                            <span class="span_sanjiaor"></span><strong>ME</strong>分析报告
                         </a>
                     </h3>
                 </div>
@@ -88,7 +85,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         <a id="btnToEe" data-toggle="collapse" data-parent="#accordion" href="#collapseEe">
-                            EE分析报告
+                            <span class="span_sanjiaor"></span><strong>EE</strong>分析报告
                         </a>
                     </h3>
                 </div>
@@ -107,7 +104,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         <a id="btnToMaterials" data-toggle="collapse" data-parent="#accordion" href="#collapseMaterials">
-                            物料信息排查
+                            <span class="span_sanjiaor"></span><strong>物料</strong>信息排查
                         </a>
                     </h3>
                 </div>
@@ -126,7 +123,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         <a id="btnToSmt" data-toggle="collapse" data-parent="#accordion" href="#collapseSmt">
-                            SMT信息排查
+                            <span class="span_sanjiaor"></span><strong>SMT</strong>信息排查
                         </a>
                     </h3>
                 </div>
@@ -145,7 +142,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         <a id="btnToBe" data-toggle="collapse" data-parent="#accordion" href="#collapseBe">
-                            组装信息排查
+                            <span class="span_sanjiaor"></span><strong>组装</strong>信息排查
                         </a>
                     </h3>
                 </div>
@@ -164,7 +161,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         <a id="btnToTest" data-toggle="collapse" data-parent="#accordion" href="#collapseTest">
-                            测试信息排查
+                            <span class="span_sanjiaor"></span><strong>测试</strong>信息排查
                         </a>
                     </h3>
                 </div>
@@ -209,11 +206,21 @@
     @Scripts.Render("~/bundles/jqueryAjax")
     @Scripts.Render("~/bundles/bootstrap")
     <script type="text/javascript">
-        
-
         var tracking_id = $("#tracking_id").val();
         var user_detailed = $("#user_detailed").val();
-        
+
+        $(function () {
+            //点击折叠时运行该函数
+            $('.panel-info').on('hide.bs.collapse show.bs.collapse', function (e) {
+
+                var $this = $(this)
+                $this.find("span").toggleClass("span_sanjiaod");
+                $this.find("span").toggleClass("span_sanjiaor");
+            });
+            //预加载
+            $("#btnToGroup").click();
+        })
+
         //Group Report
         $("#btnToGroup").click(function () {
             var category_id = 20;

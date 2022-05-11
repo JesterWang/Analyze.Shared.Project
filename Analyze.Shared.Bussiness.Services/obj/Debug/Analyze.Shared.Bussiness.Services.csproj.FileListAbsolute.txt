@@ -34,3 +34,5 @@ D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Anal
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\obj\Debug\Analyze.Shared.Bussiness.Services.csprojResolveAssemblyReference.cache
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\obj\Debug\Analyze.Shared.Bussiness.Services.dll
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\obj\Debug\Analyze.Shared.Bussiness.Services.pdb
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\log4net.dll
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\log4net.xml

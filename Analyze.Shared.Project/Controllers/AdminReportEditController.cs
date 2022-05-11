@@ -2,6 +2,7 @@
 using Analyze.Shared.Common;
 using Analyze.Shared.Common.Report;
 using Analyze.Shared.DataAccess;
+using Analyze.Shared.Project.Utility.Filters;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,6 +12,7 @@ using System.Web.Mvc;
 
 namespace Analyze.Shared.Project.Controllers
 {
+    [CustomAuthorizeAttribute]
     public class AdminReportEditController : BaseController
     {
         private IParInformationSummaryService _IParInformationSummaryService = null;

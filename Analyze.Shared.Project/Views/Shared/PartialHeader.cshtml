@@ -9,9 +9,14 @@
         <div class="top-menu">
             <ul class="nav navbar-nav pull-right">
                 <li class="dropdown dropdown-user">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="username username-hide-on-mobile">在线访问用户：<strong>@ViewData["visitcount"]</strong></span>
+                    </a>
+                </li>
+                <li class="dropdown dropdown-user">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                         <img alt="" class="img-circle" src="~/Content/Layouts/layout/img/avatar-8.png" />
-                        <span class="username username-hide-on-mobile">@ViewData["emplyee_name"]</span>
+                        <span class="username username-hide-on-mobile">@ViewData["username"]</span>
                         <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-default">
@@ -23,7 +28,7 @@
                     </ul>
                 </li>
                 <li class="dropdown dropdown-quick-sidebar-toggler">
-                    <a href="javascript:;" class="dropdown-toggle">
+                    <a href="/Account/LoginOut" class="dropdown-toggle">
                         <i class="icon-logout"></i>
                     </a>
                 </li>

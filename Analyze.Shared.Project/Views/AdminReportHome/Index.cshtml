@@ -5,12 +5,13 @@
 <link href="~/Content/bootstrap-table.min.css" rel="stylesheet" />
 
 <h3>信息汇总表</h3>
+@Html.Hidden("role_id", ViewData["role_id"], new { id = "role_id" })
 <div class="row">
     <div class="col-md-12">
         <div class="portlet light portlet-fit portlet-datatable bordered">
             <div class="portlet-body">
                 <div class="table-contaoner">
-                    <div>
+                    <div id="divToolGroup">
                         <a href="#" data-toggle="modal" id="createProject" class="btn btn-default" role="button">新建单据&nbsp;<i class="glyphicon glyphicon-plus-sign"></i></a>
                     </div>
                     <table id="table"></table>
@@ -58,6 +59,11 @@
         })
 
         function Init() {
+            var role_id = $("#role_id").val();
+            if (role_id == "5")
+            {
+                $("#divToolGroup").hide();
+            }
             $('#table').bootstrapTable({
                 url: "/AdminReportHome/ParPagingList",//数据源
                 dataField: "rows",//服务端返回数据键值
@@ -126,9 +132,18 @@
                         title: '操作',
                         align: 'center',
                         formatter: function (value, row, index) {
-                            return '<a href="/AdminReportEdit/Index?tracking_id=' + row.tracking_id + '" data-toggle="modal" title="查看">' +
+                            if (role_id == "5") {
+                                return '<a href="/EmployeeReportRead/Index?tracking_id=' + row.tracking_id + '" data-toggle="modal" title="查看">' +
                                 '<i class="glyphicon glyphicon-eye-open"></i> ' +
                                 '</a>';
+                            }
+                            else
+                            {
+                                return '<a href="/AdminReportEdit/Index?tracking_id=' + row.tracking_id + '" data-toggle="modal" title="查看">' +
+                                '<i class="glyphicon glyphicon-eye-open"></i> ' +
+                                '</a>';
+                            }
+                            
                                 //+
                                 //'<a href="#">' +
                                 //'<a href="#editProject" data-toggle="modal" title="修改">' +

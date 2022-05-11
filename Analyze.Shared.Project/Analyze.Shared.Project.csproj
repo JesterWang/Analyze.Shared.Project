@@ -56,6 +56,10 @@
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="log4net, Version=2.0.14.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.14\lib\net45\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -210,13 +214,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminReportEditController.cs" />
     <Compile Include="Controllers\AdminReportHomeController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EmployeeReportReadController.cs" />
-    <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -224,6 +228,8 @@
     <Compile Include="Utility\AutoMapperConfig.cs" />
     <Compile Include="Utility\CustomControllerFactory.cs" />
     <Compile Include="Utility\CustomDIFactory.cs" />
+    <Compile Include="Utility\Filters\CustomAuthorizeAttribute.cs" />
+    <Compile Include="Utility\Filters\CustomExceptionFilterAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config">
@@ -266,6 +272,17 @@
     <Content Include="Views\Shared\PartialHeader.cshtml" />
     <Content Include="Views\Shared\PartialContainerMenue.cshtml" />
     <Content Include="Views\Shared\PartialFooter.cshtml" />
+    <Content Include="Views\EmployeeReportRead\Index.cshtml" />
+    <Content Include="Views\EmployeeReportRead\PaertViewIndexParBe.cshtml" />
+    <Content Include="Views\EmployeeReportRead\PaertViewIndexParEe.cshtml" />
+    <Content Include="Views\EmployeeReportRead\PaertViewIndexParFae.cshtml" />
+    <Content Include="Views\EmployeeReportRead\PaertViewIndexParGroup.cshtml" />
+    <Content Include="Views\EmployeeReportRead\PaertViewIndexParMaterials.cshtml" />
+    <Content Include="Views\EmployeeReportRead\PaertViewIndexParMe.cshtml" />
+    <Content Include="Views\EmployeeReportRead\PaertViewIndexParSmt.cshtml" />
+    <Content Include="Views\EmployeeReportRead\PaertViewIndexParTest.cshtml" />
+    <Content Include="Content\BootStrap\metismenu.min.css" />
+    <Content Include="Views\Shared\Error.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -278,7 +295,6 @@
     <Folder Include="Models\" />
     <Folder Include="UploadedFiles\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\EmployeeReportRead\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Analyze.Shared.Bussiness.Interface\Analyze.Shared.Bussiness.Interface.csproj">
