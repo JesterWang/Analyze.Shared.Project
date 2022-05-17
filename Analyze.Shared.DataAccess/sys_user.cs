@@ -9,6 +9,10 @@ namespace Analyze.Shared.DataAccess
     [Table("efc_db_01.sys_user")]
     public partial class sys_user
     {
+        [Column(TypeName = "umediumint")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int id { get; set; }
+
         [Required]
         [StringLength(32)]
         public string username { get; set; }
@@ -32,14 +36,15 @@ namespace Analyze.Shared.DataAccess
         [StringLength(200)]
         public string email { get; set; }
 
-        public byte role_id { get; set; }
-
         public byte job_id { get; set; }
 
-        [Column(TypeName = "usmallint")]
-        public int dept_id { get; set; }
+        [Column(TypeName = "ubigint")]
+        public decimal dept_id { get; set; }
 
-        public byte status { get; set; }
+        [Column(TypeName = "char")]
+        [Required]
+        [StringLength(1)]
+        public string status { get; set; }
 
         [Column(TypeName = "timestamp")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -48,8 +53,5 @@ namespace Analyze.Shared.DataAccess
         [Column(TypeName = "timestamp")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime update_time { get; set; }
-
-        [Column(TypeName = "umediumint")]
-        public int id { get; set; }
     }
 }

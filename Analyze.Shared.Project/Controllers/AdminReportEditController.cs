@@ -42,6 +42,7 @@ namespace Analyze.Shared.Project.Controllers
         }
 
         // GET: Home
+        [CustomCrumbsActionFilterAttribute]
         public ActionResult Index()
         {
             // 获取路由数据

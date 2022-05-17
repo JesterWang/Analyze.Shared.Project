@@ -9,11 +9,16 @@ namespace Analyze.Shared.DataAccess
     [Table("efc_db_01.sys_role")]
     public partial class sys_role
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public byte id { get; set; }
+        [Column(TypeName = "usmallint")]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int id { get; set; }
 
         [Required]
         [StringLength(20)]
         public string role { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string note { get; set; }
     }
 }

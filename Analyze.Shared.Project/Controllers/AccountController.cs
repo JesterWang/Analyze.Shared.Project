@@ -1,6 +1,7 @@
 ﻿using Analyze.Shared.Bussiness.Interface;
 using Analyze.Shared.Bussiness.Services;
 using Analyze.Shared.Common;
+using Analyze.Shared.Common.Cache;
 using Analyze.Shared.Common.User;
 using Analyze.Shared.DataAccess;
 using Analyze.Shared.Project.Utility;
@@ -18,10 +19,12 @@ namespace Analyze.Shared.Project.Controllers
 {
     public class AccountController : Controller
     {
-        private ISysUserService _ISysUserservice = null;
-        public AccountController(ISysUserService iSysUserservice) 
+        private ISysUserService _ISysUserService = null;
+        private IMenuPermissionService _IMenuPermissionService = null;
+        public AccountController(ISysUserService iSysUserservice,IMenuPermissionService iMenuPermissionService) 
         {
-            _ISysUserservice = iSysUserservice;
+            _ISysUserService = iSysUserservice;
+            _IMenuPermissionService = iMenuPermissionService;
         }
         [HttpGet]//返回登录页
         public ActionResult Login() 
@@ -75,17 +78,24 @@ namespace Analyze.Shared.Project.Controllers
 
                 //IUnityContainer unityContainer = CustomDIFactory.GetContainer();
                 //ISysUserservice sysUserservice = unityContainer.Resolve<ISysUserservice>();
-                CurrentUser currentUser = _ISysUserservice.GetUser(user);
+                CurrentUser currentUser = _ISysUserService.GetUser(user);
                 if (currentUser != null)
                 {
+                    if (currentUser.status == "0")
+                    {
+                        ModelState.AddModelError("failed", "当前账号已禁用");
+                        return View();
+                    }
                     //写入Session
-                    HttpContext.Session["CurrentUser"] = currentUser;
+                    HttpContext.Session[CacheConstant.CacheCurrentUser] = currentUser;
 
                     //查询当前用户的菜单
-                    //List<Tuple<string, string, string>> tuples = new List<Tuple<string, string, string>>();
-                    //List<>
-
-                    return base.Redirect("/AdminReportHome/Index");
+                    List<Tuple<string, string, string, string>> tuples = new List<Tuple<string, string, string, string>>();
+                    List<MenuPermission> menuinfoList = _IMenuPermissionService.GetSubmenue
+                        (currentUser.id, out tuples);
+                    currentUser.CurrentMenue = menuinfoList;
+                    currentUser.TupMenue = tuples;
+                    return base.Redirect("/EmployeeReportHome/Index?crumbId=20220511142915%20_20220510084154");
                 }
                 else
                 {
@@ -104,6 +114,12 @@ namespace Analyze.Shared.Project.Controllers
         {
             HttpContext.Session.Clear();
             return base.Redirect("/Account/Login");
+        }
+
+        //验证无权限提示
+        public ActionResult UnAuthorize()
+        {
+            return View();
         }
     }
 }

@@ -1,20 +1,43 @@
-﻿@{
+﻿@using Analyze.Shared.Common.User;
+@using Analyze.Shared.Common.Cache;
+
+@{
     ViewBag.Title = "Index";
+
+    object currentUser = Context.Session[CacheConstant.CacheCurrentUser];
+    List<Tuple<string, string, string, string>> tuplist = new List<Tuple<string, string, string, string>>();
+    if (currentUser != null && currentUser is CurrentUser)
+    {
+        CurrentUser user = (CurrentUser)currentUser;
+        tuplist = user.TupMenue as List<Tuple<string, string, string, string>>;
+    }
 }
 
 <link href="~/Content/bootstrap-table.min.css" rel="stylesheet" />
 
-<h3>信息汇总表</h3>
-@Html.Hidden("role_id", ViewData["role_id"], new { id = "role_id" })
+<h3>信息汇总表-编辑</h3>
 <div class="row">
     <div class="col-md-12">
         <div class="portlet light portlet-fit portlet-datatable bordered">
             <div class="portlet-body">
                 <div class="table-contaoner">
-                    <div id="divToolGroup">
-                        <a href="#" data-toggle="modal" id="createProject" class="btn btn-default" role="button">新建单据&nbsp;<i class="glyphicon glyphicon-plus-sign"></i></a>
-                    </div>
                     <table id="table"></table>
+                    @if (tuplist != null)
+                    {
+                        foreach (var menue in tuplist)
+                        {
+                            if (menue.Item1 == "20220510085234")
+                            {
+                                <div id="toolbar">
+                                    <div class="btn-group">
+                                        <a href="#" data-toggle="modal" id="createProject" class="btn btn-default" role="button">
+                                            新增&nbsp;<i class="glyphicon glyphicon-plus-sign"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
                 </div>
             </div>
         </div>
@@ -27,7 +50,7 @@
             <button type="button" class="close" data-dissmiss="modal" aria-label="Close">
                 <span aria-hidden="true"></span>
             </button>
-            <h4 class="modal-title" id="ParInformationSummaryModalLabel">新建单据</h4>
+            <h4 class="modal-title" id="ParInformationSummaryModalLabel">新增</h4>
         </div>
         <div class="modal-body" id="parInformationSummaryModal-body">
 
@@ -59,11 +82,6 @@
         })
 
         function Init() {
-            var role_id = $("#role_id").val();
-            if (role_id == "5")
-            {
-                $("#divToolGroup").hide();
-            }
             $('#table').bootstrapTable({
                 url: "/AdminReportHome/ParPagingList",//数据源
                 dataField: "rows",//服务端返回数据键值
@@ -132,17 +150,10 @@
                         title: '操作',
                         align: 'center',
                         formatter: function (value, row, index) {
-                            if (role_id == "5") {
-                                return '<a href="/EmployeeReportRead/Index?tracking_id=' + row.tracking_id + '" data-toggle="modal" title="查看">' +
-                                '<i class="glyphicon glyphicon-eye-open"></i> ' +
-                                '</a>';
-                            }
-                            else
-                            {
+                                
                                 return '<a href="/AdminReportEdit/Index?tracking_id=' + row.tracking_id + '" data-toggle="modal" title="查看">' +
                                 '<i class="glyphicon glyphicon-eye-open"></i> ' +
                                 '</a>';
-                            }
                             
                                 //+
                                 //'<a href="#">' +
@@ -211,27 +222,6 @@
             })
         }
 
-        //function ParInformationSummarySubmit()
-        //{
-        //    $.ajax({
-        //        type: "POST",
-        //        dataType: "json",
-        //        url: "Update",
-        //        data: $("#from").serialize(),
-        //        success: function (result) {
-        //            if (result.Success == true) {
-        //                $("#ParInformationSummaryModal").modal('hide');
-        //                alert(result.Message);
-        //            }
-        //            if (result.Success == false) {
-        //                alert(result.Message);
-        //            }
-        //        },
-        //        error: function (event) {
-        //            alert("异常！");
-        //        }
-        //    });
-        //}
 
         function ParInformationSummarySubmit()
         {

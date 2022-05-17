@@ -24,8 +24,11 @@ namespace Analyze.Shared.DataAccess
         public virtual DbSet<par_test> par_test { get; set; }
         public virtual DbSet<sys_dept> sys_dept { get; set; }
         public virtual DbSet<sys_job> sys_job { get; set; }
+        public virtual DbSet<sys_menu_permission> sys_menu_permission { get; set; }
         public virtual DbSet<sys_role> sys_role { get; set; }
+        public virtual DbSet<sys_role_menu_permission> sys_role_menu_permission { get; set; }
         public virtual DbSet<sys_user> sys_user { get; set; }
+        public virtual DbSet<sys_user_role> sys_user_role { get; set; }
         public virtual DbSet<view_par_file> view_par_file { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -215,6 +218,10 @@ namespace Analyze.Shared.DataAccess
                 .IsUnicode(false);
 
             modelBuilder.Entity<sys_dept>()
+                .Property(e => e.path)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<sys_dept>()
                 .Property(e => e.dname_short)
                 .IsUnicode(false);
 
@@ -222,12 +229,48 @@ namespace Analyze.Shared.DataAccess
                 .Property(e => e.dname_short_splicing)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<sys_dept>()
+                .Property(e => e.manager)
+                .IsUnicode(false);
+
             modelBuilder.Entity<sys_job>()
                 .Property(e => e.job)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<sys_menu_permission>()
+                .Property(e => e.name)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<sys_menu_permission>()
+                .Property(e => e.menu_code)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<sys_menu_permission>()
+                .Property(e => e.icon_url)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<sys_menu_permission>()
+                .Property(e => e.link_url)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<sys_menu_permission>()
+                .Property(e => e.path)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<sys_menu_permission>()
+                .Property(e => e.is_delete)
+                .IsUnicode(false);
+
             modelBuilder.Entity<sys_role>()
                 .Property(e => e.role)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<sys_role>()
+                .Property(e => e.note)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<sys_role_menu_permission>()
+                .Property(e => e.note)
                 .IsUnicode(false);
 
             modelBuilder.Entity<sys_user>()
@@ -256,6 +299,14 @@ namespace Analyze.Shared.DataAccess
 
             modelBuilder.Entity<sys_user>()
                 .Property(e => e.email)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<sys_user>()
+                .Property(e => e.status)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<sys_user_role>()
+                .Property(e => e.user_role_note)
                 .IsUnicode(false);
 
             modelBuilder.Entity<view_par_file>()

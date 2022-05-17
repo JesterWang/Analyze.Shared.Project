@@ -65,6 +65,7 @@ namespace Analyze.Shared.Bussiness.Services
             }
         }
 
+
         public PageResult<T> QueryPage<T, S>(Expression<Func<T, bool>> funcWhere, int pageSize, int pageIndex, Expression<Func<T, S>>
             funcOrderby, bool isAsc = true) where T : class
         {

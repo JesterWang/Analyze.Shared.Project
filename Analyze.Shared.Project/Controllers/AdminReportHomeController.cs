@@ -24,16 +24,9 @@ namespace Analyze.Shared.Project.Controllers
         }
 
         // GET: AdminReportHome
+        [CustomCrumbsActionFilterAttribute]
         public ActionResult Index()
         {
-            if (GetUser()!= null) 
-            {
-                string _username = GetUserName();
-                ViewData["username"] = _username;
-                string _role_id = GetUser().role_id.ToString();
-                ViewData["role_id"] = _role_id;
-                ViewData["visitcount"] = HttpContext.Application["OnLineUserCount"].ToString();
-            }
             return View();
         }
         
@@ -54,7 +47,7 @@ namespace Analyze.Shared.Project.Controllers
         }
 
         /// <summary>
-        /// 修改ParInformationSummary的页面
+        /// 添加ParInformationSummary的页面
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -76,7 +69,7 @@ namespace Analyze.Shared.Project.Controllers
             JsonResult jsonResult = new JsonResult();
             jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
             //验证
-            if (title != "" || tracking_time != "" || site != "" || model != "" || defect_rate != "")
+            if (title != "" && tracking_time != "" && site != "" && model != "" && defect_rate != "")
             {
                 ParInformationSummary parInformationSummary = new ParInformationSummary()
                 {

@@ -1,0 +1,54 @@
+﻿@using Analyze.Shared.Common.Cache;
+@using Analyze.Shared.Common.User;
+@{
+    object currentUser=Context.Session[CacheConstant.CacheCurrentUser];
+    Tuple<string, string, string, string> firstCrumbs = null;
+    Tuple<string, string, string, string> secondCrumbs = null;
+    if (currentUser != null && currentUser is CurrentUser) 
+    {
+        CurrentUser user = (CurrentUser)currentUser;
+        List<Tuple<string, string, string, string>> tupMenuelist = user.TupMenue as List<Tuple<string, string, string, string>>;
+
+        if (tupMenuelist != null && tupMenuelist.Count() > 0) 
+        {
+            List<string> crumbsId = (List<string>)Context.Session[CacheConstant.CacheCurrentCrumbs];
+            if (crumbsId == null)
+            {
+                firstCrumbs = new Tuple<string, string, string, string>("", "报告查看>停线异常报告", "/EmployeeReportHome/Index", "1");
+            }
+            else 
+            {
+                firstCrumbs = tupMenuelist.FirstOrDefault(c => c.Item1 == crumbsId[1]);
+                secondCrumbs = tupMenuelist.FirstOrDefault(c => c.Item1 == crumbsId[0]);
+            }
+        }
+    }
+}
+
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        @if (firstCrumbs != null) 
+        {
+        <li>
+            <a href="">@firstCrumbs.Item2</a>
+            @if (secondCrumbs != null) 
+            {
+                <i class="icon-arrow-right"></i>
+            }
+        </li>
+        }
+        @if (secondCrumbs != null) 
+        {
+            <li>
+                <a href="">@secondCrumbs.Item2</a>
+            </li>
+        }
+    </ul>
+    <div class="page-toolbar">
+        <div id="dashboard-report-range" class="pull-right tooltips btn btn-sm" data-container="bottom" data-original-title="Change dashboard date range">
+            <i class="icon-calendar"></i>&nbsp;
+            <span class="thin uppercase hidden-xs"></span>&nbsp;
+            <i class="fa fa-angle-down"></i>
+        </div>
+    </div>
+</div>

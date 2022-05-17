@@ -116,8 +116,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sys_dept.cs" />
     <Compile Include="sys_job.cs" />
+    <Compile Include="sys_menu_permission.cs" />
     <Compile Include="sys_role.cs" />
+    <Compile Include="sys_role_menu_permission.cs" />
     <Compile Include="sys_user.cs" />
+    <Compile Include="sys_user_role.cs" />
     <Compile Include="view_par_file.cs" />
   </ItemGroup>
   <ItemGroup>

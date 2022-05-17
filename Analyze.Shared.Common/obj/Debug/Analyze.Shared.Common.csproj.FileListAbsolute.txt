@@ -5,6 +5,7 @@ D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Anal
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Common\bin\Debug\AutoMapper.dll
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Common\bin\Debug\EntityFramework.dll
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Common\bin\Debug\EntityFramework.SqlServer.dll
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Common\bin\Debug\log4net.dll
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Common\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Common\bin\Debug\System.Threading.Tasks.Extensions.dll
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Common\bin\Debug\System.ValueTuple.dll
@@ -18,6 +19,7 @@ D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Anal
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Common\bin\Debug\AutoMapper.xml
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Common\bin\Debug\EntityFramework.xml
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Common\bin\Debug\EntityFramework.SqlServer.xml
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Common\bin\Debug\log4net.xml
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Common\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Common\bin\Debug\System.Threading.Tasks.Extensions.xml
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Common\bin\Debug\System.ValueTuple.xml
@@ -29,5 +31,3 @@ D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Anal
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Common\obj\Debug\Analyze.Shared.Common.csprojResolveAssemblyReference.cache
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Common\obj\Debug\Analyze.Shared.Common.dll
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Common\obj\Debug\Analyze.Shared.Common.pdb
-D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Common\bin\Debug\log4net.dll
-D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Common\bin\Debug\log4net.xml

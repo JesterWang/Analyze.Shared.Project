@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Analyze.Shared.Common.Cache;
 
 namespace Analyze.Shared.Project
 {
@@ -15,7 +16,6 @@ namespace Analyze.Shared.Project
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-            //FilterConfig
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
@@ -29,14 +29,13 @@ namespace Analyze.Shared.Project
             });
 
             //访问量统计
-            Application["OnLineUserCount"] = 0;
-            AreaRegistration.RegisterAllAreas();
+            Application[CacheConstant.CacheOnLineUserCount] = 0;
         }
 
         protected void Session_Start(object sender, EventArgs e)
         {
             Application.Lock();
-            Application["OnLineUserCount"] = Convert.ToInt32(Application["OnLineUserCount"]) + 1;
+            Application[CacheConstant.CacheOnLineUserCount] = Convert.ToInt32(Application[CacheConstant.CacheOnLineUserCount]) + 1;
             Application.UnLock();
         }
 

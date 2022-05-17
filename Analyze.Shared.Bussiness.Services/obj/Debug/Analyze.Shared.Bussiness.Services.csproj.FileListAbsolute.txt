@@ -7,6 +7,7 @@ D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Anal
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\AutoMapper.dll
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\EntityFramework.dll
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\EntityFramework.SqlServer.dll
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\log4net.dll
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\MySql.Data.dll
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\System.Threading.Tasks.Extensions.dll
@@ -23,6 +24,7 @@ D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Anal
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\AutoMapper.xml
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\EntityFramework.xml
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\EntityFramework.SqlServer.xml
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\log4net.xml
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\System.Threading.Tasks.Extensions.xml
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\System.ValueTuple.xml
@@ -34,5 +36,3 @@ D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Anal
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\obj\Debug\Analyze.Shared.Bussiness.Services.csprojResolveAssemblyReference.cache
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\obj\Debug\Analyze.Shared.Bussiness.Services.dll
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\obj\Debug\Analyze.Shared.Bussiness.Services.pdb
-D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\log4net.dll
-D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\log4net.xml

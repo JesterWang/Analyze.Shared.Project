@@ -13,9 +13,9 @@
             @foreach (var item in Model.ParMaterials)
             {
                 <div class="text-center">
-                    <button class="btn btn-link btn-lg" type="button" onclick="showFile(4)">点击此处刷新当前模块</button>/
+                    <button class="btn btn-link btn-lg" type="button" onclick="showFile(4)"><i class="glyphicon glyphicon-refresh"></i>点击此处刷新当前模块</button>/
                     <button class="btn btn-link btn-lg" type="button" data-toggle="collapse" data-parent="#accordion" href="#collapseMaterialsLog">
-                        点击此处展开/收缩日志
+                        <i class="glyphicon glyphicon-list"></i>点击此处展开/收缩日志
                     </button>
                     <div id="collapseMaterialsLog" class="panel-collapse collapse">
                         @Html.TextAreaFor(m => item.log_result, new { @class = "form-control", @id = "txtLogResultMaterials", @autocomplete = "off", @readonly = "true", @rows = "5" })

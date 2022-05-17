@@ -18,9 +18,9 @@
                     <h1 class="text-center">@Html.DisplayFor(m => item.title)</h1>
                 </div>
                 <div class="text-center">
-                    <button class="btn btn-link btn-lg" type="button" onclick="showFile(20)">点击此处刷新当前模块</button>/
+                    <button class="btn btn-link btn-lg" type="button" onclick="showFile(20)"><i class="glyphicon glyphicon-refresh"></i>点击此处刷新当前模块</button>/
                     <button class="btn btn-link btn-lg" type="button" data-toggle="collapse" data-parent="#accordion" href="#collapseGroupLog">
-                        点击此处展开/收缩日志
+                        <i class="glyphicon glyphicon-list"></i>点击此处展开/收缩日志
                     </button>
                     <div id="collapseGroupLog" class="panel-collapse collapse">
                         @Html.TextAreaFor(m => item.log_result, new { @class = "form-control", @id = "txtLogResultGroup", @autocomplete = "off", @readonly = "true", @rows = "5" })

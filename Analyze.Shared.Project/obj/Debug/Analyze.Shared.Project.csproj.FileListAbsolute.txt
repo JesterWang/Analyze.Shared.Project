@@ -10,6 +10,7 @@ D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Anal
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Project\bin\AutoMapper.dll
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Project\bin\EntityFramework.dll
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Project\bin\EntityFramework.SqlServer.dll
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Project\bin\log4net.dll
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Project\bin\Microsoft.Web.Infrastructure.dll
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Project\bin\MySql.Data.dll
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Project\bin\MySql.Data.Entity.EF6.dll
@@ -39,6 +40,7 @@ D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Anal
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Project\bin\AutoMapper.xml
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Project\bin\EntityFramework.xml
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Project\bin\EntityFramework.SqlServer.xml
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Project\bin\log4net.xml
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Project\bin\Newtonsoft.Json.xml
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Project\bin\System.Runtime.CompilerServices.Unsafe.xml
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Project\bin\System.Threading.Tasks.Extensions.xml
@@ -64,5 +66,3 @@ D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Anal
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Project\obj\Debug\Analyze.Shared.Project.csprojResolveAssemblyReference.cache
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Project\obj\Debug\Analyze.Shared.Project.dll
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Project\obj\Debug\Analyze.Shared.Project.pdb
-D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Project\bin\log4net.dll
-D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Project\bin\log4net.xml

@@ -96,6 +96,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache\CacheConstant.cs" />
     <Compile Include="Extension\ExpressionExtend.cs" />
     <Compile Include="Extension\NewExpressionVisitor.cs" />
     <Compile Include="FileHelper.cs" />
@@ -113,8 +114,13 @@
     <Compile Include="Report\ParTest.cs" />
     <Compile Include="Report\ViewParFile.cs" />
     <Compile Include="SecurityMgr.cs" />
+    <Compile Include="UriHelper.cs" />
     <Compile Include="User\CurrentUser.cs" />
+    <Compile Include="User\CurrentUserDTO.cs" />
     <Compile Include="User\LoginUser.cs" />
+    <Compile Include="User\MenuPermission.cs" />
+    <Compile Include="User\SysDept.cs" />
+    <Compile Include="User\SysJob.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">

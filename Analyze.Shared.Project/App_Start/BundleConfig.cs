@@ -22,8 +22,10 @@ namespace Analyze.Shared.Project.App_Start
                 "~/Scripts/bootstrap.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/datetimepicker").Include(
-                "~/Scripts/Datepicker/bootstrap-datetimepicker.min.js",
-                "~/Scripts/Datepicker/moment-with-locales.min.js"));
+                "~/Scripts/Datepicker/jquery-ui-1.10.4.custom.min.js",
+                "~/Scripts/Datepicker/jquery-ui-timepicker-addon.js",
+                "~/Scripts/Datepicker/jquery-ui-timepicker-zh-CN.js",
+                "~/Scripts/Datepicker/jquery.ui.datepicker-zh-CN.js"));
 
             //--------------------------------------------------------------------
 
@@ -39,7 +41,8 @@ namespace Analyze.Shared.Project.App_Start
             "~/Content/Layouts/layout/themes/darkblue.min.css"));
 
             bundles.Add(new ScriptBundle("~/Datepicker/css").Include(
-               "~/Content/bootstrap-datetimepicker.min.css"));
+               "~/Content/Datepicker/jquery-ui.css",
+               "~/Content/Datepicker/datediv.css"));
         }
     }
 }

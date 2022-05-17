@@ -1,16 +1,27 @@
 ﻿@using Analyze.Shared.Common.Report;
+@using Analyze.Shared.Common.User;
+@using Analyze.Shared.Common.Cache;
+
 @model ParList
 @{
     ViewBag.Title = "问题分析报告-填写";
     Layout = null;
+    object currentUser = Context.Session[CacheConstant.CacheCurrentUser];
+    List<Tuple<string, string, string, string>> tuplist = new List<Tuple<string, string, string, string>>();
+    if (currentUser != null && currentUser is CurrentUser)
+    {
+        CurrentUser user = (CurrentUser)currentUser;
+        tuplist = user.TupMenue as List<Tuple<string, string, string, string>>;
+    }
 }
+
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-    <title>WHP停线验证管理平台</title>
-    <link href="~/Content/Login/img/pie_report_icon.ico" rel="icon" type="image/x-icon" />
+    <title>Product Lead信息共享平台</title>
+    <link href="~/Content/Login/img/product_hunt_round.ico" rel="icon" type="image/x-icon" />
     <link href="~/Content/BootStrap/metismenu.min.css" rel="stylesheet" />
     @Styles.Render("~/Content/bootstrap")
     
@@ -22,158 +33,184 @@
         @Html.Hidden("tracking_id", ViewData["tracking_id"], new { id = "tracking_id" })
         @Html.Hidden("user_detailed", ViewData["user_detailed"], new { id = "user_detailed" })
 
-        @*总结报告*@
-        <div class="form-group" id="divGroup">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        <a id="btnToGroup" data-toggle="collapse" data-parent="#accordion" href="#collapseGroup">
-                            <span class="span_sanjiaor"></span><strong>总结</strong>报告
-                        </a>
-                    </h3>
-                </div>
+            @if (tuplist != null)
+            {
+                foreach (var menue in tuplist)
+                {
+                    switch (menue.Item1)
+                    {
+                        case "20220510085233":
+                            @*总结报告*@
+                            <div class="form-group" id="divGroup">
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">
+                                            <a id="btnToGroup" data-toggle="collapse" data-parent="#accordion" href="#collapseGroup">
+                                                <span class="span_sanjiaor"></span><strong>总结</strong>报告
+                                            </a>
+                                        </h3>
+                                    </div>
 
-                <div id="collapseGroup" class="panel-collapse collapse">
-                    <div id="collapseExampleGroup" class="panel-body">
-                        @*返回分部视图*@
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr />
-        @*FAE分析报告*@
-        <div class="form-group" id="divFae">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        <a id="btnToFae" data-toggle="collapse" data-parent="#accordion" href="#collapseFae">
-                            <span class="span_sanjiaor"></span><strong>FAE</strong>分析报告
-                        </a>
-                    </h3>
-                </div>
+                                    <div id="collapseGroup" class="panel-collapse collapse">
+                                        <div id="collapseExampleGroup" class="panel-body">
+                                            @*返回分部视图*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            break;
+                        case "20220510084303":
+                        @*FAE分析报告*@
+                        <div class="form-group" id="divFae">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+                                        <a id="btnToFae" data-toggle="collapse" data-parent="#accordion" href="#collapseFae">
+                                            <span class="span_sanjiaor"></span><strong>FAE</strong>分析报告
+                                        </a>
+                                    </h3>
+                                </div>
 
-                <div id="collapseFae" class="panel-collapse collapse">
-                    <div id="collapseExampleFae" class="panel-body">
-                        @*返回分部视图*@
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr />
-        @*ME分析报告*@
-        <div class="form-group" id="divMe">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        <a id="btnToMe" data-toggle="collapse" data-parent="#accordion" href="#collapseMe">
-                            <span class="span_sanjiaor"></span><strong>ME</strong>分析报告
-                        </a>
-                    </h3>
-                </div>
+                                <div id="collapseFae" class="panel-collapse collapse">
+                                    <div id="collapseExampleFae" class="panel-body">
+                                        @*返回分部视图*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                            break;
+                        case "20220510085103":
+                        @*ME分析报告*@
+                        <div class="form-group" id="divMe">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+                                        <a id="btnToMe" data-toggle="collapse" data-parent="#accordion" href="#collapseMe">
+                                            <span class="span_sanjiaor"></span><strong>ME</strong>分析报告
+                                        </a>
+                                    </h3>
+                                </div>
 
-                <div id="collapseMe" class="panel-collapse collapse">
-                    <div id="collapseExampleMe" class="panel-body">
-                        @*返回分部视图*@
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr />
-        @*EE分析报告*@
-        <div class="form-group" id="divEe">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        <a id="btnToEe" data-toggle="collapse" data-parent="#accordion" href="#collapseEe">
-                            <span class="span_sanjiaor"></span><strong>EE</strong>分析报告
-                        </a>
-                    </h3>
-                </div>
+                                <div id="collapseMe" class="panel-collapse collapse">
+                                    <div id="collapseExampleMe" class="panel-body">
+                                        @*返回分部视图*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                            break;
+                        case "20220510085043":
+                        @*EE分析报告*@
+                        <div class="form-group" id="divEe">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+                                        <a id="btnToEe" data-toggle="collapse" data-parent="#accordion" href="#collapseEe">
+                                            <span class="span_sanjiaor"></span><strong>EE</strong>分析报告
+                                        </a>
+                                    </h3>
+                                </div>
 
-                <div id="collapseEe" class="panel-collapse collapse">
-                    <div id="collapseExampleEe" class="panel-body">
-                        @*返回分部视图*@
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr />
-        @*物料信息排查*@
-        <div class="form-group" id="divMaterials">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        <a id="btnToMaterials" data-toggle="collapse" data-parent="#accordion" href="#collapseMaterials">
-                            <span class="span_sanjiaor"></span><strong>物料</strong>信息排查
-                        </a>
-                    </h3>
-                </div>
+                                <div id="collapseEe" class="panel-collapse collapse">
+                                    <div id="collapseExampleEe" class="panel-body">
+                                        @*返回分部视图*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                            break;
+                        case "20220510085232":
+                        @*物料信息排查*@
+                        <div class="form-group" id="divMaterials">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+                                        <a id="btnToMaterials" data-toggle="collapse" data-parent="#accordion" href="#collapseMaterials">
+                                            <span class="span_sanjiaor"></span><strong>物料</strong>信息排查
+                                        </a>
+                                    </h3>
+                                </div>
 
-                <div id="collapseMaterials" class="panel-collapse collapse">
-                    <div id="collapseExampleMaterials" class="panel-body">
-                        @*返回分部视图*@
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr />
-        @*SMT信息排查*@
-        <div class="form-group" id="divSmt">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        <a id="btnToSmt" data-toggle="collapse" data-parent="#accordion" href="#collapseSmt">
-                            <span class="span_sanjiaor"></span><strong>SMT</strong>信息排查
-                        </a>
-                    </h3>
-                </div>
+                                <div id="collapseMaterials" class="panel-collapse collapse">
+                                    <div id="collapseExampleMaterials" class="panel-body">
+                                        @*返回分部视图*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                            break;
+                        case "20220510085226":
+                        @*SMT信息排查*@
+                        <div class="form-group" id="divSmt">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+                                        <a id="btnToSmt" data-toggle="collapse" data-parent="#accordion" href="#collapseSmt">
+                                            <span class="span_sanjiaor"></span><strong>SMT</strong>信息排查
+                                        </a>
+                                    </h3>
+                                </div>
 
-                <div id="collapseSmt" class="panel-collapse collapse">
-                    <div id="collapseExampleSmt" class="panel-body">
-                        @*返回分部视图*@
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr />
-        @*组装信息排查*@
-        <div class="form-group" id="divBe">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        <a id="btnToBe" data-toggle="collapse" data-parent="#accordion" href="#collapseBe">
-                            <span class="span_sanjiaor"></span><strong>组装</strong>信息排查
-                        </a>
-                    </h3>
-                </div>
+                                <div id="collapseSmt" class="panel-collapse collapse">
+                                    <div id="collapseExampleSmt" class="panel-body">
+                                        @*返回分部视图*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                            break;
+                        case "20220510085151":
+                        @*组装信息排查*@
+                        <div class="form-group" id="divBe">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+                                        <a id="btnToBe" data-toggle="collapse" data-parent="#accordion" href="#collapseBe">
+                                            <span class="span_sanjiaor"></span><strong>组装</strong>信息排查
+                                        </a>
+                                    </h3>
+                                </div>
 
-                <div id="collapseBe" class="panel-collapse collapse">
-                    <div id="collapseExampleBe" class="panel-body">
-                        @*返回分部视图*@
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr />
-        @*测试信息排查*@
-        <div class="form-group" id="divTest">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        <a id="btnToTest" data-toggle="collapse" data-parent="#accordion" href="#collapseTest">
-                            <span class="span_sanjiaor"></span><strong>测试</strong>信息排查
-                        </a>
-                    </h3>
-                </div>
+                                <div id="collapseBe" class="panel-collapse collapse">
+                                    <div id="collapseExampleBe" class="panel-body">
+                                        @*返回分部视图*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                            break;
+                        case "20220510085229":
+                        @*测试信息排查*@
+                        <div class="form-group" id="divTest">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+                                        <a id="btnToTest" data-toggle="collapse" data-parent="#accordion" href="#collapseTest">
+                                            <span class="span_sanjiaor"></span><strong>测试</strong>信息排查
+                                        </a>
+                                    </h3>
+                                </div>
 
-                <div id="collapseTest" class="panel-collapse collapse">
-                    <div id="collapseExampleTest" class="panel-body">
-                        @*返回分部视图*@
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr />
+                                <div id="collapseTest" class="panel-collapse collapse">
+                                    <div id="collapseExampleTest" class="panel-body">
+                                        @*返回分部视图*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                            break;
+                    }
+                }
+            }
+        
         <!-- loading -->
         <div class="modal fade" id="loading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop='static'>
             <div class="modal-dialog" role="document">

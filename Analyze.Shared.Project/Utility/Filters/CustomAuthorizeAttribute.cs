@@ -21,7 +21,34 @@ namespace Analyze.Shared.Project.Utility.Filters
             }
             else 
             {
-               
+               CurrentUser currentUser = (CurrentUser)ouser;
+               List<Tuple<string,string,string,string>> tupMen = currentUser.TupMenue;
+               List<string> currentUserUrlList = tupMen.Select(c => c.Item3).Where(c => !
+                   string.IsNullOrWhiteSpace(c)).Select(c=>c.ToUpper()).ToList();
+
+               object ObjectControllerName = filterContext.HttpContext.Request.RequestContext.RouteData.Values
+                   ["controller"];
+               string controllerName = ObjectControllerName.ToString().ToUpper();
+
+               int count = currentUserUrlList.Count(c => c.Contains(controllerName));
+               if (count <= 0) 
+               {
+                   if (filterContext.HttpContext.Request.IsAjaxRequest())//Ajax请求
+                   {
+                       filterContext.Result = new JsonResult()
+                       {
+                           Data = new AjaxResult()
+                           {
+                               Success = false,
+                               Message = "对不起，当前功能你没有权限访问"
+                           }
+                       };
+                   }
+                   else//非Ajax请求 
+                   {
+                       filterContext.Result = new RedirectResult("/Account/UnAuthorize");
+                   }
+               }
             }
         }
 

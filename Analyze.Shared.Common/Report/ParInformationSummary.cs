@@ -56,6 +56,7 @@ namespace Analyze.Shared.Common.Report
         /// </summary>
         [Column(TypeName = "char")]
         [StringLength(1)]
+        [Display(Name = "是否停线")]
         public string isline { get; set; }
         /// <summary>
         /// 问题描述
