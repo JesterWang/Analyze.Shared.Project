@@ -1,0 +1,85 @@
+﻿@using Analyze.Shared.Common.Cache;
+@{
+    List<string> crumbsId = new List<string>() { "0", "0" };
+    var crumbsList = (List<string>)Context.Session[CacheConstant.CacheCurrentCrumbs];
+    if (crumbsList != null && crumbsList.Count > 0)
+    {
+        crumbsId = crumbsList;
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Lead信息共享平台</title>
+    <link href="~/Content/Login/img/product_hunt_round.ico" rel="icon" type="image/x-icon" />
+    @Styles.Render("~/Content/bootstrap")
+    @Styles.Render("~/Plugins/css")
+    @Styles.Render("~/Layouts/css")
+</head>
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
+    @Html.Partial("PartialHeader")
+    
+
+    <div class="page-container">
+        @Html.Partial("PartialContainerMenue")
+
+        
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                @Html.Partial("PartialContainerHeader")
+
+                @RenderBody()
+
+                @*@Html.Partial("PartialModal")*@
+
+            </div>
+        </div>
+    </div>
+    @Html.Partial("PartialFooter")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts",required:false)
+    <script type="text/javascript">
+        $(function () {
+            InitSelectMenues(@crumbsId[1]);
+        })
+        //设置悬浮框
+        function OpenModal(title, mehtod){
+            if (mehtod) {
+                $("#submit").attr("onclick",mehtod);
+            }
+            $("#myModalLabel").text(title);
+            $("#myModal").modal();
+        }
+        function FoldMenue(event) {
+            if ($(event).hasClass("open")) {
+                $(event).removeClass("open");
+                var ul = $(event).find("ul");
+                $(ul).attr("style", "display:block;");
+            }
+            else {
+                $(event).addClass("open");
+                var ul = $(event).find("ul");
+                $(ul).attr("style", "display:none;");
+            }
+        }
+
+        //初始化菜单
+        function InitSelectMenues(parentId) {
+            var lis = $(".page-sidebar-menu").children();
+            lis.each(function (index, item) {
+                if ($(item).attr("dir") == parentId) {
+                    if ($(item).hasClass("open")) {
+                        $(item).removeClass("open");
+                        var ul = $(item).find("ul");
+                        $(ul).attr("style", "display:block;");
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

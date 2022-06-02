@@ -1,0 +1,223 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<link href="~/Content/bootstrap-table.min.css" rel="stylesheet" />
+
+<h3>信息汇总表-查看</h3>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light portlet-fit portlet-datatable bordered">
+            <div class="portlet-body">
+                <div class="table-contaoner">
+                    <table id="table"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/bootstrap-table.min.js"></script>
+    <script src="~/Scripts/bootstrap-table-zh-CN.min.js"></script>
+    <script>
+        $(function () {
+            Init();
+        })
+
+        function Init() {
+            $('#table').bootstrapTable({
+                url: "/EmployeeReportHome/ParPagingList",//数据源
+                dataField: "rows",//服务端返回数据键值
+                search: true,//是否搜索
+                pagination: true,//是否分页
+                pageSize: 10,//单页记录数
+                pageList: [5, 10],//分页步进值
+                sidePagination: "server",//服务端分页
+                contentType: "application/json",
+                dataType: "json",//期待返回数据类型
+                method: "post",//请求方式
+                searchAlign: "left",//查询框对齐方式
+                queryParamsType: "limit",//查询参数组织方式
+                queryParams: function getParams(params) {
+                    var temp = {
+                        PageSize: params.limit,//每页显示数量
+                        PageIndex: (params.offset / params.limit) + 1,//当前页码
+                        order: "asc",
+                        sort: params.sort,
+                        Search: params.search
+                    };
+                    return temp;
+                },
+                searchOnEnterKey: true,//回车搜索
+                showRefresh: true,//刷新按钮
+                showColumns: true,//列选择按钮
+                buttonsAlign: "left",//按钮对齐方式
+                toolbar: "#toolbar",//指定工具栏
+                toolbarAlign: "right",//工具栏对齐方式
+                columns: [
+                    {
+                        title: "全选",
+                        field: "select",
+                        checkox: true,
+                        width: 20,//宽度
+                        align: "center",//水平
+                        valign: "middle"//垂直
+                    },
+                    {
+                        field: "tracking_id",
+                        title: "单号"
+                    },
+                    {
+                        field: "title",
+                        title: "标题",
+                        titleTooltip: "标题"
+                    },
+                    {
+                        field: "create_time",
+                        title: "创建日期",
+                    },
+                    {
+                        field: "site",
+                        title: "发生地点",
+                    },
+                    {
+                        field: "model",
+                        title: "产品型号",
+                    },
+                    {
+                        field: "defect_rate",
+                        title: "不良率",
+                    },
+                    {
+                        field: 'operator',
+                        title: '操作',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+
+                            return '<a href="/EmployeeReportRead/Index?tracking_id=' + row.tracking_id + '" data-toggle="modal" title="查看">' +
+                                '<i class="glyphicon glyphicon-eye-open"></i> ' +
+                                '</a>';
+
+                                //+
+                                //'<a href="#">' +
+                                //'<a href="#editProject" data-toggle="modal" title="修改">' +
+                                //'<i class="glyphicon glyphicon-pencil"></i>' +
+                                //'</a>' +
+                                //'<a href="javascript:void(0)" title="删除">' +
+                                //'<i class="glyphicon glyphicon-trash text-danger"></i>' +
+                                //'</a>';
+                        },
+                        //events: {
+                        //    'click a[title=删除]': function (e, value, row, index) {
+                        //        if (confirm('此操作不可逆，请确认是否删除？')) {
+                        //            var id = row.Id;
+                        //            $.ajax({
+                        //                url: "delete",
+                        //                data: { id: id },
+                        //                method: "get",
+                        //                success: function (result) {
+                        //                    $("#table").bootstrapTable('refresh');
+                        //                    alert(result.Message);
+                        //                }
+                        //            });
+                        //        }
+                        //    },
+                        //    'click a[title=修改]': function (e, value, row, index) {
+
+                        //        var tracking_id = row.tracking_id;
+                        //        $.ajax({
+                        //            url: "Update",
+                        //            data: { tracking_id: tracking_id },
+                        //            method: "get",
+                        //            success: function (result) {
+                        //                $("#parInformationSummaryModal-body").html(result);
+                        //                $("#ParInformationSummaryModal").modal();
+                        //            }
+                        //        });
+                        //    }
+                        //}
+                    }
+                ],
+                onClickRow: function (row, $element) {
+                    $element.css("background-color", "238,241,245");
+                },
+                locale: "zh-CN",//中文支持
+                //detailView:true,//是否显示详情折叠
+                detailFormatter: function (index, row, element) {
+                    var html = '';
+                    $.each(row, function (key, val) {
+                        html += "<p>" + key + ":" + val + "</p>"
+                    });
+                    return html;
+                },
+                responseHandler: function (res) {
+                    if (res.Success == true) {
+                        var result = {
+                            total: res.Total,
+                            rows: res.Rows
+                        }
+                        return result;
+                    }
+                    else {
+                        location.href = "/Account/Login";
+                    }
+                }
+            })
+        }
+
+        //function ParInformationSummarySubmit()
+        //{
+        //    $.ajax({
+        //        type: "POST",
+        //        dataType: "json",
+        //        url: "Update",
+        //        data: $("#from").serialize(),
+        //        success: function (result) {
+        //            if (result.Success == true) {
+        //                $("#ParInformationSummaryModal").modal('hide');
+        //                alert(result.Message);
+        //            }
+        //            if (result.Success == false) {
+        //                alert(result.Message);
+        //            }
+        //        },
+        //        error: function (event) {
+        //            alert("异常！");
+        //        }
+        //    });
+        //}
+
+        function ParInformationSummarySubmit()
+        {
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "Insert",
+                data: $("#from").serialize(),
+                success: function (result) {
+                    if (result.Success == true) {
+                        $("#ParInformationSummaryModal").modal('hide');
+                        alert(result.Message);
+                        $('#table').bootstrapTable('refresh', { pageNumber: 1 });
+                    }
+                    if (result.Success == false) {
+                        alert(result.Message);
+                    }
+                },
+                error: function (event) {
+                    alert("异常！");
+                }
+            });
+        }
+
+        function ParInformationSummaryHide()
+        {
+            $("#ParInformationSummaryModal").modal('hide');
+        }
+
+
+    </script>
+}
+
+

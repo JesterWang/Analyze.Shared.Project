@@ -1,0 +1,54 @@
+﻿@using Analyze.Shared.Common.User;
+@using Analyze.Shared.Common.Cache;
+
+@{
+    object currentUser = Context.Session[CacheConstant.CacheCurrentUser];
+    string username = null;
+    if (currentUser != null && currentUser is CurrentUser)
+    {
+        CurrentUser user = (CurrentUser)currentUser;
+        username = user.username;
+    }
+}
+
+<div class="page-header navbar navbar-fixed-top">
+    <div class="page-header-inner">
+        <div class="page-logo">
+            <a href="#" alt="logo" class="logo-default" style="display:block;">
+                <img src="~/Content/Login/img/product_hunt_round_20px.png" style="vertical-align: middle;"/>
+                <strong style="color:white;vertical-align: middle;font-size:10px;">Product Lead信息共享平台</strong>
+            </a>
+            <div class="menu-toggler sidebar-toggler"></div>
+        </div>
+        <div class="top-menu">
+            <ul class="nav navbar-nav pull-right">
+                <li class="dropdown dropdown-user">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="username username-hide-on-mobile">在线访问用户：
+                        <strong>@Context.Application[CacheConstant.CacheOnLineUserCount]</strong>
+                        </span>
+                    </a>
+                </li>
+                <li class="dropdown dropdown-user">
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                        <img alt="" class="img-circle" src="~/Content/Layouts/layout/img/avatar-8.png" />
+                        <span class="username username-hide-on-mobile">@Html.DisplayName(username)</span>
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-default">
+                        <li>
+                            <a href="/SystemSetting/User/Index?crumbId=20220101010012%20_20220101010010">
+                                <i class="icon-user"></i> 我的信息
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown dropdown-quick-sidebar-toggler">
+                    <a href="/Account/LoginOut" class="dropdown-toggle">
+                        <i class="icon-logout"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

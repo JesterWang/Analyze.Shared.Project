@@ -1,0 +1,505 @@
+﻿@using Analyze.Shared.Common.Report;
+@model ParList
+@{
+    ViewBag.Title = "问题分析报告";
+    Layout = null;
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>Product Lead信息共享平台</title>
+    <link href="~/Content/Login/img/product_hunt_round.ico" rel="icon" type="image/x-icon" />
+    <link href="~/Content/BootStrap/metismenu.min.css" rel="stylesheet" />
+    @Styles.Render("~/Content/bootstrap")
+        
+</head>
+
+<body>
+    <div class="container">
+        @*参数*@
+        @Html.Hidden("tracking_id", ViewData["tracking_id"], new { id = "tracking_id" })
+        @Html.Hidden("user_detailed", ViewData["user_detailed"], new { id = "user_detailed" })
+
+        @*总结报告*@
+        <div class="form-group" id="divGroup">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <a id="btnToGroup" class="ssss" data-toggle="collapse" data-parent="#accordion" href="#collapseGroup">
+                            <span class="span_sanjiaor"></span><strong>总结</strong>报告
+                        </a>
+                    </h3>
+                </div>
+
+                <div id="collapseGroup" class="panel-collapse collapse">
+                    <div id="collapseExampleGroup" class="panel-body">
+                        @*返回分部视图*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        @*FAE分析报告*@
+        <div class="form-group" id="divFae">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <a id="btnToFae" class="ssss" data-toggle="collapse" data-parent="#accordion" href="#collapseFae">
+                            <span class="span_sanjiaor"></span><strong>FAE</strong>分析报告
+                        </a>
+                    </h3>
+                </div>
+
+                <div id="collapseFae" class="panel-collapse collapse">
+                    <div id="collapseExampleFae" class="panel-body">
+                        @*返回分部视图*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        @*ME分析报告*@
+        <div class="form-group" id="divMe">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <a id="btnToMe" data-toggle="collapse" data-parent="#accordion" href="#collapseMe">
+                            <span class="span_sanjiaor"></span><strong>ME</strong>分析报告
+                        </a>
+                    </h3>
+                </div>
+
+                <div id="collapseMe" class="panel-collapse collapse">
+                    <div id="collapseExampleMe" class="panel-body">
+                        @*返回分部视图*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        @*EE分析报告*@
+        <div class="form-group" id="divEe">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <a id="btnToEe" data-toggle="collapse" data-parent="#accordion" href="#collapseEe">
+                            <span class="span_sanjiaor"></span><strong>EE</strong>分析报告
+                        </a>
+                    </h3>
+                </div>
+
+                <div id="collapseEe" class="panel-collapse collapse">
+                    <div id="collapseExampleEe" class="panel-body">
+                        @*返回分部视图*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        @*物料信息排查*@
+        <div class="form-group" id="divMaterials">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <a id="btnToMaterials" data-toggle="collapse" data-parent="#accordion" href="#collapseMaterials">
+                            <span class="span_sanjiaor"></span><strong>物料</strong>信息排查
+                        </a>
+                    </h3>
+                </div>
+
+                <div id="collapseMaterials" class="panel-collapse collapse">
+                    <div id="collapseExampleMaterials" class="panel-body">
+                        @*返回分部视图*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        @*SMT信息排查*@
+        <div class="form-group" id="divSmt">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <a id="btnToSmt" data-toggle="collapse" data-parent="#accordion" href="#collapseSmt">
+                            <span class="span_sanjiaor"></span><strong>SMT</strong>信息排查
+                        </a>
+                    </h3>
+                </div>
+
+                <div id="collapseSmt" class="panel-collapse collapse">
+                    <div id="collapseExampleSmt" class="panel-body">
+                        @*返回分部视图*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        @*组装信息排查*@
+        <div class="form-group" id="divBe">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <a id="btnToBe" data-toggle="collapse" data-parent="#accordion" href="#collapseBe">
+                            <span class="span_sanjiaor"></span><strong>组装</strong>信息排查
+                        </a>
+                    </h3>
+                </div>
+
+                <div id="collapseBe" class="panel-collapse collapse">
+                    <div id="collapseExampleBe" class="panel-body">
+                        @*返回分部视图*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        @*测试信息排查*@
+        <div class="form-group" id="divTest">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <a id="btnToTest" data-toggle="collapse" data-parent="#accordion" href="#collapseTest">
+                            <span class="span_sanjiaor"></span><strong>测试</strong>信息排查
+                        </a>
+                    </h3>
+                </div>
+
+                <div id="collapseTest" class="panel-collapse collapse">
+                    <div id="collapseExampleTest" class="panel-body">
+                        @*返回分部视图*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <!-- loading -->
+        <div class="modal fade" id="loading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop='static'>
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">提示</h4>
+                    </div>
+                    <div class="modal-body">
+                        请稍候。。。<span id="result"></span>
+                        <img src="~/Content/Loading/loading.gif" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="btn-group-vertical" style="position:absolute;right:20px;top:20px;">
+        <div id="divLocationGroup" class="btn btn-primary">总结报告</div>
+        <div id="divLocationFae" class="btn btn-primary">FAE分析报告</div>
+        <div id="divLocationMe" class="btn btn-primary">ME分析报告</div>
+        <div id="divLocationEe" class="btn btn-primary">EE分析报告</div>
+        <div id="divLocationMaterials" class="btn btn-primary">物料信息排查</div>
+        <div id="divLocationSmt" class="btn btn-primary">SMT信息排查</div>
+        <div id="divLocationBe" class="btn btn-primary">组装信息排查</div>
+        <div id="divLocationTest" class="btn btn-primary">测试信息排查</div>
+    </div>
+    
+
+    @Scripts.Render("~/bundles/jqueryAjax")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript">
+        var tracking_id = $("#tracking_id").val();
+        var user_detailed = $("#user_detailed").val();
+        $(function () {
+            //点击折叠时运行该函数
+            $('.panel-info').on('hide.bs.collapse show.bs.collapse', function (e) {
+
+                var $this = $(this)
+                $this.find("span").toggleClass("span_sanjiaod");
+                $this.find("span").toggleClass("span_sanjiaor");
+            });
+            //预加载
+            $("#btnToGroup").click();
+        })
+        
+        //Group Report
+        $("#btnToGroup").click(function () {
+            var category_id = 20;
+            $.ajax({
+                type: 'POST',
+                url: '/EmployeeReportRead/PaertViewIndexParGroup',
+                data: '{tracking_id: ' + tracking_id + ',category_id: ' + category_id + '}',
+                dataType: "html",
+                contentType: 'application/json;charset=utf-8',
+                async: true,
+                beforeSend: beforeSend,
+                success: function (data) {
+                    $("#collapseExampleGroup").html(data);
+                    var title = $("#txtTitle").val();
+                    $("#title_group").val(title);
+                },
+                error: function (data) {
+                    alert("失败:" + data[0])
+                },
+                complete: complete
+            });
+            $(this).unbind("click");
+        });
+        //Fae Report
+        $("#btnToFae").click(function () {
+            var category_id = 1;
+            $.ajax({
+                type: 'POST',
+                url: '/EmployeeReportRead/PaertViewIndexParFae',
+                data: '{tracking_id: ' + tracking_id + ',category_id: ' + category_id + '}',
+                dataType: "html",
+                contentType: 'application/json;charset=utf-8',
+                async: true,
+                beforeSend: beforeSend,
+                success: function (data) {
+                    $("#collapseExampleFae").html(data);
+                },
+                error: function (data) {
+                    alert("失败:" + data[0])
+                },
+                complete: complete
+            });
+            $(this).unbind("click");
+        });
+        //Me Report
+        $("#btnToMe").click(function () {
+            var category_id = 2;//文件类型-ParFileUpload.cs类
+            $.ajax({
+                type: 'POST',
+                url: '/EmployeeReportRead/PaertViewIndexParMe',
+                data: '{tracking_id: ' + tracking_id + ',category_id: ' + category_id + '}',
+                dataType: "html",
+                contentType: 'application/json;charset=utf-8',
+                async: true,
+                beforeSend: beforeSend,//发送请求
+                success: function (data) {
+                    $("#collapseExampleMe").html(data);//ME分析报告展开页
+                },
+                error: function (data) {
+                    alert("失败:" + data[0])
+                },
+                complete: complete//请求完成
+            });
+            //click事件执行一次
+            $(this).unbind("click");
+        });
+        //Ee Report
+        $("#btnToEe").click(function () {
+            var category_id = 3;
+            $.ajax({
+                type: 'POST',
+                url: '/EmployeeReportRead/PaertViewIndexParEe',
+                data: '{tracking_id: ' + tracking_id + ',category_id: ' + category_id + '}',
+                dataType: "html",
+                contentType: 'application/json;charset=utf-8',
+                async: true,
+                beforeSend: beforeSend,
+                success: function (data) {
+                    $("#collapseExampleEe").html(data);
+                },
+                error: function (data) {
+                    alert("失败:" + data[0])
+                },
+                complete: complete
+            });
+            $(this).unbind("click");
+        });
+        //Materials Report
+        $("#btnToMaterials").click(function () {
+            var category_id = 4;
+            $.ajax({
+                type: 'POST',
+                url: '/EmployeeReportRead/PaertViewIndexParMaterials',
+                data: '{tracking_id: ' + tracking_id + ',category_id: ' + category_id + '}',
+                dataType: "html",
+                contentType: 'application/json;charset=utf-8',
+                async: true,
+                beforeSend: beforeSend,
+                success: function (data) {
+                    $("#collapseExampleMaterials").html(data);
+                },
+                error: function (data) {
+                    alert("失败:" + data[0])
+                },
+                complete: complete
+            });
+            $(this).unbind("click");
+        });
+        //Smt Report
+        $("#btnToSmt").click(function () {
+            var category_id = 8;
+            $.ajax({
+                type: 'POST',
+                url: '/EmployeeReportRead/PaertViewIndexParSmt',
+                data: '{tracking_id: ' + tracking_id + ',category_id: ' + category_id + '}',
+                dataType: "html",
+                contentType: 'application/json;charset=utf-8',
+                async: true,
+                beforeSend: beforeSend,
+                success: function (data) {
+                    $("#collapseExampleSmt").html(data);
+                },
+                error: function (data) {
+                    alert("失败:" + data[0])
+                },
+                complete: complete
+            });
+            $(this).unbind("click");
+        });
+        //Be Report
+        $("#btnToBe").click(function () {
+            var category_id = 12;
+            $.ajax({
+                type: 'POST',
+                url: '/EmployeeReportRead/PaertViewIndexParBe',
+                data: '{tracking_id: ' + tracking_id + ',category_id: ' + category_id + '}',
+                dataType: "html",
+                contentType: 'application/json;charset=utf-8',
+                async: true,
+                beforeSend: beforeSend,
+                success: function (data) {
+                    $("#collapseExampleBe").html(data);
+                },
+                error: function (data) {
+                    alert("失败:" + data[0])
+                },
+                complete: complete
+            });
+            $(this).unbind("click");
+        });
+        //Test Report
+        $("#btnToTest").click(function () {
+            var category_id = 16;
+            $.ajax({
+                type: 'POST',
+                url: '/EmployeeReportRead/PaertViewIndexParTest',
+                data: '{tracking_id: ' + tracking_id + ',category_id: ' + category_id + '}',
+                dataType: "html",
+                contentType: 'application/json;charset=utf-8',
+                async: true,
+                beforeSend: beforeSend,
+                success: function (data) {
+                    $("#collapseExampleTest").html(data);
+                },
+                error: function (data) {
+                    alert("失败:" + data[0])
+                },
+                complete: complete
+            });
+            $(this).unbind("click");
+        });
+        
+        //show
+        function showFile(category_id) {
+            var url = '';
+            var alertId = "";
+            var collapseExample = "";
+            switch (category_id) {
+                case 1: _url = '/EmployeeReportRead/PaertViewIndexParFae'; alertId = "saveFaeAlert"; collapseExample = "#collapseExampleFae"; break;
+                case 2: _url = '/EmployeeReportRead/PaertViewIndexParMe'; alertId = "saveMeAlert"; collapseExample = "#collapseExampleMe"; break;
+                case 3: _url = '/EmployeeReportRead/PaertViewIndexParEe'; alertId = "saveEeAlert"; collapseExample = "#collapseExampleEe"; break;
+                case 4: _url = '/EmployeeReportRead/PaertViewIndexParMaterials'; alertId = "saveMaterialsAlert"; collapseExample = "#collapseExampleMaterials"; break;
+                case 5: _url = '/EmployeeReportRead/PaertViewIndexParMaterials'; alertId = "saveMaterialsAlert"; collapseExample = "#collapseExampleMaterials"; break;
+                case 6: _url = '/EmployeeReportRead/PaertViewIndexParMaterials'; alertId = "saveMaterialsAlert"; collapseExample = "#collapseExampleMaterials"; break;
+                case 7: _url = '/EmployeeReportRead/PaertViewIndexParMaterials'; alertId = "saveMaterialsAlert"; collapseExample = "#collapseExampleMaterials"; break;
+                case 8: _url = '/EmployeeReportRead/PaertViewIndexParSmt'; alertId = "saveSmtAlert"; collapseExample = "#collapseExampleSmt"; break;
+                case 9: _url = '/EmployeeReportRead/PaertViewIndexParSmt'; alertId = "saveSmtAlert"; collapseExample = "#collapseExampleSmt"; break;
+                case 10: _url = '/EmployeeReportRead/PaertViewIndexParSmt'; alertId = "saveSmtAlert"; collapseExample = "#collapseExampleSmt"; break;
+                case 11: _url = '/EmployeeReportRead/PaertViewIndexParSmt'; alertId = "saveSmtAlert"; collapseExample = "#collapseExampleSmt"; break;
+                case 12: _url = '/EmployeeReportRead/PaertViewIndexParBe'; alertId = "saveBeAlert"; collapseExample = "#collapseExampleBe"; break;
+                case 13: _url = '/EmployeeReportRead/PaertViewIndexParBe'; alertId = "saveBeAlert"; collapseExample = "#collapseExampleBe"; break;
+                case 14: _url = '/EmployeeReportRead/PaertViewIndexParBe'; alertId = "saveBeAlert"; collapseExample = "#collapseExampleBe"; break;
+                case 15: _url = '/EmployeeReportRead/PaertViewIndexParBe'; alertId = "saveBeAlert"; collapseExample = "#collapseExampleBe"; break;
+                case 16: _url = '/EmployeeReportRead/PaertViewIndexParTest'; alertId = "saveTestAlert"; collapseExample = "#collapseExampleTest"; break;
+                case 17: _url = '/EmployeeReportRead/PaertViewIndexParTest'; alertId = "saveTestAlert"; collapseExample = "#collapseExampleTest"; break;
+                case 18: _url = '/EmployeeReportRead/PaertViewIndexParTest'; alertId = "saveTestAlert"; collapseExample = "#collapseExampleTest"; break;
+                case 19: _url = '/EmployeeReportRead/PaertViewIndexParTest'; alertId = "saveTestAlert"; collapseExample = "#collapseExampleTest"; break;
+                case 20: _url = '/EmployeeReportRead/PaertViewIndexParGroup'; alertId = "saveGroupAlert"; collapseExample = "#collapseExampleGroup"; break;
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: _url,//控制器活动,返回一个分部视图,并且给分部视图传递数据.
+                data: '{tracking_id: ' + tracking_id + ',category_id: ' + category_id + '}',//传给服务器的数据(即后台方法的参数,参数类型要一致才可以)
+                dataType: "html",
+                contentType: 'application/json;charset=utf-8',//数据类型
+                async: true,//异步
+                beforeSend: beforeSend,//发送请求
+                success: function (data) //成功后的回调方法
+                {
+                    $(collapseExample).html(data);//data--对应的分部视图页面内容.
+                    var boarddiv = "<div id='success-alert' class='alert alert-success'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>成功！</strong>操作成功。</div>";
+                    successAlert(boarddiv,alertId);
+                },
+                error: function (data) {
+                    var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>刷新失败，服务器请求超时。</div>";
+                    failAlert(boarddiv,alertId);
+                },
+                complete: complete//请求完成
+            });
+        }
+        //success
+        function successAlert(boarddiv,alertId) {
+            $(document.getElementById(alertId)).append(boarddiv);
+            window.setTimeout(function () {
+                $("#success-alert").alert('close');
+            }, 2000);
+        }
+        //warning
+        function failAlert(boarddiv,alertId) {
+            $(document.getElementById(alertId)).append(boarddiv);
+            window.setTimeout(function () {
+                $("#warning-alert").alert('close');
+            }, 2000);
+        }
+
+        //loading begin
+        function beforeSend(XMLHttpRequest) {
+            $('#loading').modal('show');
+        }
+        //loading end
+        function complete(XMLHttpRequest, textStatus) {
+            $('#loading').modal('hide');
+        }
+
+        $(window).scroll(function (e) {
+            console.log($(window).scrollTop());
+            if ($(window).scrollTop() > $('#divGroup').offset().top) {
+                $('.btn-group-vertical').css({ 'position': 'fixed' });
+                console.log('ss');
+            } else {
+                $('.btn-group-vertical').css({ 'position': 'absolute' });
+            }
+        })
+
+        $("#divLocationGroup").click(function () {
+            $('body,html').animate({ scrollTop: $('#divGroup').offset().top }, 500);
+        });
+        $("#divLocationFae").click(function () {
+            $('body,html').animate({ scrollTop: $('#divFae').offset().top }, 500);
+        });
+        $("#divLocationMe").click(function () {
+            $('body,html').animate({ scrollTop: $('#divMe').offset().top }, 500);
+        });
+        $("#divLocationEe").click(function () {
+            $('body,html').animate({ scrollTop: $('#divEe').offset().top }, 500);
+        });
+        $("#divLocationMaterials").click(function () {
+            $('body,html').animate({ scrollTop: $('#divMaterials').offset().top }, 500);
+        });
+        $("#divLocationSmt").click(function () {
+            $('body,html').animate({ scrollTop: $('#divSmt').offset().top }, 500);
+        });
+        $("#divLocationBe").click(function () {
+            $('body,html').animate({ scrollTop: $('#divBe').offset().top }, 500);
+        });
+        $("#divLocationTest").click(function () {
+            $('body,html').animate({ scrollTop: $('#divTest').offset().top }, 500);
+        });
+    </script>
+</body>
+
+</html>

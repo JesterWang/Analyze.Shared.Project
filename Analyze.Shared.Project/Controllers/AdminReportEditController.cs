@@ -83,6 +83,7 @@ namespace Analyze.Shared.Project.Controllers
                     System.IO.File.Delete(Server.MapPath("~") + group_image_old.Replace("/", "\\"));
                 }
             }
+            if (group_image == "") { group_image = null; }
             string _log_result = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " by " + user + " update;" + "\r\n" + log_result;
             ParInformationSummary parGroup = new ParInformationSummary()
             {
@@ -102,7 +103,7 @@ namespace Analyze.Shared.Project.Controllers
                 update_time = DateTime.Now,
                 log_result = _log_result
             };
-            bool b = _IParInformationSummaryService.Update(parGroup, _log_result);
+            bool b = _IParInformationSummaryService.Update(parGroup);
             return Json(_log_result);
         }
 
@@ -233,7 +234,7 @@ namespace Analyze.Shared.Project.Controllers
         }
 
         [HttpPost]//基础信息修改
-        public ActionResult PaertViewIndexParMaterialsUpdate(int tracking_id, string materials_steps_1, string materials_steps_2,string materials_steps_3,string materials_steps_4, string log_result, string user)
+        public JsonResult PaertViewIndexParMaterialsUpdate(int tracking_id, string materials_steps_1, string materials_steps_2,string materials_steps_3,string materials_steps_4, string log_result, string user)
         {
             string _log_result = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " by " + user + " update;" + "\r\n" + log_result;
             ParMaterials parMaterials = new ParMaterials()

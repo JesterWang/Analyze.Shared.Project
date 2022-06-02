@@ -93,7 +93,7 @@ namespace Analyze.Shared.Bussiness.Services
         /// </summary>
         /// <param name="parInformationSummary"></param>
         /// <returns></returns>
-        public bool Update(ParInformationSummary parInformationSummary, string log_result) 
+        public bool Update(ParInformationSummary parInformationSummary) 
         {
             par_information_summary parContext = new par_information_summary()
             {
@@ -111,7 +111,7 @@ namespace Analyze.Shared.Bussiness.Services
                 next_steps = parInformationSummary.next_steps,
                 group_image = parInformationSummary.group_image,
                 update_time = DateTime.Now,
-                log_result = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " by " + log_result + " update;"
+                log_result = parInformationSummary.log_result
             };
             Context.Set<par_information_summary>().Attach(parContext);
             Context.Entry<par_information_summary>(parContext).State = EntityState.Modified;

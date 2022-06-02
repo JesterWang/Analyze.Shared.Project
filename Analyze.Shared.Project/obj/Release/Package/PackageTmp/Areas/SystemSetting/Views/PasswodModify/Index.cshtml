@@ -1,0 +1,59 @@
+﻿@using Analyze.Shared.Common.User
+@model CurrentUser
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@using (Html.BeginForm("Index", "/SystemSetting/PasswodModify", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "from" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="container">
+        <h1>修改密码</h1>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon">①</span>
+            @Html.TextBox("oldPassword", "", new { @class = "form-control", @type = "password", @autocomplete = "off", @placeholder = "请输入原始密码" })
+            @Html.ValidationMessage("oldPassword", new { @style = "color:yellow" })
+        </div>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon">②</span>
+            @Html.TextBox("newPassword", "", new { @class = "form-control", @type = "password", @autocomplete = "off", @placeholder = "请输入新密码" })
+            @Html.ValidationMessage("newPassword", new { @style = "color:yellow" })
+        </div>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon">③</span>
+            @Html.TextBox("newRePassword", "", new { @class = "form-control", @type = "password", @autocomplete = "off", @placeholder = "请再次确认新密码" })
+            @Html.ValidationMessage("newRePassword", new { @style = "color:yellow" })
+        </div>
+        <br>
+        <button class="btn btn-success" type="button" onclick="ModifyPasswordSubmit()">完成</button>
+    </div>
+}
+
+<script type="text/javascript">
+    function ModifyPasswordSubmit() {
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "ModifyPassword",
+            data: $("#from").serialize(),
+            success: function (result) {
+                if (result.Success == true) {
+                    alert(result.Message);
+                    location.href = '/Account/Login';
+                }
+                if (result.Success == false) {
+                    alert(result.Message);
+                }
+            },
+            error: function (event) {
+                alert("异常！");
+            }
+        });
+    }
+</script>
+

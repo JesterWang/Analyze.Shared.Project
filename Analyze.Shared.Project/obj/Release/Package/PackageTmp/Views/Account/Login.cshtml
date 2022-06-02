@@ -1,0 +1,81 @@
+﻿@using Analyze.Shared.Common.User;
+@model LoginUser
+@{
+    Layout = null;
+    ViewBag.Title = "登录";
+}
+<!doctype html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+    <title>登录‹Product Lead信息共享平台</title>
+    <link href="~/Content/Login/img/product_hunt_round.ico" rel="icon" type="image/x-icon" />
+    <link href="~/Content/Login/style.css" rel="stylesheet" />
+    <link href="~/Content/Login/iconfont.css" rel="stylesheet" />
+    @Styles.Render("~/Plugins/css")
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+
+</head>
+
+<body style="background:url(../../Content/Login/img/login-background.387950de.jpg) no-repeat;background-size:cover;">
+
+    <div class="login-banner">
+        <div style="margin-left:20px;margin-top:20px;">
+            <img src="~/Content/Login/img/product_hunt_round_16px.png" style="vertical-align: middle;" />
+            <strong style="vertical-align: middle;">Product Lead信息共享平台</strong>
+        </div>
+    </div>
+
+    <div class="login-box" style="background-color:rgba(245, 245, 245, 0.8);">
+
+        <div class="box-con tran">
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post, 
+                new { @class="form-horizontal",role = "form" })) 
+            {
+                @Html.AntiForgeryToken()
+                <div class="login-con f-l">
+                    <div class="alert alert-danger display-hide">
+                        <span> @ViewBag.Message</span>
+                        @Html.ValidationSummary(true)
+                    </div>
+                    <br />
+                    <h3 style="color:gray;">账号登录</h3>
+                   
+                    <div class="form-group">
+                        <div class="input-icon">
+                            <i class="icon-user">用户名</i>
+                            @Html.TextBoxFor(m => m.username, new { @class = "form-control placeholder-no-fix",
+                                @type = "text" , @autocomplete = "off" , @placeholder = "请输入用户名..."})
+                            @Html.ValidationMessage("username", new { style = "color: red" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-icon">
+                            <i class="icon-key">密码</i>
+                            @Html.TextBoxFor(m => m.password, new{@class = "form-control placeholder-no-fix",
+                           @type = "password",@autocomplete = "off",@placeholder = "请输入密码..."})
+                            @Html.ValidationMessage("password", new { style = "color: red" })
+                            @Html.ValidationMessage("failed", new { style = "color: red" })
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn green pull-right" >登录&nbsp;&nbsp;<i class="icon-login"></i></button>
+                    </div>
+
+                    <div class="from-line"></div>
+
+            </div>
+            }
+        </div>
+
+    </div>
+</body>
+
+</html>

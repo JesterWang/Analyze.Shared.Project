@@ -17,7 +17,7 @@ namespace Analyze.Shared.Project.Utility.Filters
              log.Error("应用程序异常", filterContext.Exception);
  
              //跳转到自定义的错误页,增强用户体验。
-             ActionResult result = new ViewResult() { ViewName = "CustomErrorPage" };
+             ActionResult result = new ViewResult() { ViewName = "Error" };
              filterContext.Result = result;
              //异常处理结束后,一定要将ExceptionHandled设置为true,否则仍然会继续抛出错误。
              filterContext.ExceptionHandled = true;

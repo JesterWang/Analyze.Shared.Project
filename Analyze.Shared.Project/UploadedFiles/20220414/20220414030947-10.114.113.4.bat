@@ -1,1 +1,0 @@
-net use \\10.114.113.4\ENG_Digitalization "lenovo@wangqiang24" /user:"wangqiang24"
