@@ -66,3 +66,9 @@ D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Anal
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Project\obj\Release\Analyze.Shared.Project.csprojResolveAssemblyReference.cache
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Project\obj\Release\Analyze.Shared.Project.dll
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Project\obj\Release\Analyze.Shared.Project.pdb
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Project\bin\Aspose.Cells.dll
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Project\bin\Aspose.Slides.dll
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Project\bin\Aspose.Words.dll
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Project\bin\Aspose.Cells.xml
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Project\bin\Aspose.Slides.xml
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Project\bin\Aspose.Words.xml

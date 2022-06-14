@@ -26,7 +26,8 @@ namespace Analyze.Shared.Project.Controllers
             _ISysUserService = iSysUserservice;
             _IMenuPermissionService = iMenuPermissionService;
         }
-        [HttpGet]//返回登录页
+
+        [HttpGet]
         public ActionResult Login() 
         {
             return View();
@@ -37,47 +38,6 @@ namespace Analyze.Shared.Project.Controllers
         {
             if (ModelState.IsValid)//触发实体验证--如果返回true,验证通过
             {
-
-                //连接数据库查询--EF6
-                #region 直接查询
-                //using (efc_db_01_DBContext context = new efc_db_01_DBContext())
-                //{
-                //   //密码明文MD5,通过MD5之后的数据做查询
-                //   string md5password = user.password.ToMd5();
-                //   sys_user currentUser = context.Set<sys_user>().FirstOrDefault(e => e.username == user.username && e.password == md5password);
-                //   if (currentUser != null)
-                //   {
-                //       {
-                //           //写入Session
-                //           HttpContext.Session["CurrentUser"] = currentUser;
-                //       }
-                //       return base.Redirect("/Home/Index");
-                //   }
-                //   else
-                //   {
-                //       ModelState.AddModelError("failed", "用户名或者密码错误");
-                //       return View();
-                //   }
-                //} 
-                #endregion
-
-                //ISysUserservice sysUserservice = new SysUserservice(new efc_db_01_DBContext());
-
-                {
-                    //断开对细节的依赖--通过IOC容器来创建Unity
-                    //IUnityContainer _Container = new UnityContainer();
-                    //ExeConfigurationFileMap fileMap = new ExeConfigurationFileMap();
-                    //fileMap.ExeConfigFilename = Path.Combine(AppDomain.CurrentDomain.BaseDirectory+"CfgFiles\\Unity.Config");
-                    //Configuration configuration = ConfigurationManager.OpenMappedExeConfiguration(fileMap,ConfigurationUserLevel.None);
-                    //UnityConfigurationSection section = (UnityConfigurationSection)configuration.GetSection
-                    //    (UnityConfigurationSection.SectionName);
-                    //section.Configure(_Container, "AnalyzeContainer");
-                    
-                    //ISysUserservice sysUserservice = _Container.Resolve<ISysUserservice>();
-                }
-
-                //IUnityContainer unityContainer = CustomDIFactory.GetContainer();
-                //ISysUserservice sysUserservice = unityContainer.Resolve<ISysUserservice>();
                 CurrentUser currentUser = _ISysUserService.GetUser(user);
                 if (currentUser != null)
                 {

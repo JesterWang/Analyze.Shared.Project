@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="2" virtualPath="/Views/Shared/PartialContainerHeader.cshtml" hash="33d8b175" filehash="fffff11e99a34242" flags="110000" assembly="App_Web_partialcontainerheader.cshtml.639c3968" type="ASP._Page_Views_Shared_PartialContainerHeader_cshtml">
+    <filedeps>
+        <filedep name="/Views/Shared/PartialContainerHeader.cshtml" />
+    </filedeps>
+</preserve>

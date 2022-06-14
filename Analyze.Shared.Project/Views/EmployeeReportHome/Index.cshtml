@@ -64,10 +64,32 @@
                     //    align: "center",//水平
                     //    valign: "middle"//垂直
                     //},
+                    //{
+                    //    title: '序号',
+                    //    align: 'center',
+                    //    halign: 'center',
+                    //    formatter: function (value, row, index) {
+                    //        var options = $table.bootstrapTable('getOptions');
+                    //        return options.pageSize * (options.pageNumber - 1) + index + 1;
+                    //    }
+                    //},
                     {
-                        field: "tracking_id",
-                        title: "单号"
+                        title: '序号',
+                        align: "center",
+                        width: 40,
+                        formatter: function (value, row, index) {
+                            //获取每页显示的数量
+                            var pageSize = $('#table').bootstrapTable('getOptions').pageSize;
+                            //获取当前是第几页  
+                            var pageNumber = $('#table').bootstrapTable('getOptions').pageNumber;
+                            //返回序号，注意index是从0开始的，所以要加上1
+                            return pageSize * (pageNumber - 1) + index + 1;
+                        }
                     },
+                    //{
+                    //    field: "tracking_id",
+                    //    title: "单号"
+                    //},
                     {
                         field: "title",
                         title: "标题",
@@ -81,17 +103,25 @@
                         title: "创建日期",
                     },
                     {
-                        field: "site",
-                        title: "发生地点",
-                    },
-                    {
                         field: "model",
                         title: "产品型号",
                     },
-                    {
-                        field: "defect_rate",
-                        title: "不良率",
-                    },
+                    //{
+                    //    field: "rd",
+                    //    title: "设计方",
+                    //},
+                    //{
+                    //    field: "issue_category",
+                    //    title: "问题类别",
+                    //},
+                    //{
+                    //    field: "product_category",
+                    //    title: "产品类型",
+                    //},
+                    //{
+                    //    field: "status",
+                    //    title: "状态",
+                    //},
                     //{
                     //    field: 'operator',
                     //    title: '操作',

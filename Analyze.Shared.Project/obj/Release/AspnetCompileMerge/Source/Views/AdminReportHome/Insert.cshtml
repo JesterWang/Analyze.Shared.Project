@@ -1,0 +1,148 @@
+﻿@using Analyze.Shared.Common.Report
+@model ParInformationSummary
+
+
+<script src="~/Scripts/Validate/jquery.validate.min.js"></script>
+<script src="~/Scripts/Validate/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Html.BeginForm("Insert", "AdminReportHome", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "from" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="form-body">
+        <div class="form-group form-md-line-input">
+            <label class="col-lg-3 control-label" for="form_control_1">
+                <font style="vertical-align:inherit;">
+                    <font style="vertical-align:inherit;">
+                        @Html.DisplayName("title")*
+                    </font>
+                </font>
+            </label>
+            <div class="col-md-9">
+                @Html.TextBox("title", "", new { @class = "form-control", @type = "text", @autocomplete = "off", @placeholder = "请输入..." })
+                @Html.ValidationMessage("title", new { @style = "color:yellow" })
+            </div>
+        </div>
+        <div class="form-group form-md-line-input">
+            <label class="col-lg-3 control-label" for="form_control_1">
+                <font style="vertical-align:inherit;">
+                    <font style="vertical-align:inherit;">
+                        @Html.DisplayName("tracking_time")*
+                    </font>
+                </font>
+            </label>
+            <div class="col-md-9">
+                <div class="doc-dd">
+                    @Html.TextBox("tracking_time", "", new { @class = "form_control", @type = "datetime-local", @step = "01", @value = "2022-01-22T21:22:22" })
+                    @Html.ValidationMessage("tracking_time", new { @style = "color:yellow" })
+                </div>
+                
+            </div>
+        </div>
+        <div class="form-group form-md-line-input">
+            <label class="col-lg-3 control-label" for="form_control_1">
+                <font style="vertical-align:inherit;">
+                    <font style="vertical-align:inherit;">
+                        @Html.DisplayName("site")*
+                    </font>
+                </font>
+            </label>
+            <div class="col-md-9">
+                @Html.TextBox("site", "", new { @class = "form-control", @type = "text", @autocomplete = "off", @placeholder = "请输入..." })
+                @Html.ValidationMessage("site", new { @style = "color:yellow" })
+            </div>
+        </div>
+        <div class="form-group form-md-line-input">
+            <label class="col-lg-3 control-label" for="form_control_1">
+                <font style="vertical-align:inherit;">
+                    <font style="vertical-align:inherit;">
+                        @Html.DisplayName("model")*
+                    </font>
+                </font>
+            </label>
+            <div class="col-md-9">
+                @Html.TextBox("model", "", new { @class = "form-control", @type = "text", @autocomplete = "off", @placeholder = "请输入..." })
+                @Html.ValidationMessage("model", new { @style = "color:yellow" })
+            </div>
+        </div>
+        <div class="form-group form-md-line-input">
+            <label class="col-lg-3 control-label" for="form_control_1">
+                <font style="vertical-align:inherit;">
+                    <font style="vertical-align:inherit;">
+                        @Html.DisplayName("defect_rate")*
+                    </font>
+                </font>
+            </label>
+            <div class="col-md-9">
+                @Html.TextBox("defect_rate","", new { @class = "form-control", @type = "text", @autocomplete = "off", @placeholder = "请输入..." })
+                @Html.ValidationMessage("defect_rate", new { @style = "color:yellow" })
+            </div>
+        </div>
+        <div class="form-group form-md-line-input">
+            <label class="col-lg-3 control-label" for="form_control_1">
+                <font style="vertical-align:inherit;">
+                    <font style="vertical-align:inherit;">
+                        @Html.DisplayName("isline")*
+                    </font>
+                </font>
+            </label>
+            <div class="col-md-9">
+                @Html.RadioButton("isline", 0, new { @id = "isline0", @name = "isline" })否
+                @Html.RadioButton("isline", 1, new { @id = "isline1", @name = "isline", @checked=true})是
+            </div>
+        </div>
+        <div class="form-group form-md-line-input">
+            <label class="col-lg-3 control-label" for="form_control_1">
+                <font style="vertical-align:inherit;">
+                    <font style="vertical-align:inherit;">
+                        @Html.DisplayName("problem_description")
+                    </font>
+                </font>
+            </label>
+            <div class="col-md-9">
+                @Html.TextArea("problem_description", new { @class = "form-control", @type = "text", @autocomplete = "off", @rows = "5", @placeholder = "请输入..." })
+                @Html.ValidationMessage("problem_description", new { @style = "color:yellow" })
+            </div>
+        </div>
+        <div class="form-group form-md-line-input">
+            <label class="col-lg-3 control-label" for="form_control_1">
+                <font style="vertical-align:inherit;">
+                    <font style="vertical-align:inherit;">
+                        @Html.DisplayName("root_cause")
+                    </font>
+                </font>
+            </label>
+            <div class="col-md-9">
+                @Html.TextArea("root_cause", new { @class = "form-control", @type = "text", @autocomplete = "off", @rows = "5", @placeholder = "请输入..." })
+                @Html.ValidationMessage("root_cause", new { @style = "color:yellow" })
+            </div>
+        </div>
+        <div class="form-group form-md-line-input">
+            <label class="col-lg-3 control-label" for="form_control_1">
+                <font style="vertical-align:inherit;">
+                    <font style="vertical-align:inherit;">
+                        @Html.DisplayName("analysis_conclusion")
+                    </font>
+                </font>
+            </label>
+            <div class="col-md-9">
+                @Html.TextArea("analysis_conclusion", new { @class = "form-control", @type = "text", @autocomplete = "off", @rows = "5", @placeholder = "请输入..." })
+                @Html.ValidationMessage("analysis_conclusion", new { @style = "color:yellow" })
+            </div>
+        </div>
+        <div class="form-group form-md-line-input">
+            <label class="col-lg-3 control-label" for="form_control_1">
+                <font style="vertical-align:inherit;">
+                    <font style="vertical-align:inherit;">
+                        @Html.DisplayName("next_steps")
+                    </font>
+                </font>
+            </label>
+            <div class="col-md-9">
+                @Html.TextArea("next_steps", new { @class = "form-control", @type = "text", @autocomplete = "off", @rows = "5", @placeholder = "请输入..." })
+                @Html.ValidationMessage("next_steps", new { @style = "color:yellow" })
+            </div>
+        </div>
+    </div>
+}
+

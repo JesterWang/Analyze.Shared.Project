@@ -1,0 +1,57 @@
+﻿@using Analyze.Shared.Common.User;
+@using Analyze.Shared.Common.Cache;
+
+@{
+    object currentUser = Context.Session[CacheConstant.CacheCurrentUser];
+    List<MenuPermission> submenulist=new List<MenuPermission>();
+    if(currentUser != null && currentUser is CurrentUser)
+    {
+        CurrentUser user = (CurrentUser) currentUser;
+        submenulist=user.CurrentMenue as List<MenuPermission>;
+    }
+}
+<div class="page-sidebar-wrapper" style="color:white;">
+    <div class="page-sidebar navbar-collapse collapse">
+        <ul class="page-sidebar-menu page-header-fixed" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+            @*<li class="heading">
+                <h3 class="uppercase">报告管理</h3>
+            </li>
+            <li class="nav-item">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-home"></i>
+                    <span class="title">首页</span>
+                    <span class="arrow"></span>
+                </a>
+            </li>*@
+
+            @if(submenulist!=null)
+            {
+                foreach (var menue in submenulist)
+	            {
+		            <li dir="@menue.id" class="nav-item open" onclick="FoldMenue(this)">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="@menue.icon_url"></i>
+                            <span class="title">@menue.name</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            @if(menue.Submenu!=null && menue.Submenu.Count()>0)
+                            {
+                                foreach (var subItem in menue.Submenu)
+                                {
+                                    <li dir="@subItem.id" class="nav-item">
+                                        <a href="@subItem.link_url?crumbId=@subItem.id _@menue.id" class="nav-link">
+                                            <i class="@subItem.icon_url"></i>
+                                            <span class="title">@subItem.name</span>
+                                        </a>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </li>
+	            }
+            }
+
+        </ul>
+    </div>
+</div>

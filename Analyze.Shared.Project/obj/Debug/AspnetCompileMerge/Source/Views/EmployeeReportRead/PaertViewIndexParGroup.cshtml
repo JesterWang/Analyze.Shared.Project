@@ -1,6 +1,6 @@
 ﻿@using Analyze.Shared.Common.Report;
 @model ParList
-<link href="~/Content/Modal/modal-image.css" rel="stylesheet" />
+
 @*基础信息保存*@
 @if (Model.ParInformationSummary != null)
 {
@@ -179,13 +179,6 @@
             @*执行成功/失败提示*@
             <div id="saveGroupAlert"><br /></div>
 
-            <!-- The Modal -->
-            <div id="myModal" class="modal">
-                <span class="close">×</span>
-                <img class="modal-content" id="img01">
-                <div id="caption"></div>
-            </div>
-
             @if (Model.ParFileUpload != null)
             {
                 <div class="form-horizontal">
@@ -219,33 +212,3 @@
         </div>
     }
 }
-
-
-        <script type="text/javascript">
-        $("#groupImg").click(function () {
-            var modal = document.getElementById('myModal');
-
-            // 获取图片模态框，alt 属性作为图片弹出中文本描述
-            var img = document.getElementById('groupImg');
-            var modalImg = document.getElementById("img01");
-            var captionText = document.getElementById("caption");
-            img.onclick = function () {
-                // 获取模态窗口
-
-                modal.style.display = "block";
-                modalImg.src = this.src;
-                modalImg.alt = this.alt;
-                captionText.innerHTML = this.alt;
-            }
-            // 获取 <span> 元素，设置关闭模态框按钮
-            var span = document.getElementsByClassName("close")[0];
-
-            // 点击 <span> 元素上的 (x), 关闭模态框
-            span.onclick = function () {
-                modal.style.display = "none";
-            }
-        });
-        
-
-        
-        </script>

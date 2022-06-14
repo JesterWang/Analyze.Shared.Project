@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/AdminReportHome/Insert.cshtml" hash="ffffffffc129c093" filehash="7ec79c1a7ed" flags="110000" assembly="App_Web_zvgxffka" type="ASP._Page_Views_AdminReportHome_Insert_cshtml">
+<preserve resultType="2" virtualPath="/Views/AdminReportHome/Insert.cshtml" hash="ffffffffc129c093" filehash="7396b4fb35d" flags="110000" assembly="App_Web_insert.cshtml.24fe611c" type="ASP._Page_Views_AdminReportHome_Insert_cshtml">
     <filedeps>
         <filedep name="/Views/AdminReportHome/Insert.cshtml" />
     </filedeps>

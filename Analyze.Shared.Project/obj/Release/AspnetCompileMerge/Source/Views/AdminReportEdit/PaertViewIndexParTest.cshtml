@@ -1,0 +1,209 @@
+﻿@using Analyze.Shared.Common.Report;
+@model ParList
+
+@*基础信息保存*@
+@if (Model.ParTest != null)
+{
+    using (Html.BeginForm("Index", "AdminReportEdit", FormMethod.Post,
+                new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+
+            @foreach (var item in Model.ParTest)
+            {
+                <div class="text-center">
+                    <button class="btn btn-link btn-lg" type="button" onclick="showFile(16)"><i class="glyphicon glyphicon-refresh"></i>点击此处刷新当前模块</button>/
+                    <button class="btn btn-link btn-lg" type="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTestLog">
+                        <i class="glyphicon glyphicon-list"></i>点击此处展开/收缩日志
+                    </button>
+                    <div id="collapseTestLog" class="panel-collapse collapse">
+                        @Html.TextAreaFor(m => item.log_result, new { @class = "form-control", @id = "txtLogResultTest", @autocomplete = "off", @readonly = "true", @rows = "5" })
+                    </div>
+                </div>
+                <div class="form-horizontal">
+                    <label>FE排查</label>
+                    @Html.TextAreaFor(m => item.fe, new
+                        {
+                            @id = "txtTest_fe",
+                            @class = "form-control placeholder-no-fix",
+                            @autocomplete = "off",
+                            @rows = "5",
+                            @placeholder = "请输入FE排查步骤..."
+                        })
+                    @Html.ValidationMessage("fe", new { style = "color: red" })
+                </div>
+                <div class="form-horizontal">
+                    <label>BE排查</label>
+                    @Html.TextAreaFor(m => item.be, new
+                                    {
+                                        @id = "txtTest_be",
+                                        @class = "form-control placeholder-no-fix",
+                                        @autocomplete = "off",
+                                        @rows = "5",
+                                        @placeholder = "请输入BE排查步骤..."
+                                    })
+                    @Html.ValidationMessage("be", new { style = "color: red" })
+                </div>
+                <div class="form-horizontal">
+                    <label>CFC排查</label>
+                    @Html.TextAreaFor(m => item.cfc, new
+                                    {
+                                        @id = "txtTest_cfc",
+                                        @class = "form-control placeholder-no-fix",
+                                        @autocomplete = "off",
+                                        @rows = "5",
+                                        @placeholder = "请输入CFC排查步骤..."
+                                    })
+                    @Html.ValidationMessage("cfc", new { style = "color: red" })
+                </div>
+                <div class="form-horizontal">
+                    <label>SD BU排查</label>
+                    @Html.TextAreaFor(m => item.sdbu, new
+                                    {
+                                        @id = "txtTest_sdbu",
+                                        @class = "form-control placeholder-no-fix",
+                                        @autocomplete = "off",
+                                        @rows = "5",
+                                        @placeholder = "请输入SD BU排查步骤..."
+                                    })
+                    @Html.ValidationMessage("sdbu", new { style = "color: red" })
+                </div>
+                <br />
+                <button type="button" id="btnSaveTest" class="btn btn-primary">确认保存</button>
+            }
+            <br />
+            @*执行成功/失败提示*@
+            <div id="saveTestAlert"><br /></div>
+
+            @if (Model.ViewParFile != null)
+            {
+                <div class="form-horizontal">
+                    <br />
+                    <table class="table table-bordered table-hover" id="table_Test">
+                        <caption class="text-center">
+                            <div class="input-group">
+                                <span class="input-group-addon">附件分类：</span>
+                                <select class="form-control" style="width:150px" onchange="onSearch(this)" value="">
+                                    <option value="">全选</option>
+                                    <option value="FE">FE</option>
+                                    <option value="BE">BE</option>
+                                    <option value="CFC">CFC</option>
+                                    <option value="SD BU">SD BU</option>
+                                </select>
+                            </div>
+                            附件列表
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th>文件名称</th>
+                                <th>分类</th>
+                                <th>信息</th>
+                                <th colspan="2">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.ViewParFile)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(m => item.file_name)</td>
+                                    <td>@Html.DisplayFor(m => item.category_chil)</td>
+                                    <td>
+                                        @Html.DisplayFor(m => item.update_time)
+                                        <span>by</span>
+                                        @Html.DisplayFor(m => item.user_detailed)
+                                    </td>
+                                    <td>@Html.ActionLink("下载", "DownloadFile", new { filePath = item.file_url })</td>
+                                    <td>
+                                        @Ajax.ActionLink("删除", "DeleteFile", "AdminReportEdit", new { id = item.id, tracking_id = item.tracking_id, filePath = item.file_url, category_id = item.category_id },
+                                     new AjaxOptions() { UpdateTargetId = "collapseExampleTest", HttpMethod = "Post", Confirm = " 您确定要删除该记录吗？该操作不可恢复！" })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    }
+}
+
+        @*文件列表*@
+        @using (Html.BeginForm("Index", "AdminReportEdit", FormMethod.Post,
+    new { @class = "form-horizontal", id = "formFileTest", role = "form", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <label>上传附件-FE排查</label>
+                @Html.TextBox("file", "", new { type = "file", id = "UpFileTest_fe" })<br />
+                <button type="button" class="btn btn-primary" onclick='upFile(16)'>确认上传</button><hr />
+            </div>
+            <div class="form-group">
+                <label>上传附件-BE排查</label>
+                @Html.TextBox("file", "", new { type = "file", id = "UpFileTest_be" })<br />
+                <button type="button" class="btn btn-primary" onclick='upFile(17)'>确认上传</button><hr />
+            </div>
+            <div class="form-group">
+                <label>上传附件-CFC排查</label>
+                @Html.TextBox("file", "", new { type = "file", id = "UpFileTest_cfc" })<br />
+                <button type="button" class="btn btn-primary" onclick='upFile(18)'>确认上传</button><hr />
+            </div>
+            <div class="form-group">
+                <label>上传附件-SD BU排查</label>
+                @Html.TextBox("file", "", new { type = "file", id = "UpFileTest_sdbu" })<br />
+                <button type="button" class="btn btn-primary" onclick='upFile(19)'>确认上传</button>
+            </div>
+        }
+
+        <script type="text/javascript">
+            $("#btnSaveTest").click(function () {
+                var alertId = "saveTestAlert";
+                var fe = $("#txtTest_fe").val().replace(' ', ' ');
+                var be = $("#txtTest_be").val().replace(' ', ' ');
+                var cfc = $("#txtTest_cfc").val().replace(' ', ' ');
+                var sdbu = $("#txtTest_sdbu").val().replace(' ', ' ');
+                var log_result = $("#txtLogResultTest").val();
+                if (fe == "" && be == "" && cfc == "" && sdbu == "") {
+                    var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>请最少填写一条信息保存。</div>";
+                    failAlert(boarddiv, alertId);
+                    return;
+                }
+                $.ajax({
+                    type: 'POST',
+                    url: '/AdminReportEdit/PaertViewIndexParTestUpdate',
+                    data: JSON.stringify({ tracking_id: tracking_id, fe: fe, be: be, cfc: cfc, sdbu: sdbu, log_result: log_result, user: user_detailed }),
+                    dataType: "json",
+                    contentType: 'application/json;charset=utf-8',
+                    async: true,
+                    beforeSend: beforeSend,//发送请求
+                    success: function (data) {
+                        $("#txtLogResultTest").val(data);
+                        var boarddiv = "<div id='success-alert' class='alert alert-success'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>成功！</strong>填写结果已保存。</div>";
+                        successAlert(boarddiv, alertId);
+                    },
+                    error: function (data) {
+                        var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>服务器请求超时。</div>";
+                        failAlert(boarddiv, alertId);
+                    },
+                    complete: complete//请求完成
+                });
+            });
+
+            //下拉筛选
+            function onSearch(obj) {//js函数开始
+                setTimeout(function () {//因为是即时查询，需要用setTimeout进行延迟，让值写入到input内，再读取
+                    var storeId = document.getElementById('table_Test');//获取table的id标识
+                    var rowsLength = storeId.rows.length;//表格总共有多少行
+                    var key = obj.value;//获取输入框的值
+                    var searchCol = 1;//要搜索的哪一列，这里是第一列，从0开始数起
+                    for (var i = 1; i < rowsLength; i++) {//按表的行数进行循环，第一行是标题，所以i=1，从第二行开始筛选（从0数起）
+                        var searchText = storeId.rows[i].cells[searchCol].innerHTML;//取得table行，列的值
+                        if (searchText.match(key)) {//用match函数进行筛选，如果input的值，即变量 key的值为空，返回的是ture，
+                            storeId.rows[i].style.display = '';//显示行操作，
+                        } else {
+                            storeId.rows[i].style.display = 'none';//隐藏行操作
+                        }
+                    }
+                }, 200);//200为延时时间
+            }
+        </script>

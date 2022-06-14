@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Analyze.Shared.Project.Controllers
 {
-    [CustomAuthorizeAttribute]
+    
     public class EmployeeReportHomeController : BaseController
     {
         private IParInformationSummaryService _IParInformationSummaryService = null;
@@ -19,7 +19,7 @@ namespace Analyze.Shared.Project.Controllers
             _IParInformationSummaryService = iParInformationSummaryService;
         }
 
-        // GET: EmployeeReportHome
+        [CustomAuthorizeAttribute]
         [CustomCrumbsActionFilterAttribute]
         public ActionResult Index()
         {

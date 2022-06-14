@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="2" virtualPath="/Views/Shared/PartialModal.cshtml" hash="33d8b175" filehash="beca56f293a" flags="110000" assembly="App_Web_partialmodal.cshtml.639c3968" type="ASP._Page_Views_Shared_PartialModal_cshtml">
+    <filedeps>
+        <filedep name="/Views/Shared/PartialModal.cshtml" />
+    </filedeps>
+</preserve>

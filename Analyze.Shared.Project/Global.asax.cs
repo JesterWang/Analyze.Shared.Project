@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Analyze.Shared.Common.Cache;
+using Analyze.Shared.DataAccess;
 
 namespace Analyze.Shared.Project
 {
@@ -41,9 +42,9 @@ namespace Analyze.Shared.Project
 
         protected void Session_End(object sender, EventArgs e)
         {
-            //Application.Lock();
-            //Application["OnLineUserCount"] = Convert.ToInt32(Application["OnLineUserCount"]) - 1;
-            //Application.UnLock();
+            Application.Lock();
+            Application[CacheConstant.CacheOnLineUserCount] = Convert.ToInt32(Application[CacheConstant.CacheOnLineUserCount]) - 1;
+            Application.UnLock();
         }
     }
 }
