@@ -63,8 +63,9 @@ namespace Analyze.Shared.Project.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Insert(string title, string tracking_time, string site, string model, string defect_rate, string isline
-            , string problem_description, string root_cause, string analysis_conclusion, string next_steps)
+        public ActionResult Insert(string title, string tracking_time, string site, string model, string defect_rate, string isline,
+           string rd ,string issue_category,string product_category, string status, string problem_description, string root_cause, 
+            string analysis_conclusion, string next_steps)
         {
             JsonResult jsonResult = new JsonResult();
             jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
@@ -75,15 +76,20 @@ namespace Analyze.Shared.Project.Controllers
                 {
                     tracking_number=DateTime.Now.ToString("yyyyMMddHHmmss"),
                     title = title,
-                    tracking_time = Convert.ToDateTime(tracking_time),
+                    tracking_time = tracking_time,
                     site = site,
                     model = model,
                     defect_rate = defect_rate,
                     isline = isline,
+                    rd = rd,
+                    issue_category = issue_category,
+                    product_category = product_category,
+                    status = status,
                     problem_description = problem_description,
                     root_cause = root_cause,
                     analysis_conclusion = analysis_conclusion,
-                    next_steps = next_steps
+                    next_steps = next_steps,
+                    create_owner = GetUserEmplyeeName()
                 };
                 bool bResult = _IParInformationSummaryService.Insert(parInformationSummary);
                 if (bResult)

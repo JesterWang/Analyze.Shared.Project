@@ -30,18 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Aspose.Cells, Version=22.5.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
-      <HintPath>..\packages\Aspose.Cells.22.5.0\lib\net40\Aspose.Cells.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Aspose.Slides, Version=22.5.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
-      <HintPath>..\packages\Aspose.Slides.NET.22.5.0\lib\net4.0-client\Aspose.Slides.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Aspose.Words, Version=22.5.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
-      <HintPath>..\packages\Aspose.Words.22.5.0\lib\net40\Aspose.Words.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
@@ -116,6 +104,7 @@
     <Compile Include="Extension\ExpressionExtend.cs" />
     <Compile Include="Extension\NewExpressionVisitor.cs" />
     <Compile Include="FileHelper.cs" />
+    <Compile Include="LibreOfficeConvert.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query\PageQuery.cs" />
     <Compile Include="Report\ParBe.cs" />

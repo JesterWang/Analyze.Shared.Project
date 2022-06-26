@@ -31,7 +31,7 @@
                         <tbody>
                             <tr>
                                 <td><label>标题</label></td>
-                                <td colspan="4">
+                                <td colspan="5">
                                     @Html.TextBoxFor(m => item.title, new
                                             {
                                                 @id = "txtTitle",
@@ -45,7 +45,7 @@
                             </tr>
                             <tr>
                                 <td rowspan="2"><label>基础信息*</label></td>
-                                <td colspan="2">
+                                <td>
                                     <label>发生时间*</label>
                                     @Html.TextBoxFor(m => item.tracking_time, new
                                         {
@@ -57,7 +57,7 @@
                                             @style = "background-color:white"
                                         })
                                 </td>
-                                <td colspan="2">
+                                <td>
                                     <label>发生地点*</label>
                                     @Html.TextBoxFor(m => item.site, new
                                     {
@@ -69,9 +69,7 @@
                                         @style = "background-color:white"
                                     })
                                 </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
+                                <td>
                                     <label>产品型号*</label>
                                     @Html.TextBoxFor(m => item.model, new
                                     {
@@ -83,7 +81,7 @@
                                         @style = "background-color:white"
                                     })
                                 </td>
-                                <td colspan="2">
+                                <td>
                                     <label>不良率*</label>
                                     @Html.TextBoxFor(m => item.defect_rate, new
                                     {
@@ -95,17 +93,72 @@
                                         @style = "background-color:white"
                                     })
                                 </td>
-                            </tr>
-                            <tr>
-                                <td><label>是否停线</label></td>
-                                <td colspan="4">
+                                <td>
+                                    <label>是否停线</label><br />
                                     @Html.RadioButtonFor(m => item.isline, 0, new { @id = "isline0", @name = "isline", @disabled = false })否
                                     @Html.RadioButtonFor(m => item.isline, 1, new { @id = "isline1", @name = "isline", @disabled = true })是
                                 </td>
                             </tr>
                             <tr>
+                                <td>
+                                    <label>设计方</label>
+                                    @Html.TextBoxFor(m => item.rd, new
+                                        {
+                                            @class = "form-control placeholder-no-fix",
+                                            @type = "text",
+                                            @autocomplete = "off",
+                                            @readonly = true,
+                                            @style = "background-color:white"
+                                        })
+                                </td>
+                                <td>
+                                    <label>产品类型</label>
+                                    @Html.TextBoxFor(m => item.product_category, new
+                                        {
+                                            @class = "form-control placeholder-no-fix",
+                                            @type = "text",
+                                            @autocomplete = "off",
+                                            @readonly = true,
+                                            @style = "background-color:white"
+                                        })
+                                </td>
+                                <td>
+                                    <label>问题类别</label>
+                                    @Html.TextBoxFor(m => item.issue_category, new
+                                        {
+                                            @class = "form-control placeholder-no-fix",
+                                            @type = "text",
+                                            @autocomplete = "off",
+                                            @readonly = true,
+                                            @style = "background-color:white"
+                                        })
+                                </td>
+                                <td>
+                                    <label>状态</label>
+                                    @Html.TextBoxFor(m => item.status, new
+                                        {
+                                            @class = "form-control placeholder-no-fix",
+                                            @type = "text",
+                                            @autocomplete = "off",
+                                            @readonly = true,
+                                            @style = "background-color:white"
+                                        })
+                                </td>
+                                <td>
+                                    <label>创建人</label>
+                                    @Html.TextBoxFor(m => item.create_owner, new
+                                        {
+                                            @class = "form-control placeholder-no-fix",
+                                            @type = "text",
+                                            @autocomplete = "off",
+                                            @readonly = true,
+                                            @style = "background-color:white"
+                                        })
+                                </td>
+                            </tr>
+                            <tr>
                                 <td><label>问题描述</label></td>
-                                <td colspan="4">
+                                <td colspan="5">
                                     @Html.TextAreaFor(m => item.problem_description, new
                                         {
                                             @id = "txtProblem_descriptionGroup",
@@ -119,34 +172,11 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><label>不良原因</label></td>
-                                <td colspan="4">
+                                <td><label>分析结论</label></td>
+                                <td colspan="5">
                                     @Html.TextAreaFor(m => item.root_cause, new
                                         {
                                             @id = "txtRoot_causeGroup",
-                                            @class = "form-control placeholder-no-fix",
-                                            @autocomplete = "off",
-                                            @rows = "5",
-                                            @placeholder = "待补充不良原因...",
-                                            @readonly = true,
-                                            @style = "background-color:white"
-                                        })
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="5">
-                                    <div style="width:100%;height:400px;text-align:center;">
-                                        @Html.Hidden("group_image", item.group_image, new { id = "group_image" })
-                                        <img id="groupImg" src="@Url.Content(item.group_image ?? "~/Content/Loading/error.png")" style="width:auto;height:auto;max-width:100%;max-height:100%;margin:auto;" class="img-thumbnail" />
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label>分析结论</label></td>
-                                <td colspan="4">
-                                    @Html.TextAreaFor(m => item.analysis_conclusion, new
-                                        {
-                                            @id = "txtAnalysis_conclusionGroup",
                                             @class = "form-control placeholder-no-fix",
                                             @autocomplete = "off",
                                             @rows = "5",
@@ -157,8 +187,32 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td><label>排查图片</label></td>
+                                <td colspan="5">
+                                    <div style="width:100%;height:400px;text-align:center;">
+                                        @Html.Hidden("group_image", item.group_image, new { id = "group_image" })
+                                        <img id="groupImg" src="@Url.Content(item.group_image ?? "~/Content/Loading/error.png")" style="width:auto;height:auto;max-width:100%;max-height:100%;margin:auto;" class="img-thumbnail" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>改善措施</label></td>
+                                <td colspan="5">
+                                    @Html.TextAreaFor(m => item.analysis_conclusion, new
+                                        {
+                                            @id = "txtAnalysis_conclusionGroup",
+                                            @class = "form-control placeholder-no-fix",
+                                            @autocomplete = "off",
+                                            @rows = "5",
+                                            @placeholder = "待补充改善措施...",
+                                            @readonly = true,
+                                            @style = "background-color:white"
+                                        })
+                                </td>
+                            </tr>
+                            <tr>
                                 <td><label>下一步计划</label></td>
-                                <td colspan="4">
+                                <td colspan="5">
                                     @Html.TextAreaFor(m => item.next_steps, new
                                         {
                                             @id = "txtNext_stepsGroup",
@@ -196,7 +250,7 @@
                             @foreach (var item in Model.ParFileUpload)
                             {
                                 <tr>
-                                    <td>@Html.DisplayFor(m => item.file_name)</td>
+                                    <td>@Html.ActionLink(item.file_name, "ShowFile", new { filePath = item.file_url,id="showfile" }, new { target = "_blank" })</td>
                                     <td>
                                         @Html.DisplayFor(m => item.update_time)
                                         <span>by</span>

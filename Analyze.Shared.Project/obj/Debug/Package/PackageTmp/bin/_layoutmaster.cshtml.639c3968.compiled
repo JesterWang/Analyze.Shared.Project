@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Shared/_LayoutMaster.cshtml" hash="ffffffffc129c093" filehash="fffff48f519ee052" flags="110000" assembly="App_Web__layoutmaster.cshtml.639c3968" type="ASP._Page_Views_Shared__LayoutMaster_cshtml">
+<preserve resultType="2" virtualPath="/Views/Shared/_LayoutMaster.cshtml" hash="ffffffffc129c093" filehash="fffff4b3a35319b8" flags="110000" assembly="App_Web__layoutmaster.cshtml.639c3968" type="ASP._Page_Views_Shared__LayoutMaster_cshtml">
     <filedeps>
         <filedep name="/Views/Shared/_LayoutMaster.cshtml" />
     </filedeps>

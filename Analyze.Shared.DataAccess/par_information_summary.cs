@@ -41,6 +41,18 @@ namespace Analyze.Shared.DataAccess
         [StringLength(1)]
         public string isline { get; set; }
 
+        [StringLength(16)]
+        public string rd { get; set; }
+
+        [StringLength(16)]
+        public string issue_category { get; set; }
+
+        [StringLength(16)]
+        public string product_category { get; set; }
+
+        [StringLength(16)]
+        public string status { get; set; }
+
         [Column(TypeName = "text")]
         [StringLength(65535)]
         public string problem_description { get; set; }
@@ -59,6 +71,9 @@ namespace Analyze.Shared.DataAccess
 
         [StringLength(200)]
         public string group_image { get; set; }
+
+        [StringLength(16)]
+        public string create_owner { get; set; }
 
         [Column(TypeName = "timestamp")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

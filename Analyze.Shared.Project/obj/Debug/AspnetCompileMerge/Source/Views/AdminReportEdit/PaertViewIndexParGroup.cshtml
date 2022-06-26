@@ -31,7 +31,7 @@
                         <tbody>
                             <tr>
                                 <td><label>标题</label></td>
-                                <td colspan="4">
+                                <td colspan="5">
                                     @Html.TextBoxFor(m => item.title, new
                                             {
                                                 @id = "txtTitle",
@@ -45,7 +45,7 @@
                             </tr>
                             <tr>
                                 <td rowspan="2"><label>基础信息*</label></td>
-                                <td colspan="2">
+                                <td>
                                     <label>发生时间*</label>
                                     @Html.TextBoxFor(m => item.tracking_time, new
                                         {
@@ -57,7 +57,7 @@
                                         })
                                     @Html.ValidationMessage("tracking_time", new { style = "color: red;" })
                                 </td>
-                                <td colspan="2">
+                                <td>
                                     <label>发生地点*</label>
                                     @Html.TextBoxFor(m => item.site, new
                                     {
@@ -69,9 +69,7 @@
                                     })
                                     @Html.ValidationMessage("site", new { style = "color: red;" })
                                 </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
+                                <td>
                                     <label>产品型号*</label>
                                     @Html.TextBoxFor(m => item.model, new
                                     {
@@ -79,11 +77,11 @@
                                         @class = "form-control placeholder-no-fix",
                                         @type = "text",
                                         @autocomplete = "off",
-                                        @placeholder = "请输入发生地点..."
+                                        @placeholder = "请输入产品型号..."
                                     })
                                     @Html.ValidationMessage("model", new { style = "color: red;" })
                                 </td>
-                                <td colspan="2">
+                                <td>
                                     <label>不良率*</label>
                                     @Html.TextBoxFor(m => item.defect_rate, new
                                     {
@@ -91,21 +89,80 @@
                                         @class = "form-control placeholder-no-fix",
                                         @type = "text",
                                         @autocomplete = "off",
-                                        @placeholder = "请输入发生地点..."
+                                        @placeholder = "请输入不良率..."
                                     })
                                     @Html.ValidationMessage("defect_rate", new { style = "color: red;" })
                                 </td>
-                            </tr>
-                            <tr>
-                                <td><label>是否停线</label></td>
-                                <td colspan="4">
+                                <td>
+                                    <label>是否停线</label><br />
                                     @Html.RadioButtonFor(m => item.isline, 0, new { @id = "isline0", @name = "isline" })否
                                     @Html.RadioButtonFor(m => item.isline, 1, new { @id = "isline1", @name = "isline" })是
                                 </td>
                             </tr>
                             <tr>
+                                <td>
+                                    <label>设计方</label>
+                                    @{
+                                        List<SelectListItem> rd_list = new List<SelectListItem>();
+                                        rd_list.Add(new SelectListItem { Text = "Inhouse", Value = "Inhouse", Selected = ("Inhouse" == item.rd) });
+                                        rd_list.Add(new SelectListItem { Text = "HQ", Value = "HQ", Selected = ("HQ" == item.rd) });
+                                        rd_list.Add(new SelectListItem { Text = "WT", Value = "WT", Selected = ("WT" == item.rd) });
+                                        rd_list.Add(new SelectListItem { Text = "LC", Value = "LC", Selected = ("LC" == item.rd) });
+                                        rd_list.Add(new SelectListItem { Text = "TN", Value = "TN", Selected = ("TN" == item.rd) });
+                                        rd_list.Add(new SelectListItem { Text = "CNCE", Value = "CNCE", Selected = ("CNCE" == item.rd) });
+                                    }
+                                    @Html.DropDownListFor(m => item.rd, rd_list, "---请选择---", new { @id = "txtRd", @class = "btn dropdown-toggle form-control" })
+                                    @Html.ValidationMessage("rd", new { @style = "color:yellow"})
+                                </td>
+                                <td>
+                                    <label>产品类型</label>
+                                    @{
+                                        List<SelectListItem> productCategory_list = new List<SelectListItem>();
+                                        productCategory_list.Add(new SelectListItem { Text = "PH", Value = "PH", Selected = ("PH" == item.product_category) });
+                                        productCategory_list.Add(new SelectListItem { Text = "TB", Value = "TB", Selected = ("TB" == item.product_category) });
+                                    }
+                                    @Html.DropDownListFor(m => item.product_category, productCategory_list, "---请选择---", new { @id = "txtProduct_category", @class = "btn dropdown-toggle form-control" })
+                                    @Html.ValidationMessage("product_category", new { @style = "color:yellow" })
+                                </td>
+                                <td>
+                                    <label>问题类别</label>
+                                    @{
+                                        List<SelectListItem> issueCategory_list = new List<SelectListItem>();
+                                        issueCategory_list.Add(new SelectListItem { Text = "设计问题", Value = "设计问题", Selected = ("设计问题" == item.issue_category) });
+                                        issueCategory_list.Add(new SelectListItem { Text = "软件问题", Value = "软件问题", Selected = ("软件问题" == item.issue_category) });
+                                        issueCategory_list.Add(new SelectListItem { Text = "物料问题", Value = "物料问题", Selected = ("物料问题" == item.issue_category) });
+                                        issueCategory_list.Add(new SelectListItem { Text = "制程问题", Value = "制程问题", Selected = ("制程问题" == item.issue_category) });
+                                    }
+                                    @Html.DropDownListFor(m => item.issue_category, issueCategory_list, "---请选择---", new { @id = "txtIssue_category", @class = "btn dropdown-toggle form-control" })
+                                    @Html.ValidationMessage("issue_category", new { @style = "color:yellow" })
+                                </td>
+                                <td>
+                                    <label>状态</label>
+                                    @{
+                                        List<SelectListItem> status_list = new List<SelectListItem>();
+                                        status_list.Add(new SelectListItem { Text = "Ongoing", Value = "Ongoing", Selected = ("Ongoing" == item.status) });
+                                        status_list.Add(new SelectListItem { Text = "Tracking", Value = "Tracking", Selected = ("Tracking" == item.status) });
+                                        status_list.Add(new SelectListItem { Text = "Closed", Value = "Closed", Selected = ("Closed" == item.status) });
+                                    }
+                                    @Html.DropDownListFor(m => item.status, status_list, "---请选择---", new { @id = "txtStatus", @class = "btn dropdown-toggle form-control" })
+                                    @Html.ValidationMessage("status", new { @style = "color:yellow" })
+                                </td>
+                                <td>
+                                    <label>创建人</label>
+                                    @Html.TextBoxFor(m => item.create_owner, new
+                                            {
+                                                @id = "txtCreateOwner",
+                                                @class = "form-control placeholder-no-fix",
+                                                @type = "text",
+                                                @readonly=true
+                                            })
+                                    @Html.ValidationMessage("create_owner", new { style = "color: red;" })
+                                </td>
+                                
+                            </tr>
+                            <tr>
                                 <td><label>问题描述</label></td>
-                                <td colspan="4">
+                                <td colspan="5">
                                     @Html.TextAreaFor(m => item.problem_description, new
                                         {
                                             @id = "txtProblem_descriptionGroup",
@@ -117,32 +174,11 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><label>不良原因</label></td>
-                                <td colspan="4">
+                                <td><label>分析结论</label></td>
+                                <td colspan="5">
                                     @Html.TextAreaFor(m => item.root_cause, new
                                         {
                                             @id = "txtRoot_causeGroup",
-                                            @class = "form-control placeholder-no-fix",
-                                            @autocomplete = "off",
-                                            @rows = "5",
-                                            @placeholder = "请输入不良原因..."
-                                        })
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="5">
-                                    <div style="width:100%;height:400px;text-align:center;">
-                                        @Html.Hidden("group_image", item.group_image, new { id = "group_image" })
-                                        <img id="groupImg" src="@Url.Content(item.group_image ?? "~/Content/Loading/error.png")" style="width:auto;height:auto;max-width:100%;max-height:100%;margin:auto;" class="img-thumbnail" />
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label>分析结论</label></td>
-                                <td colspan="4">
-                                    @Html.TextAreaFor(m => item.analysis_conclusion, new
-                                        {
-                                            @id = "txtAnalysis_conclusionGroup",
                                             @class = "form-control placeholder-no-fix",
                                             @autocomplete = "off",
                                             @rows = "5",
@@ -151,8 +187,30 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td><label>排查图片</label></td>
+                                <td colspan="5">
+                                    <div style="width:100%;height:400px;text-align:center;">
+                                        @Html.Hidden("group_image", item.group_image, new { id = "group_image" })
+                                        <img id="groupImg" src="@Url.Content(item.group_image ?? "~/Content/Loading/error.png")" style="width:auto;height:auto;max-width:100%;max-height:100%;margin:auto;" class="img-thumbnail" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>改善措施</label></td>
+                                <td colspan="5">
+                                    @Html.TextAreaFor(m => item.analysis_conclusion, new
+                                        {
+                                            @id = "txtAnalysis_conclusionGroup",
+                                            @class = "form-control placeholder-no-fix",
+                                            @autocomplete = "off",
+                                            @rows = "5",
+                                            @placeholder = "请输入改善措施..."
+                                        })
+                                </td>
+                            </tr>
+                            <tr>
                                 <td><label>下一步计划</label></td>
-                                <td colspan="4">
+                                <td colspan="5">
                                     @Html.TextAreaFor(m => item.next_steps, new
                                         {
                                             @id = "txtNext_stepsGroup",
@@ -197,7 +255,7 @@
                             @foreach (var item in Model.ParFileUpload)
                             {
                                 <tr>
-                                    <td>@Html.DisplayFor(m => item.file_name)</td>
+                                    <td>@Html.ActionLink(item.file_name, "ShowFile", new { filePath = item.file_url }, new { target = "_blank" })</td>
                                     <td>
                                         @Html.DisplayFor(m => item.update_time)
                                         <span>by</span>
@@ -244,6 +302,10 @@
                 var site = $("#txtSite").val();
                 var model = $("#txtModel").val();
                 var defect_rate = $("#txtDefect_rate").val();
+                var rd = $("#txtRd").val();
+                var product_category = $("#txtProduct_category").val();
+                var issue_category = $("#txtIssue_category").val();
+                var status = $("#txtStatus").val();
                 var reserve = null;
                 if (document.getElementById("isline0").checked) {
                     reserve = "0";
@@ -258,6 +320,7 @@
                 var root_cause = $("#txtRoot_causeGroup").val().replace(' ', ' ');
                 var analysis_conclusion = $("#txtAnalysis_conclusionGroup").val().replace(' ', ' ');
                 var next_steps = $("#txtNext_stepsGroup").val().replace(' ', ' ');
+                var create_owner = $("#txtCreateOwner").val();
                 var log_result = $("#txtLogResultGroup").val();
 
                 if (title == "" || tracking_time == "" || site == "" || model == "" || defect_rate == "") {
@@ -270,8 +333,9 @@
                     url: '/AdminReportEdit/PaertViewIndexParGroupUpdate',
                     data: JSON.stringify({
                         tracking_id: tracking_id, tracking_number: tracking_number, title: title, tracking_time: tracking_time,
-                        site: site, model: model, defect_rate: defect_rate, isline: isline, group_image: group_image, group_image_old: group_image_old,
-                        problem_description: problem_description, root_cause: root_cause, analysis_conclusion: analysis_conclusion, next_steps: next_steps,
+                        site: site, model: model, defect_rate: defect_rate, rd: rd, product_category: product_category, issue_category: issue_category, status: status,
+                        isline: isline, group_image: group_image, group_image_old: group_image_old,
+                        problem_description: problem_description, root_cause: root_cause, analysis_conclusion: analysis_conclusion, next_steps: next_steps,create_owner:create_owner,
                         log_result: log_result, user: user_detailed
                     }),
                     dataType: "json",
@@ -330,6 +394,10 @@
                     var site = $("#txtSite").val();
                     var model = $("#txtModel").val();
                     var defect_rate = $("#txtDefect_rate").val();
+                    var rd = $("#txtRd").val();
+                    var product_category = $("#txtProduct_category").val();
+                    var issue_category = $("#txtIssue_category").val();
+                    var status = $("#txtStatus").val();
                     var reserve = null;
                     if (document.getElementById("isline0").checked) {
                         reserve = "0";
@@ -344,6 +412,7 @@
                     var root_cause = $("#txtRoot_causeGroup").val().replace(' ', ' ');
                     var analysis_conclusion = $("#txtAnalysis_conclusionGroup").val().replace(' ', ' ');
                     var next_steps = $("#txtNext_stepsGroup").val().replace(' ', ' ');
+                    var create_owner = $("#txtCreateOwner").val();
                     var log_result = $("#txtLogResultGroup").val();
 
                     $.ajax({
@@ -351,8 +420,9 @@
                         url: '/AdminReportEdit/PaertViewIndexParGroupUpdate',
                         data: JSON.stringify({
                             tracking_id: tracking_id, tracking_number: tracking_number, title: title, tracking_time: tracking_time,
-                            site: site, model: model, defect_rate: defect_rate, isline: isline, group_image: group_image, group_image_old: group_image_old,
-                            problem_description: problem_description, root_cause: root_cause, analysis_conclusion: analysis_conclusion, next_steps: next_steps,
+                            site: site, model: model, defect_rate: defect_rate, rd: rd, product_category: product_category, issue_category: issue_category, status: status,
+                            isline: isline, group_image: group_image, group_image_old: group_image_old,
+                            problem_description: problem_description, root_cause: root_cause, analysis_conclusion: analysis_conclusion, next_steps: next_steps,create_owner:create_owner,
                             log_result: log_result, user: user_detailed
                         }),
                         dataType: "json",

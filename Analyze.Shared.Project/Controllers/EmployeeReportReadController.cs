@@ -238,7 +238,7 @@ namespace Analyze.Shared.Project.Controllers
             return base.PartialView("PaertViewIndexParTest", parlist);
         }  
         #endregion
-
+        
         #region 文件操作
         [HttpGet]//文件下载
         public FileResult DownloadFile(string filePath)
@@ -250,6 +250,39 @@ namespace Analyze.Shared.Project.Controllers
             byte[] bytes = System.IO.File.ReadAllBytes(path);
             //Send the File to Download.
             return File(bytes, "application/octet-stream", fileName);
+        }
+
+        [HttpGet]//文件预览
+        public ActionResult ShowFile(string filePath)
+        {
+            string filename = Path.GetFileNameWithoutExtension(filePath);
+            string path = Path.GetFileName(filePath);
+            string path_ex = Path.GetExtension(filePath);
+            string pathName = Server.MapPath(filePath);
+            string type = "";
+
+            if (path_ex == ".pdf")
+            {
+                type = "application/pdf";
+            }
+            if (path_ex == ".png")
+            {
+                return base.File(pathName, "image/png");
+            }
+            if (path_ex == ".jpg")
+            {
+                return base.File(pathName, "image/jpeg");
+            }
+            if (path_ex == ".gif")
+            {
+                return base.File(pathName, "image/gif");
+            }
+            if (path_ex != ".pdf" && path_ex != ".png" && path_ex != ".jpg" && path_ex != ".gif")
+            {
+                return Content("仅支持PDF,图片(PNG,JPG,GIF)格式预览");
+            }
+            byte[] FileBytes = System.IO.File.ReadAllBytes(pathName);
+            return File(FileBytes, type);
         }
         #endregion
 

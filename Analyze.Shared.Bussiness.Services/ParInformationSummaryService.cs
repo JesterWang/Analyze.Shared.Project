@@ -71,16 +71,21 @@ namespace Analyze.Shared.Bussiness.Services
                     tracking_id = e.tracking_id,
                     tracking_number = e.tracking_number,
                     title = e.title,
-                    tracking_time = e.tracking_time,
+                    tracking_time = e.tracking_time.ToString("yyyy-MM-dd HH:mm:ss"),
                     site = e.site,
                     model = e.model,
                     defect_rate = e.defect_rate,
                     isline=e.isline,
+                    rd = e.rd,
+                    issue_category = e.issue_category,
+                    product_category = e.product_category,
+                    status = e.status,
                     problem_description = e.problem_description,
                     root_cause = e.root_cause,
                     analysis_conclusion = e.analysis_conclusion,
                     next_steps = e.next_steps,
                     group_image=e.group_image,
+                    create_owner=e.create_owner,
                     create_time = e.create_time.ToString("yyyy-MM-dd HH:mm:ss"),
                     update_time = e.update_time,
                     log_result = e.log_result
@@ -105,11 +110,16 @@ namespace Analyze.Shared.Bussiness.Services
                 model = parInformationSummary.model,
                 defect_rate = parInformationSummary.defect_rate,
                 isline=parInformationSummary.isline,
+                rd=parInformationSummary.rd,
+                issue_category = parInformationSummary.issue_category,
+                product_category = parInformationSummary.product_category,
+                status = parInformationSummary.status,
                 problem_description = parInformationSummary.problem_description,
                 root_cause = parInformationSummary.root_cause,
                 analysis_conclusion = parInformationSummary.analysis_conclusion,
                 next_steps = parInformationSummary.next_steps,
                 group_image = parInformationSummary.group_image,
+                create_owner=parInformationSummary.create_owner,
                 update_time = DateTime.Now,
                 log_result = parInformationSummary.log_result
             };
@@ -135,10 +145,15 @@ namespace Analyze.Shared.Bussiness.Services
                 model = parInformationSummary.model,
                 defect_rate = parInformationSummary.defect_rate,
                 isline = parInformationSummary.isline,
+                rd = parInformationSummary.rd,
+                issue_category = parInformationSummary.issue_category,
+                product_category = parInformationSummary.product_category,
+                status = parInformationSummary.status,
                 problem_description = parInformationSummary.problem_description,
                 root_cause = parInformationSummary.root_cause,
                 analysis_conclusion = parInformationSummary.analysis_conclusion,
-                next_steps = parInformationSummary.next_steps
+                next_steps = parInformationSummary.next_steps,
+                create_owner = parInformationSummary.create_owner
             };
             Context.Set<par_information_summary>().Add(parContext);
             Context.SaveChanges();

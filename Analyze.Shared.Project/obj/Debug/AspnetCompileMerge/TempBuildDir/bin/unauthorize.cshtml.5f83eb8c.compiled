@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Account/UnAuthorize.cshtml" hash="ffffffffc129c093" filehash="23b9defd83d" flags="110000" assembly="App_Web_unauthorize.cshtml.5f83eb8c" type="ASP._Page_Views_Account_UnAuthorize_cshtml">
+<preserve resultType="2" virtualPath="/Views/Account/UnAuthorize.cshtml" hash="ffffffffc129c093" filehash="22e6f196194" flags="110000" assembly="App_Web_unauthorize.cshtml.5f83eb8c" type="ASP._Page_Views_Account_UnAuthorize_cshtml">
     <filedeps>
         <filedep name="/Views/Account/UnAuthorize.cshtml" />
     </filedeps>

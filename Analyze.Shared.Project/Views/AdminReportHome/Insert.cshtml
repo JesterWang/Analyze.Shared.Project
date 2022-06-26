@@ -95,6 +95,85 @@
             <label class="col-lg-3 control-label" for="form_control_1">
                 <font style="vertical-align:inherit;">
                     <font style="vertical-align:inherit;">
+                        @Html.DisplayName("rd")
+                    </font>
+                </font>
+            </label>
+            <div class="col-md-9">
+                @{
+                    List<SelectListItem> rd_list = new List<SelectListItem>();
+                    rd_list.Add(new SelectListItem { Text = "Inhouse", Value = "Inhouse" });
+                    rd_list.Add(new SelectListItem { Text = "HQ", Value = "HQ" });
+                    rd_list.Add(new SelectListItem { Text = "WT", Value = "WT" });
+                    rd_list.Add(new SelectListItem { Text = "LC", Value = "LC" });
+                    rd_list.Add(new SelectListItem { Text = "TN", Value = "TN" });
+                    rd_list.Add(new SelectListItem { Text = "CNCE", Value = "CNCE" });
+                }
+                @Html.DropDownList("rd",rd_list, "---请选择---", new {@class = "btn dropdown-toggle form-control" })
+                @Html.ValidationMessage("rd", new { @style = "color:yellow" })
+            </div>
+        </div>
+        <div class="form-group form-md-line-input">
+            <label class="col-lg-3 control-label" for="form_control_1">
+                <font style="vertical-align:inherit;">
+                    <font style="vertical-align:inherit;">
+                        @Html.DisplayName("issue_category")
+                    </font>
+                </font>
+            </label>
+            <div class="col-md-9">
+                @{
+                    List<SelectListItem> issueCategory_list = new List<SelectListItem>();
+                    issueCategory_list.Add(new SelectListItem { Text = "设计问题", Value = "设计问题"});
+                    issueCategory_list.Add(new SelectListItem { Text = "软件问题", Value = "软件问题"});
+                    issueCategory_list.Add(new SelectListItem { Text = "物料问题", Value = "物料问题"});
+                    issueCategory_list.Add(new SelectListItem { Text = "制程问题", Value = "制程问题"});
+                }
+                @Html.DropDownList("issue_category", issueCategory_list, "---请选择---", new { @id = "txtIssue_category", @class = "btn dropdown-toggle form-control" })
+                @Html.ValidationMessage("issue_category", new { @style = "color:yellow" })
+            </div>
+        </div>
+        <div class="form-group form-md-line-input">
+            <label class="col-lg-3 control-label" for="form_control_1">
+                <font style="vertical-align:inherit;">
+                    <font style="vertical-align:inherit;">
+                        @Html.DisplayName("product_category")
+                    </font>
+                </font>
+            </label>
+            <div class="col-md-9">
+                @{
+                    List<SelectListItem> productCategory_list = new List<SelectListItem>();
+                    productCategory_list.Add(new SelectListItem { Text = "PH", Value = "PH"});
+                    productCategory_list.Add(new SelectListItem { Text = "TB", Value = "TB" });
+                }
+                @Html.DropDownList("product_category", productCategory_list, "---请选择---", new {@class = "btn dropdown-toggle form-control" })
+                @Html.ValidationMessage("product_category", new { @style = "color:yellow" })
+            </div>
+        </div>
+        <div class="form-group form-md-line-input">
+            <label class="col-lg-3 control-label" for="form_control_1">
+                <font style="vertical-align:inherit;">
+                    <font style="vertical-align:inherit;">
+                        @Html.DisplayName("status")
+                    </font>
+                </font>
+            </label>
+            <div class="col-md-9">
+                @{
+                    List<SelectListItem> status_list = new List<SelectListItem>();
+                    status_list.Add(new SelectListItem { Text = "Ongoing", Value = "Ongoing"});
+                    status_list.Add(new SelectListItem { Text = "Tracking", Value = "Tracking"});
+                    status_list.Add(new SelectListItem { Text = "Closed", Value = "Closed"});
+                }
+                @Html.DropDownList("status", status_list, "---请选择---", new { @id = "txtStatus", @class = "btn dropdown-toggle form-control" })
+                @Html.ValidationMessage("status", new { @style = "color:yellow" })
+            </div>
+        </div>
+        <div class="form-group form-md-line-input">
+            <label class="col-lg-3 control-label" for="form_control_1">
+                <font style="vertical-align:inherit;">
+                    <font style="vertical-align:inherit;">
                         @Html.DisplayName("problem_description")
                     </font>
                 </font>

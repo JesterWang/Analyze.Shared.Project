@@ -70,7 +70,7 @@
                             @foreach (var item in Model.ParFileUpload)
                             {
                                 <tr>
-                                    <td>@Html.DisplayFor(m => item.file_name)</td>
+                                    <td>@Html.ActionLink(item.file_name, "ShowFile", new { filePath = item.file_url }, new { target = "_blank" })</td>
                                     <td>
                                         @Html.DisplayFor(m => item.update_time)
                                         <span>by</span>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Shared/PartialFooter.cshtml" hash="ffffffffc129c093" filehash="ffffc1d9c75175a3" flags="110000" assembly="App_Web_partialfooter.cshtml.639c3968" type="ASP._Page_Views_Shared_PartialFooter_cshtml">
+<preserve resultType="2" virtualPath="/Views/Shared/PartialFooter.cshtml" hash="ffffffffc129c093" filehash="ffffc1e309e28a07" flags="110000" assembly="App_Web_partialfooter.cshtml.639c3968" type="ASP._Page_Views_Shared_PartialFooter_cshtml">
     <filedeps>
         <filedep name="/Views/Shared/PartialFooter.cshtml" />
     </filedeps>

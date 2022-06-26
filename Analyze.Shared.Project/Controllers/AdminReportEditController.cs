@@ -74,7 +74,8 @@ namespace Analyze.Shared.Project.Controllers
 
         [HttpPost]//基础信息修改
         public ActionResult PaertViewIndexParGroupUpdate(int tracking_id, string tracking_number, string title, string tracking_time, string site, string model,
-            string defect_rate, string isline, string group_image, string group_image_old, string problem_description, string root_cause, string analysis_conclusion, string next_steps, string log_result, string user)
+            string defect_rate, string rd, string product_category, string issue_category, string status, string isline, string group_image, string group_image_old,
+            string problem_description, string root_cause, string analysis_conclusion, string next_steps,string create_owner, string log_result, string user)
         {
             if (group_image_old != group_image) 
             {
@@ -90,16 +91,21 @@ namespace Analyze.Shared.Project.Controllers
                 tracking_id = tracking_id,
                 tracking_number=tracking_number,
                 title = title,
-                tracking_time = Convert.ToDateTime(tracking_time),
+                tracking_time = tracking_time,
                 site = site,
                 model = model,
                 defect_rate = defect_rate,
+                rd = rd,
+                product_category = product_category,
+                issue_category=issue_category,
+                status=status,
                 isline=isline,
                 group_image=group_image,
                 problem_description = problem_description,
                 root_cause = root_cause,
                 analysis_conclusion = analysis_conclusion,
                 next_steps = next_steps,
+                create_owner = create_owner,
                 update_time = DateTime.Now,
                 log_result = _log_result
             };
@@ -450,6 +456,11 @@ namespace Analyze.Shared.Project.Controllers
                 if (!Directory.Exists(Server.MapPath(savePath)))
                 {
                     Directory.CreateDirectory(Server.MapPath(savePath));
+                    if (Directory.Exists(Server.MapPath(savePath))) 
+                    {
+                        string savePathTemp = "/UploadedFiles/" + filePathName + "/temp/";
+                        Directory.CreateDirectory(Server.MapPath(savePathTemp));
+                    }
                 }
                 string imgName = DateTime.Now.ToString("yyyyMMddhhmmss");//文件别名
                 string imgPath = savePath + imgName + "-" + imgFile.FileName;//构造文件保存路径 
@@ -481,6 +492,39 @@ namespace Analyze.Shared.Project.Controllers
             byte[] bytes = System.IO.File.ReadAllBytes(path);
             //Send the File to Download.
             return File(bytes, "application/octet-stream", fileName);
+        }
+
+        [HttpGet]//文件预览
+        public ActionResult ShowFile(string filePath)
+        {
+            string filename = Path.GetFileNameWithoutExtension(filePath);
+            string path = Path.GetFileName(filePath);
+            string path_ex = Path.GetExtension(filePath);
+            string pathName = Server.MapPath(filePath);
+            string type = "";
+
+            if (path_ex == ".pdf")
+            {
+                type = "application/pdf";
+            }
+            if (path_ex == ".png")
+            {
+                return base.File(pathName, "image/png");
+            }
+            if (path_ex == ".jpg")
+            {
+                return base.File(pathName, "image/jpeg");
+            }
+            if (path_ex == ".gif")
+            {
+                return base.File(pathName, "image/gif");
+            }
+            if (path_ex != ".pdf" && path_ex != ".png" && path_ex != ".jpg" && path_ex != ".gif")
+            {
+                return Content("仅支持PDF,图片(PNG,JPG,GIF)格式预览");
+            }
+            byte[] FileBytes = System.IO.File.ReadAllBytes(pathName);
+            return File(FileBytes, type);
         }
         #endregion
 

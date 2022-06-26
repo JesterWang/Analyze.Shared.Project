@@ -30,7 +30,7 @@ namespace Analyze.Shared.Common.Report
         /// 发生时间
         /// </summary>
         [Display(Name = "发生时间")]
-        public DateTime? tracking_time { get; set; }
+        public string tracking_time { get; set; }
         /// <summary>
         /// 发生地点
         /// </summary>
@@ -58,20 +58,47 @@ namespace Analyze.Shared.Common.Report
         [StringLength(1)]
         [Display(Name = "是否停线")]
         public string isline { get; set; }
+
+
+        /// <summary>
+        /// 设计方
+        /// </summary>
+        [Required(ErrorMessage = "请输入设计方")]
+        [Display(Name = "设计方")]
+        public string rd { get; set; }
+        /// <summary>
+        /// 问题类别
+        /// </summary>
+        [Required(ErrorMessage = "请输入问题类别")]
+        [Display(Name = "问题类别")]
+        public string issue_category { get; set; }
+        /// <summary>
+        /// 产品类型
+        /// </summary>
+        [Required(ErrorMessage = "请输入产品类型")]
+        [Display(Name = "产品类型")]
+        public string product_category { get; set; }
+        /// <summary>
+        /// 状态
+        /// </summary>
+        [Required(ErrorMessage = "请输入状态")]
+        [Display(Name = "状态")]
+        public string status { get; set; }
+
         /// <summary>
         /// 问题描述
         /// </summary>
         [Display(Name = "问题描述")]
         public string problem_description { get; set; }
         /// <summary>
-        /// 不良原因
-        /// </summary>
-        [Display(Name = "不良原因")]
-        public string root_cause { get; set; }
-        /// <summary>
         /// 分析结论
         /// </summary>
         [Display(Name = "分析结论")]
+        public string root_cause { get; set; }
+        /// <summary>
+        /// 改善措施
+        /// </summary>
+        [Display(Name = "改善措施")]
         public string analysis_conclusion { get; set; }
         /// <summary>
         /// 下一步计划
@@ -84,6 +111,11 @@ namespace Analyze.Shared.Common.Report
         [Display(Name = "问题总结图片")]
         [StringLength(200)]
         public string group_image { get; set; }
+        /// <summary>
+        /// 创建人
+        /// </summary>
+        [Display(Name = "创建人")]
+        public string create_owner { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>

@@ -468,6 +468,10 @@
                 failAlert(boarddiv, alertId);
                 return;
             }
+
+            if (confirm('【保存提醒】上传文件时，未保存的数据将会丢失，确认继续上传吗？') == false) {
+                return;
+            }
             
             $(_id).ajaxSubmit({
                 url: "/AdminReportEdit/UploadFile",

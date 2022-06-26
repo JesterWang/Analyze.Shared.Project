@@ -1,10 +1,9 @@
-using System;
-using System.Data.Entity;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 namespace Analyze.Shared.DataAccess
 {
-    
+    using System;
+    using System.Data.Entity;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
 
     public partial class efc_db_01_DBContext : DbContext
     {
@@ -31,6 +30,7 @@ namespace Analyze.Shared.DataAccess
         public virtual DbSet<sys_user> sys_user { get; set; }
         public virtual DbSet<sys_user_role> sys_user_role { get; set; }
         public virtual DbSet<view_par_file> view_par_file { get; set; }
+        public virtual DbSet<view_user> view_user { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -123,6 +123,22 @@ namespace Analyze.Shared.DataAccess
                 .IsUnicode(false);
 
             modelBuilder.Entity<par_information_summary>()
+                .Property(e => e.rd)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<par_information_summary>()
+                .Property(e => e.issue_category)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<par_information_summary>()
+                .Property(e => e.product_category)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<par_information_summary>()
+                .Property(e => e.status)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<par_information_summary>()
                 .Property(e => e.problem_description)
                 .IsUnicode(false);
 
@@ -140,6 +156,10 @@ namespace Analyze.Shared.DataAccess
 
             modelBuilder.Entity<par_information_summary>()
                 .Property(e => e.group_image)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<par_information_summary>()
+                .Property(e => e.create_owner)
                 .IsUnicode(false);
 
             modelBuilder.Entity<par_information_summary>()
@@ -328,6 +348,46 @@ namespace Analyze.Shared.DataAccess
 
             modelBuilder.Entity<view_par_file>()
                 .Property(e => e.category_chil)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<view_user>()
+                .Property(e => e.username)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<view_user>()
+                .Property(e => e.password)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<view_user>()
+                .Property(e => e.employee_name)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<view_user>()
+                .Property(e => e.employee_itcode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<view_user>()
+                .Property(e => e.sex)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<view_user>()
+                .Property(e => e.tel)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<view_user>()
+                .Property(e => e.email)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<view_user>()
+                .Property(e => e.status)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<view_user>()
+                .Property(e => e.job)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<view_user>()
+                .Property(e => e.dname_short)
                 .IsUnicode(false);
         }
     }
