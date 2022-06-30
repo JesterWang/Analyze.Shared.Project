@@ -55,7 +55,7 @@ namespace Analyze.Shared.Project.Controllers
                         (currentUser.id, out tuples);
                     currentUser.CurrentMenue = menuinfoList;
                     currentUser.TupMenue = tuples;
-                    return base.Redirect("/EmployeeReportHome/Index?crumbId=20220511142915%20_20220510084154");
+                    return base.Redirect("/Home/Index");
                 }
                 else
                 {
@@ -63,7 +63,7 @@ namespace Analyze.Shared.Project.Controllers
                     return View();
                 }
             }
-            else 
+            else
             {
                 return View();
             }

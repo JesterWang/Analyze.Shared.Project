@@ -13,7 +13,7 @@
                     <table id="table"></table>
                     <div id="toolbar">
                         <div class="btn-group">
-                            <a href="#" data-toggle="modal" id="createProject" class="btn btn-default" role="button">
+                            <a href="#" data-toggle="modal" id="createProject" class="btn btn-success" role="button">
                                 新增&nbsp;<i class="glyphicon glyphicon-plus-sign"></i>
                             </a>
                         </div>
@@ -112,16 +112,22 @@
                 toolbarAlign: "right",//工具栏对齐方式
                 columns: [
                     {
-                        title: "全选",
-                        field: "select",
-                        checkox: true,
-                        width: 20,//宽度
-                        align: "center",//水平
-                        valign: "middle"//垂直
+                        field: "id",
+                        title: "Id",
+                        visible: false
                     },
                     {
-                        field: "id",
-                        title: "Id"
+                        title: '序号',
+                        align: "center",
+                        width: 40,
+                        formatter: function (value, row, index) {
+                            //获取每页显示的数量
+                            var pageSize = $('#table').bootstrapTable('getOptions').pageSize;
+                            //获取当前是第几页  
+                            var pageNumber = $('#table').bootstrapTable('getOptions').pageNumber;
+                            //返回序号，注意index是从0开始的，所以要加上1
+                            return pageSize * (pageNumber - 1) + index + 1;
+                        }
                     },
                     {
                         field: "username",

@@ -1,4 +1,5 @@
 ﻿using Analyze.Shared.Bussiness.Interface;
+using Analyze.Shared.Common.Chart;
 using Analyze.Shared.Common.Query;
 using Analyze.Shared.Common.Report;
 using Analyze.Shared.Project.Utility.Filters;
@@ -10,7 +11,7 @@ using System.Web.Mvc;
 
 namespace Analyze.Shared.Project.Controllers
 {
-    
+    [CustomAuthorizeAttribute]
     public class EmployeeReportHomeController : BaseController
     {
         private IParInformationSummaryService _IParInformationSummaryService = null;
@@ -19,7 +20,6 @@ namespace Analyze.Shared.Project.Controllers
             _IParInformationSummaryService = iParInformationSummaryService;
         }
 
-        [CustomAuthorizeAttribute]
         [CustomCrumbsActionFilterAttribute]
         public ActionResult Index()
         {

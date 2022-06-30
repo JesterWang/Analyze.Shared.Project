@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<br />
+<div id="main" style="width: 98%;height:570px;"></div>
+<script type="text/javascript" src="~/Scripts/Echarts/echarts.min.js"></script>
+
+@section Scripts{
+
+    <script>
+
+        $.ajax({
+            url: "/Home/Echarts",
+            type: "get",
+            data: {},
+            success: function (res) {
+                var objs = []//用于存放类型
+                var obj1 = []//用于存放状态
+                var obj2 = []//用于存放状态
+                var obj3 = []//用于存放状态
+                //var arr = [];
+                $.each(res, function (i, v) {
+                    objs[i] = v.issue_category;
+                    obj1[i] = v.count1;
+                    obj2[i] = v.count2;
+                    obj3[i] = v.count3;
+                })
+                console.log("类型:" + objs)
+                console.log("状态:" + obj1)
+                // 基于准备好的dom，初始化echarts实例
+                var myChart = echarts.init(document.getElementById('main'));
+
+                // 指定图表的配置项和数据
+                var option = {
+                    title: {
+                        text: '最近3月停线重大异常状态统计'
+                    },
+                    tooltip: {},
+                    legend: {
+                        data: ['Ongoing', 'Tracking', 'Closed']
+                    },
+                    xAxis: {
+                        data: objs
+                    },
+                    yAxis: {
+                        splitLine: {
+                            show: false
+                        },
+                    },
+                    series: [{
+                        name: 'Ongoing',
+                        type: 'bar',
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    show: true,
+                                    position: 'top',
+                                    textStyle: {
+                                        color: 'black',
+                                        fontSize:16
+                                    }
+                                },
+                                color: '#00B0F0'
+                            }
+                        },
+                        data: obj1
+                    },
+                    {
+                        name: 'Tracking',
+                        type: 'bar',
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    show: true,
+                                    position: 'top',
+                                    textStyle: {
+                                        color: 'black',
+                                        fontSize: 16
+                                    }
+                                },
+                                color: '#FFC000'
+                            }
+                        },
+                        data: obj2
+                    },
+                    {
+                        name: 'Closed',
+                        type: 'bar',
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    show: true,
+                                    position: 'top',
+                                    textStyle: {
+                                        color: 'black',
+                                        fontSize:16
+                                    }
+                                },
+                                color: '#00B050'
+                            }
+                        },
+                        data: obj3
+                    }
+                    ]
+                };
+
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+
+            }
+        });
+
+    </script>
+}

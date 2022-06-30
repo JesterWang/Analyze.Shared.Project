@@ -28,3 +28,6 @@ D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Anal
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.DataAccess\bin\Debug\Unity.Interception.Configuration.pdb
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.DataAccess\obj\Debug\Analyze.Shared.DataAccess.dll
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.DataAccess\obj\Debug\Analyze.Shared.DataAccess.pdb
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.DataAccess\obj\Debug\Analyze.Shared.DataAccess.csproj.CoreCompileInputs.cache
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.DataAccess\obj\Debug\Analyze.Shared.DataAccess.csproj.CopyComplete
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.DataAccess\obj\Debug\Analyze.Shared.DataAccess.csprojAssemblyReference.cache

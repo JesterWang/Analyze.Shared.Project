@@ -14,7 +14,7 @@
             List<string> crumbsId = (List<string>)Context.Session[CacheConstant.CacheCurrentCrumbs];
             if (crumbsId == null)
             {
-                firstCrumbs = new Tuple<string, string, string, string>("", "报告查看>停线异常报告", "/EmployeeReportHome/Index", "1");
+                firstCrumbs = new Tuple<string, string, string, string>("", "首页", "/Home/Index", "1");
             }
             else 
             {

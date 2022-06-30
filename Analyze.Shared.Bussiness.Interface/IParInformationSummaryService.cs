@@ -19,6 +19,12 @@ namespace Analyze.Shared.Bussiness.Interface
         PageResult<ParInformationSummary> ParPagingList(PageQuery query);
 
         /// <summary>
+        /// 查询表
+        /// </summary>
+        /// <returns></returns>
+        List<ParInformationSummary> GetQueryEchart();
+
+        /// <summary>
         /// 查询Id
         /// </summary>
         /// <param name="tracking_id"></param>

@@ -1,7 +1,6 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
-
 <link href="~/Content/bootstrap-table.min.css" rel="stylesheet" />
 
 <h3>信息汇总表-查看</h3>
@@ -71,7 +70,7 @@
                         formatter: function (value, row, index) {
                             //获取每页显示的数量
                             var pageSize = $('#table').bootstrapTable('getOptions').pageSize;
-                            //获取当前是第几页  
+                            //获取当前是第几页
                             var pageNumber = $('#table').bootstrapTable('getOptions').pageNumber;
                             //返回序号，注意index是从0开始的，所以要加上1
                             return pageSize * (pageNumber - 1) + index + 1;
@@ -82,7 +81,7 @@
                         title: "标题",
                         titleTooltip: "标题",
                         formatter: function (value, row, index) {
-                            return '<a href="/EmployeeReportRead/Index?tracking_id=' + row.tracking_id + '"title="查看">'+value+'</a>';
+                            return '<a href="/EmployeeReportRead/Index?tracking_id=' + row.tracking_id + '"title="查看">' + value + '</a>';
                         }
                     },
                     {
@@ -123,44 +122,44 @@
                     //            '<i class="glyphicon glyphicon-eye-open"></i> ' +
                     //            '</a>';
 
-                                //+
-                                //'<a href="#">' +
-                                //'<a href="#editProject" data-toggle="modal" title="修改">' +
-                                //'<i class="glyphicon glyphicon-pencil"></i>' +
-                                //'</a>' +
-                                //'<a href="javascript:void(0)" title="删除">' +
-                                //'<i class="glyphicon glyphicon-trash text-danger"></i>' +
-                                //'</a>';
-                        //},
-                        //events: {
-                        //    'click a[title=删除]': function (e, value, row, index) {
-                        //        if (confirm('此操作不可逆，请确认是否删除？')) {
-                        //            var id = row.Id;
-                        //            $.ajax({
-                        //                url: "delete",
-                        //                data: { id: id },
-                        //                method: "get",
-                        //                success: function (result) {
-                        //                    $("#table").bootstrapTable('refresh');
-                        //                    alert(result.Message);
-                        //                }
-                        //            });
-                        //        }
-                        //    },
-                        //    'click a[title=修改]': function (e, value, row, index) {
+                    //+
+                    //'<a href="#">' +
+                    //'<a href="#editProject" data-toggle="modal" title="修改">' +
+                    //'<i class="glyphicon glyphicon-pencil"></i>' +
+                    //'</a>' +
+                    //'<a href="javascript:void(0)" title="删除">' +
+                    //'<i class="glyphicon glyphicon-trash text-danger"></i>' +
+                    //'</a>';
+                    //},
+                    //events: {
+                    //    'click a[title=删除]': function (e, value, row, index) {
+                    //        if (confirm('此操作不可逆，请确认是否删除？')) {
+                    //            var id = row.Id;
+                    //            $.ajax({
+                    //                url: "delete",
+                    //                data: { id: id },
+                    //                method: "get",
+                    //                success: function (result) {
+                    //                    $("#table").bootstrapTable('refresh');
+                    //                    alert(result.Message);
+                    //                }
+                    //            });
+                    //        }
+                    //    },
+                    //    'click a[title=修改]': function (e, value, row, index) {
 
-                        //        var tracking_id = row.tracking_id;
-                        //        $.ajax({
-                        //            url: "Update",
-                        //            data: { tracking_id: tracking_id },
-                        //            method: "get",
-                        //            success: function (result) {
-                        //                $("#parInformationSummaryModal-body").html(result);
-                        //                $("#ParInformationSummaryModal").modal();
-                        //            }
-                        //        });
-                        //    }
-                        //}
+                    //        var tracking_id = row.tracking_id;
+                    //        $.ajax({
+                    //            url: "Update",
+                    //            data: { tracking_id: tracking_id },
+                    //            method: "get",
+                    //            success: function (result) {
+                    //                $("#parInformationSummaryModal-body").html(result);
+                    //                $("#ParInformationSummaryModal").modal();
+                    //            }
+                    //        });
+                    //    }
+                    //}
                     //}
                 ],
                 onClickRow: function (row, $element) {
@@ -212,8 +211,7 @@
         //    });
         //}
 
-        function ParInformationSummarySubmit()
-        {
+        function ParInformationSummarySubmit() {
             $.ajax({
                 type: "POST",
                 dataType: "json",
@@ -235,13 +233,10 @@
             });
         }
 
-        function ParInformationSummaryHide()
-        {
+        function ParInformationSummaryHide() {
             $("#ParInformationSummaryModal").modal('hide');
         }
 
 
     </script>
 }
-
-

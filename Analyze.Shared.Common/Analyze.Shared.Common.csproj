@@ -101,6 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cache\CacheConstant.cs" />
+    <Compile Include="Chart\HomeChart.cs" />
     <Compile Include="Extension\ExpressionExtend.cs" />
     <Compile Include="Extension\NewExpressionVisitor.cs" />
     <Compile Include="FileHelper.cs" />

@@ -11,6 +11,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using System.Data;
 
 namespace Analyze.Shared.Bussiness.Services
 {
@@ -20,6 +21,7 @@ namespace Analyze.Shared.Bussiness.Services
         {
 
         }
+
         /// <summary>
         /// 查询分页列表
         /// ParInformationSummaryDTO:展示到界面上的实体
@@ -55,6 +57,43 @@ namespace Analyze.Shared.Bussiness.Services
                 Rows = Mapper.Map<List<par_information_summary>, List<ParInformationSummary>>(pageResult.Rows)
             };
             return pagelist;
+        }
+
+        /// <summary>
+        /// 查询表
+        /// </summary>
+        /// <returns></returns>
+        public List<ParInformationSummary> GetQueryEchart()
+        {
+            DateTime dtNextDay = Convert.ToDateTime(DateTime.Now.AddDays(1).ToString("yyyy-MM-dd"));
+            DateTime dtLastDay = Convert.ToDateTime(DateTime.Now.AddDays(-90).ToString("yyyy-MM-dd"));
+            List<ParInformationSummary> listParInformationSummary = new List<ParInformationSummary>();
+            listParInformationSummary = Context.Set<par_information_summary>().Where(s=> s.tracking_time > dtLastDay && s.tracking_time < dtNextDay)
+                .AsEnumerable().Select(e => new ParInformationSummary
+                {
+                    tracking_id = e.tracking_id,
+                    tracking_number = e.tracking_number,
+                    title = e.title,
+                    tracking_time = e.tracking_time.ToString("yyyy-MM-dd HH:mm:ss"),
+                    site = e.site,
+                    model = e.model,
+                    defect_rate = e.defect_rate,
+                    isline = e.isline,
+                    rd = e.rd,
+                    issue_category = e.issue_category,
+                    product_category = e.product_category,
+                    status = e.status,
+                    problem_description = e.problem_description,
+                    root_cause = e.root_cause,
+                    analysis_conclusion = e.analysis_conclusion,
+                    next_steps = e.next_steps,
+                    group_image = e.group_image,
+                    create_owner = e.create_owner,
+                    create_time = e.create_time.ToString("yyyy-MM-dd HH:mm:ss"),
+                    update_time = e.update_time,
+                    log_result = e.log_result
+                }).ToList();
+            return listParInformationSummary;
         }
 
         /// <summary>

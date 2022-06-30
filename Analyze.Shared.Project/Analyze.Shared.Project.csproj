@@ -22,6 +22,8 @@
     <NuGetPackageImportStamp>1b022396</NuGetPackageImportStamp>
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
     <TargetFrameworkProfile />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -193,6 +195,8 @@
     <Content Include="Scripts\Datepicker\jquery-ui-timepicker-addon.js" />
     <Content Include="Scripts\Datepicker\jquery-ui-timepicker-zh-CN.js" />
     <Content Include="Scripts\Datepicker\jquery.ui.datepicker-zh-CN.js" />
+    <Content Include="Scripts\Echarts\echarts.js" />
+    <Content Include="Scripts\Echarts\echarts.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
@@ -238,6 +242,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EmployeeReportHomeController.cs" />
     <Compile Include="Controllers\EmployeeReportReadController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -317,6 +322,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Properties\PublishProfiles\ProductLeadWeb.pubxml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

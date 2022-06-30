@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Areas/SystemManage/Views/Shared/_Layout.cshtml" hash="ffffffffc129c093" filehash="ffffcee2c2e4ec59" flags="110000" assembly="App_Web__layout.cshtml.85fd3c3c" type="ASP._Page_Areas_SystemManage_Views_Shared__Layout_cshtml">
+<preserve resultType="2" virtualPath="/Areas/SystemManage/Views/Shared/_Layout.cshtml" hash="fffffffff3c9419c" filehash="ffffce658f08f3d3" flags="110000" assembly="App_Web__layout.cshtml.85fd3c3c" type="ASP._Page_Areas_SystemManage_Views_Shared__Layout_cshtml">
     <filedeps>
         <filedep name="/Areas/SystemManage/Views/Shared/_Layout.cshtml" />
     </filedeps>
