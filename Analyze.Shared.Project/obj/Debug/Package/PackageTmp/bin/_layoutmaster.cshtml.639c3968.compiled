@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Shared/_LayoutMaster.cshtml" hash="fffffffff3c9419c" filehash="fffff46d853b9005" flags="110000" assembly="App_Web__layoutmaster.cshtml.639c3968" type="ASP._Page_Views_Shared__LayoutMaster_cshtml">
-    <filedeps>
-        <filedep name="/Views/Shared/_LayoutMaster.cshtml" />
-    </filedeps>
-</preserve>

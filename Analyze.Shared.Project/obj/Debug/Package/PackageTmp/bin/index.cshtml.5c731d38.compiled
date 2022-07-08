@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Areas/SystemManage/Views/User/Index.cshtml" hash="fffffffff3c9419c" filehash="ffffdf78e6dd3693" flags="110000" assembly="App_Web_index.cshtml.5c731d38" type="ASP._Page_Areas_SystemManage_Views_User_Index_cshtml">
-    <filedeps>
-        <filedep name="/Areas/SystemManage/Views/User/Index.cshtml" />
-    </filedeps>
-</preserve>

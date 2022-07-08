@@ -147,6 +147,7 @@ namespace Analyze.Shared.Project.Controllers
         /// <returns></returns>
         public ActionResult PaertViewIndexParMaterialsShow(int id)
         {
+            //测试
             par_materials par_materials = _IParMaterialsService.Find<par_materials>(id);
             ParMaterials parMaterials = Mapper.Map<par_materials, ParMaterials>(par_materials);
             return base.PartialView("PaertViewIndexParMaterialsShow", parMaterials);
