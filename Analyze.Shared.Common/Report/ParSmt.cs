@@ -29,6 +29,10 @@ namespace Analyze.Shared.Common.Report
         /// </summary>
         public string environments { get; set; }
         /// <summary>
+        /// 物料
+        /// </summary>
+        public string materials { get; set; }
+        /// <summary>
         /// 更新时间
         /// </summary>
         public DateTime update_time { get; set; }

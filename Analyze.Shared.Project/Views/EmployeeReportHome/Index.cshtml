@@ -1,15 +1,15 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
-<link href="~/Content/bootstrap-table.min.css" rel="stylesheet" />
+@Styles.Render("~/Content/bootstrap-table")
 
-<h3>信息汇总表-查看</h3>
+<h3>重大异常报告</h3>
 <div class="row">
     <div class="col-md-12">
         <div class="portlet light portlet-fit portlet-datatable bordered">
             <div class="portlet-body">
                 <div class="table-contaoner">
-                    <table id="table"></table>
+                    <table id="table" style="white-space:nowrap;overflow:hidden;"></table>
                 </div>
             </div>
         </div>
@@ -17,8 +17,7 @@
 </div>
 
 @section Scripts{
-    <script src="~/Scripts/bootstrap-table.min.js"></script>
-    <script src="~/Scripts/bootstrap-table-zh-CN.min.js"></script>
+    @Scripts.Render("~/bundles/bootstrap-table")
     <script>
         $(function () {
             Init();
@@ -32,6 +31,9 @@
                 pagination: true,//是否分页
                 pageSize: 10,//单页记录数
                 pageList: [5, 10],//分页步进值
+                fixedColumns: true,
+                fixedNumber: 2,
+                fixedRightNumber: 1,
                 sidePagination: "server",//服务端分页
                 contentType: "application/json",
                 dataType: "json",//期待返回数据类型
@@ -66,7 +68,6 @@
                     {
                         title: '序号',
                         align: "center",
-                        width: 40,
                         formatter: function (value, row, index) {
                             //获取每页显示的数量
                             var pageSize = $('#table').bootstrapTable('getOptions').pageSize;
@@ -81,8 +82,16 @@
                         title: "标题",
                         titleTooltip: "标题",
                         formatter: function (value, row, index) {
-                            return '<a href="/EmployeeReportRead/Index?tracking_id=' + row.tracking_id + '"title="查看">' + value + '</a>';
+                            return '<a href="/EmployeeReportRead/Index?tracking_id=' + row.tracking_id + '"title="查看" style="text-decoration:underline;">' + value + '</a>';
                         }
+                    },
+                    {
+                        field: "tracking_time",
+                        title: "发生时间",
+                    },
+                    {
+                        field: "site",
+                        title: "发生地点",
                     },
                     {
                         field: "model",
@@ -91,6 +100,24 @@
                     {
                         field: "rd",
                         title: "设计方",
+                    },
+                    {
+                        field: "defect_rate",
+                        title: "不良率",
+                    },
+                    {
+                        field: "isline",
+                        title: "停线",
+                        formatter: function (value, row, index) {
+                            var a = "";
+                            if (value == "1") {
+                                var a = "是";
+                            }
+                            else if (value == "0") {
+                                var a = "否";
+                            }
+                            return a;
+                        }
                     },
                     {
                         field: "issue_category",
@@ -105,12 +132,29 @@
                         title: "创建人",
                     },
                     {
-                        field: "tracking_time",
-                        title: "发生日期",
+                        field: "create_time",
+                        title: "创建时间",
+                    },
+                    {
+                        field: "update_time",
+                        title: "更新时间",
                     },
                     {
                         field: "status",
                         title: "状态",
+                        formatter: function (value, row, index) {
+                            var a = "";
+                            if (value == "Ongoing") {
+                                var a = '<span style="color:#00B0F0">' + value + '</span>';
+                            }
+                            else if (value == "Tracking") {
+                                var a = '<span style="color:#FFC000">' + value + '</span>';
+                            }
+                            else if (value == "Closed") {
+                                var a = '<span style="color:#00B050">' + value + '</span>';
+                            }
+                            return a;
+                        }
                     },
                     //{
                     //    field: 'operator',

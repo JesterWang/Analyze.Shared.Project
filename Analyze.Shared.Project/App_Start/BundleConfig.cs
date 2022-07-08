@@ -21,10 +21,19 @@ namespace Analyze.Shared.Project.App_Start
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                 "~/Scripts/bootstrap.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap-table").Include(
+                "~/Scripts/bootstrap-table.js",
+                "~/Scripts/bootstrap-table-zh-CN.js",
+                "~/Scripts/BootStrap/bootstrap-table/fixed-columns/bootstrap-table-fixed-columns.js"));
+
             //--------------------------------------------------------------------
 
             bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
                "~/Content/bootstrap.css"));
+
+            bundles.Add(new StyleBundle("~/Content/bootstrap-table").Include(
+                "~/Content/bootstrap-table.css",
+               "~/Content/BootStrap/bootstrap-table/fixed-columns/bootstrap-table-fixed-columns.css"));
 
             bundles.Add(new StyleBundle("~/Plugins/css").Include(
                 "~/Content/Plugins/font-awesome/css/font-awesome.css",

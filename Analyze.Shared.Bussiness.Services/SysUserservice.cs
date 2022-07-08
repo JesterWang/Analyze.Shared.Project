@@ -49,16 +49,45 @@ namespace Analyze.Shared.Bussiness.Services
         }
 
         /// <summary>
+        /// 查询用户是否存在
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public bool GetUserIs(string username)
+        {
+            CurrentUser user = Context.Set<sys_user>().Where(e => e.username == username)
+                .Select(e => new CurrentUser
+                {
+                    id = e.id,
+                    username = e.username,
+                    password = e.password,
+                    employee_name = e.employee_name,
+                    employee_itcode = e.employee_itcode,
+                    sex = e.sex,
+                    tel = e.tel,
+                    email = e.email,
+                    job_id = e.job_id,
+                    dept_id = e.dept_id,
+                    status = e.status
+                }).FirstOrDefault();
+            if (user == null)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
         /// 查询分页列表
         /// ParInformationSummaryDTO:展示到界面上的实体
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        public PageResult<CurrentUserDTO> ParPagingList(PageQuery query)
+        public PageResult<CurrentUserView> ParPagingList(PageQuery query)
         {
             #region 查询关键字
 
-            Expression<Func<sys_user, bool>> expression = null;
+            Expression<Func<view_user, bool>> expression = null;
             if (!string.IsNullOrWhiteSpace(query.Search))
             {
                 expression = expression.And(c => c.employee_name.Contains(query.Search));
@@ -76,11 +105,11 @@ namespace Analyze.Shared.Bussiness.Services
 
             #endregion
 
-            PageResult<sys_user> pageResult = base.QueryPage(expression, query.PageSize, query.PageIndex, x => x.create_time, isAsc);
-            PageResult<CurrentUserDTO> pagelist = new PageResult<CurrentUserDTO>
+            PageResult<view_user> pageResult = base.QueryPage(expression, query.PageSize, query.PageIndex, x => x.create_time, isAsc);
+            PageResult<CurrentUserView> pagelist = new PageResult<CurrentUserView>
             {
                 Total = pageResult.Total,
-                Rows = Mapper.Map<List<sys_user>, List<CurrentUserDTO>>(pageResult.Rows)
+                Rows = Mapper.Map<List<view_user>, List<CurrentUserView>>(pageResult.Rows)
             };
             return pagelist;
         }

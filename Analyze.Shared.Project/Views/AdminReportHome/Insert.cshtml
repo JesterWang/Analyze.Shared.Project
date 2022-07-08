@@ -102,12 +102,12 @@
             <div class="col-md-9">
                 @{
                     List<SelectListItem> rd_list = new List<SelectListItem>();
-                    rd_list.Add(new SelectListItem { Text = "Inhouse", Value = "Inhouse" });
+                    rd_list.Add(new SelectListItem { Text = "INHOUSE", Value = "INHOUSE" });
                     rd_list.Add(new SelectListItem { Text = "HQ", Value = "HQ" });
                     rd_list.Add(new SelectListItem { Text = "WT", Value = "WT" });
                     rd_list.Add(new SelectListItem { Text = "LC", Value = "LC" });
                     rd_list.Add(new SelectListItem { Text = "TN", Value = "TN" });
-                    rd_list.Add(new SelectListItem { Text = "CNCE", Value = "CNCE" });
+                    rd_list.Add(new SelectListItem { Text = "ZN", Value = "ZN" });
                 }
                 @Html.DropDownList("rd",rd_list, "---请选择---", new {@class = "btn dropdown-toggle form-control" })
                 @Html.ValidationMessage("rd", new { @style = "color:yellow" })

@@ -72,12 +72,12 @@ namespace Analyze.Shared.Common.User
         /// 创建时间
         /// </summary>
         [Display(Name = "创建时间")]
-        public DateTime create_time { get; set; }
+        public string create_time { get; set; }
         /// <summary>
         /// 更新时间
         /// </summary>
         [Display(Name = "更新时间")]
-        public DateTime update_time { get; set; }
+        public string update_time { get; set; }
         public int id { get; set; }
     }
 }

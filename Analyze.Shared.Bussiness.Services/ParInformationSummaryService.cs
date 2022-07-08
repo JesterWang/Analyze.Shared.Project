@@ -50,7 +50,7 @@ namespace Analyze.Shared.Bussiness.Services
 
             #endregion
 
-            PageResult<par_information_summary> pageResult = base.QueryPage(expression, query.PageSize, query.PageIndex, x => x.create_time, isAsc);
+            PageResult<par_information_summary> pageResult = base.QueryPage(expression, query.PageSize, query.PageIndex, x => x.tracking_time, isAsc);
             PageResult<ParInformationSummary> pagelist = new PageResult<ParInformationSummary>
             {
                 Total = pageResult.Total,
@@ -90,7 +90,7 @@ namespace Analyze.Shared.Bussiness.Services
                     group_image = e.group_image,
                     create_owner = e.create_owner,
                     create_time = e.create_time.ToString("yyyy-MM-dd HH:mm:ss"),
-                    update_time = e.update_time,
+                    update_time = e.update_time.ToString("yyyy-MM-dd HH:mm:ss"),
                     log_result = e.log_result
                 }).ToList();
             return listParInformationSummary;
@@ -126,7 +126,7 @@ namespace Analyze.Shared.Bussiness.Services
                     group_image=e.group_image,
                     create_owner=e.create_owner,
                     create_time = e.create_time.ToString("yyyy-MM-dd HH:mm:ss"),
-                    update_time = e.update_time,
+                    update_time = e.update_time.ToString("yyyy-MM-dd HH:mm:ss"),
                     log_result = e.log_result
                 }).FirstOrDefault();
             return par;

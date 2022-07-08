@@ -18,12 +18,19 @@ namespace Analyze.Shared.Bussiness.Interface
         CurrentUser GetUser(LoginUser loginUser);
 
         /// <summary>
+        /// 查询用户是否存在
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        bool GetUserIs(string username);
+
+        /// <summary>
         /// 查询分页列表
-        ///CurrentUserDTO:展示到界面上的实体
+        ///CurrentUserView:展示到界面上的实体
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        PageResult<CurrentUserDTO> ParPagingList(PageQuery query);
+        PageResult<CurrentUserView> ParPagingList(PageQuery query);
 
         /// <summary>
         /// 添加CurrentUser表信息

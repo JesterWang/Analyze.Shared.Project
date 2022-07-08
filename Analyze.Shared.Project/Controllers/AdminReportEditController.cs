@@ -3,6 +3,7 @@ using Analyze.Shared.Common;
 using Analyze.Shared.Common.Report;
 using Analyze.Shared.DataAccess;
 using Analyze.Shared.Project.Utility.Filters;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -106,7 +107,7 @@ namespace Analyze.Shared.Project.Controllers
                 analysis_conclusion = analysis_conclusion,
                 next_steps = next_steps,
                 create_owner = create_owner,
-                update_time = DateTime.Now,
+                update_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                 log_result = _log_result
             };
             bool b = _IParInformationSummaryService.Update(parGroup);
@@ -216,45 +217,184 @@ namespace Analyze.Shared.Project.Controllers
         public ActionResult PaertViewIndexParMaterials(int tracking_id, byte category_id)
         {
             ParList parlist = new ParList();
-            List<ParMaterials> listParMaterials = new List<ParMaterials>();
-            ParMaterials parMaterials = _IParMaterialsService.GetQueryReport(tracking_id);
-            listParMaterials.Add(parMaterials);
+            List<ParMaterials> listParMaterials = _IParMaterialsService.GetQueryReport(tracking_id); ;
             parlist.ParMaterials = listParMaterials;
 
-            //这里需要传递四个category_id
-            int category_id_1 = 0;
-            int category_id_2 = 0;
-            int category_id_3 = 0;
-            int category_id_4 = 0;
-            if (category_id == 4 || category_id == 5 || category_id == 6 || category_id == 7) 
-            {
-                category_id_1 = 4;
-                category_id_2 = 5;
-                category_id_3 = 6;
-                category_id_4 = 7;
-            }
-            List<ViewParFile> listViewParFile = _IParFileService.GetQueryView(tracking_id, category_id_1, category_id_2, category_id_3, category_id_4);
+            //这里需要传递1个category_id
+            int category_id_1 = 4;
+            List<ViewParFile> listViewParFile = _IParFileService.GetQueryView_1(tracking_id, category_id_1);
             parlist.ViewParFile = listViewParFile;
 
             return base.PartialView("PaertViewIndexParMaterials", parlist);
         }
 
-        [HttpPost]//基础信息修改
-        public JsonResult PaertViewIndexParMaterialsUpdate(int tracking_id, string materials_steps_1, string materials_steps_2,string materials_steps_3,string materials_steps_4, string log_result, string user)
+        /// <summary>
+        /// 添加Materials的页面
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult PaertViewIndexParMaterialsInsert(string  tracking_id)
         {
-            string _log_result = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " by " + user + " update;" + "\r\n" + log_result;
-            ParMaterials parMaterials = new ParMaterials()
-            {
-                tracking_id = tracking_id,
-                materials_steps_1=materials_steps_1,
-                materials_steps_2=materials_steps_2,
-                materials_steps_3=materials_steps_3,
-                materials_steps_4=materials_steps_4,
-                log_result = _log_result
-            };
-            bool b = _IParMaterialsService.GetUpdateReport(parMaterials);
-            return Json(_log_result);
+            ViewData["tracking_id"] = tracking_id;
+            return PartialView("PaertViewIndexParMaterialsInsert");
         }
+
+        /// <summary>
+        /// 添加Materials的页面
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult PaertViewIndexParMaterialsInsert(string tracking_id, string tag_number, string lenovo_pn, string odm_pn, string supplier, string suspect_batch, string suspect_lot,
+           string other_batch, string other_batch_number, string alternative_materials, string product, string is_npi_issue, string remark)
+        {
+            JsonResult jsonResult = new JsonResult();
+            jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            //验证
+            if (tag_number != "" && lenovo_pn != "" && odm_pn != "" && supplier != "" && suspect_batch != "" && suspect_lot != "" && other_batch != "" 
+                && other_batch_number != "" && alternative_materials != "" && product != "" && is_npi_issue != "")
+            {
+                string _log_result = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " by " + GetUserName() + GetUserEmplyeeName() + " create;";
+
+                ParMaterials parMaterials = new ParMaterials()
+                {
+                    tracking_id = Convert.ToInt32(tracking_id),
+                    tag_number= tag_number,
+                    lenovo_pn = lenovo_pn,
+                    odm_pn = odm_pn,
+                    supplier = supplier,
+                    suspect_batch = suspect_batch,
+                    suspect_lot = suspect_lot,
+                    other_batch = other_batch,
+                    other_batch_number = other_batch_number,
+                    alternative_materials = alternative_materials,
+                    product = product,
+                    is_npi_issue = is_npi_issue,
+                    remark = remark,
+                    log_result = _log_result
+                };
+                bool bResult = _IParMaterialsService.Insert(parMaterials);
+                if (bResult)
+                {
+                    jsonResult.Data = new AjaxResult()
+                    {
+                        Success = true,
+                        Message = "操作成功"
+                    };
+                }
+                else
+                {
+                    jsonResult.Data = new AjaxResult()
+                    {
+                        Success = false,
+                        Message = "操作失败"
+                    };
+                }
+            }
+            else
+            {
+                jsonResult.Data = new AjaxResult()
+                {
+                    Success = false,
+                    Message = "操作失败,必填项必须填写完整！"
+                };
+            }
+
+            return jsonResult;
+        }
+
+        /// <summary>
+        /// 修改Materials的页面
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult PaertViewIndexParMaterialsUpdate(int id)
+        {
+            par_materials par_materials = _IParMaterialsService.Find<par_materials>(id);
+            ParMaterials parMaterials = Mapper.Map<par_materials, ParMaterials>(par_materials);
+            return base.PartialView("PaertViewIndexParMaterialsUpdate", parMaterials);
+        }
+
+        /// <summary>
+        /// 修改Materials的页面
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult PaertViewIndexParMaterialsUpdate(int id,int tracking_id,string tag_number, string lenovo_pn, string odm_pn, string supplier, string suspect_batch,
+            string suspect_lot, string other_batch, string other_batch_number, string alternative_materials, string product, string is_npi_issue, string remark, string log_result)
+        {
+            JsonResult jsonResult = new JsonResult();
+            jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            //验证
+            if (ModelState.IsValid)
+            {
+                string user = GetUserName() + GetUserEmplyeeName();
+                string _log_result = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " by " + user + " update;" + "\r\n" + log_result;
+
+                ParMaterials parMaterials = new ParMaterials()
+                {
+                    id = id,
+                    tracking_id = tracking_id,
+                    tag_number = tag_number,
+                    lenovo_pn = lenovo_pn,
+                    odm_pn = odm_pn,
+                    supplier = supplier,
+                    suspect_batch = suspect_batch,
+                    suspect_lot = suspect_lot,
+                    other_batch = other_batch,
+                    other_batch_number = other_batch_number,
+                    alternative_materials = alternative_materials,
+                    product = product,
+                    is_npi_issue = is_npi_issue,
+                    remark = remark,
+                    log_result = _log_result
+                };
+
+                bool bResult = _IParMaterialsService.Update(parMaterials);
+                if (bResult)
+                {
+                    jsonResult.Data = new AjaxResult()
+                    {
+                        Success = true,
+                        Message = "操作成功"
+                    };
+                }
+                else
+                {
+                    jsonResult.Data = new AjaxResult()
+                    {
+                        Success = false,
+                        Message = "操作失败"
+                    };
+                }
+            }
+            else
+            {
+                jsonResult.Data = new AjaxResult()
+                {
+                    Success = false,
+                    Message = "操作失败"
+                };
+            }
+
+            return jsonResult;
+        }
+
+        public ActionResult PaertViewIndexParMaterialsDelete(int id) {
+            try
+            {
+                bool bResult = _IParMaterialsService.Delete(id);
+                return JavaScript("showFile(" + 4 + ")");
+            }
+            catch (Exception exp)
+            {
+                return JavaScript("Error:" + exp);
+            }
+        }
+
         #endregion
 
         #region Smt分析报告
@@ -267,26 +407,28 @@ namespace Analyze.Shared.Project.Controllers
             listParSmt.Add(parSmt);
             parlist.ParSmt = listParSmt;
 
-            //这里需要传递四个category_id
+            //这里需要传递五个category_id
             int category_id_1 = 0;
             int category_id_2 = 0;
             int category_id_3 = 0;
             int category_id_4 = 0;
-            if (category_id == 8 || category_id == 9 || category_id == 10 || category_id == 11)
+            int category_id_5 = 0;
+            if (category_id == 8 || category_id == 9 || category_id == 10 || category_id == 11 || category_id == 21)
             {
                 category_id_1 = 8;
                 category_id_2 = 9;
                 category_id_3 = 10;
                 category_id_4 = 11;
+                category_id_5 = 21;
             }
-            List<ViewParFile> listViewParFile = _IParFileService.GetQueryView(tracking_id, category_id_1, category_id_2, category_id_3, category_id_4);
+            List<ViewParFile> listViewParFile = _IParFileService.GetQueryView_5(tracking_id, category_id_1, category_id_2, category_id_3, category_id_4, category_id_5);
             parlist.ViewParFile = listViewParFile;
 
             return base.PartialView("PaertViewIndexParSmt", parlist);
         }
 
         [HttpPost]//基础信息修改
-        public ActionResult PaertViewIndexParSmtUpdate(int tracking_id, string man, string machine, string method, string environments, string log_result, string user)
+        public ActionResult PaertViewIndexParSmtUpdate(int tracking_id, string man, string machine, string method, string environments,string materials, string log_result, string user)
         {
             string _log_result = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " by " + user + " update;" + "\r\n" + log_result;
             ParSmt parSmt = new ParSmt()
@@ -296,6 +438,7 @@ namespace Analyze.Shared.Project.Controllers
                 machine = machine,
                 method = method,
                 environments = environments,
+                materials = materials,
                 log_result = _log_result
             };
             bool b = _IParSmtService.GetUpdateReport(parSmt);
@@ -441,12 +584,17 @@ namespace Analyze.Shared.Project.Controllers
         }
 
         [HttpPost]//文件上传-服务器接收
-        public ActionResult UploadFile()
+        public ActionResult UploadFile(FormCollection form)
         {
             try
             {
-                HttpRequest request = System.Web.HttpContext.Current.Request;
-                HttpPostedFile imgFile = request.Files[0];
+                var imgFile = Request.Files[0];
+                //保存成自己的文件全路径,newfile就是你上传后保存的文件,
+                //服务器上的UpLoadFile文件夹必须有读写权限
+               
+                
+                //HttpRequest request = System.Web.HttpContext.Current.Request;
+                //HttpPostedFile imgFile = request.Files[0];
                 string fileName = imgFile.FileName;
                 string path = "";//文件的完整路径
                 //文件保存目录路径
@@ -456,16 +604,17 @@ namespace Analyze.Shared.Project.Controllers
                 if (!Directory.Exists(Server.MapPath(savePath)))
                 {
                     Directory.CreateDirectory(Server.MapPath(savePath));
-                    if (Directory.Exists(Server.MapPath(savePath))) 
-                    {
-                        string savePathTemp = "/UploadedFiles/" + filePathName + "/temp/";
-                        Directory.CreateDirectory(Server.MapPath(savePathTemp));
-                    }
+                    //if (Directory.Exists(Server.MapPath(savePath))) 
+                    //{
+                    //    string savePathTemp = "/UploadedFiles/" + filePathName + "/temp/";
+                    //    Directory.CreateDirectory(Server.MapPath(savePathTemp));
+                    //}
                 }
                 string imgName = DateTime.Now.ToString("yyyyMMddhhmmss");//文件别名
                 string imgPath = savePath + imgName + "-" + imgFile.FileName;//构造文件保存路径 
                 string AbsolutePath = Server.MapPath(imgPath);
-                FileHelper.RequestUpload(imgFile, AbsolutePath);
+                imgFile.SaveAs(AbsolutePath);
+                //FileHelper.RequestUpload(imgFile, AbsolutePath);
                 path = imgPath;//获得文件完整路径并返回到前台页面
                 if (path != "")
                 {

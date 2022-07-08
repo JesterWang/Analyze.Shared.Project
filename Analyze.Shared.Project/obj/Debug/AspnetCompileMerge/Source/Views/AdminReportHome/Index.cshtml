@@ -13,15 +13,15 @@
     }
 }
 
-<link href="~/Content/bootstrap-table.min.css" rel="stylesheet" />
+@Styles.Render("~/Content/bootstrap-table")
 
-<h3>信息汇总表-编辑</h3>
+<h3>重大异常报告管理页</h3>
 <div class="row">
     <div class="col-md-12">
         <div class="portlet light portlet-fit portlet-datatable bordered">
             <div class="portlet-body">
                 <div class="table-contaoner">
-                    <table id="table"></table>
+                    <table id="table" style="white-space:nowrap;overflow:hidden;"></table>
                     @if (tuplist != null)
                     {
                         foreach (var menue in tuplist)
@@ -44,7 +44,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="ParInformationSummaryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+<div class="modal fade" id="ParInformationSummaryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document" style="background-color:#fff">
         <div class="modal-header">
             <button type="button" class="close" data-dissmiss="modal" aria-label="Close">
@@ -63,17 +63,16 @@
 </div>
 
 @section Scripts{
-    <script src="~/Scripts/bootstrap-table.min.js"></script>
-    <script src="~/Scripts/bootstrap-table-zh-CN.min.js"></script>
+    @Scripts.Render("~/bundles/bootstrap-table")
     <script>
         $("#createProject").click(function () {
             $.ajax({
-                    url: "Insert",
-                    method: "get",
-                    success: function (result) {
+                url: "Insert",
+                method: "get",
+                success: function (result) {
                     $("#parInformationSummaryModal-body").html(result);
                     $("#ParInformationSummaryModal").modal();
-                    }
+                }
             });
         });
 
@@ -89,6 +88,9 @@
                 pagination: true,//是否分页
                 pageSize: 10,//单页记录数
                 pageList: [5, 10],//分页步进值
+                fixedColumns: true,
+                fixedNumber: 2,
+                fixedRightNumber: 1,
                 sidePagination: "server",//服务端分页
                 contentType: "application/json",
                 dataType: "json",//期待返回数据类型
@@ -112,22 +114,13 @@
                 toolbar: "#toolbar",//指定工具栏
                 toolbarAlign: "right",//工具栏对齐方式
                 columns: [
-                    //{
-                    //    title: "全选",
-                    //    field: "select",
-                    //    checkox: true,
-                    //    width: 20,//宽度
-                    //    align: "center",//水平
-                    //    valign: "middle"//垂直
-                    //},
                     {
                         title: '序号',
                         align: "center",
-                        width: 40,
                         formatter: function (value, row, index) {
                             //获取每页显示的数量
                             var pageSize = $('#table').bootstrapTable('getOptions').pageSize;
-                            //获取当前是第几页  
+                            //获取当前是第几页
                             var pageNumber = $('#table').bootstrapTable('getOptions').pageNumber;
                             //返回序号，注意index是从0开始的，所以要加上1
                             return pageSize * (pageNumber - 1) + index + 1;
@@ -138,10 +131,17 @@
                         title: "标题",
                         titleTooltip: "标题",
                         formatter: function (value, row, index) {
-                            return '<a href="/AdminReportEdit/Index?tracking_id=' + row.tracking_id + '"title="查看">' + value + '</a>';
+                            return '<a href="/AdminReportEdit/Index?tracking_id=' + row.tracking_id + '"title="查看" style="text-decoration:underline;">' + value + '</a>';
                         }
                     },
-
+                    {
+                        field: "tracking_time",
+                        title: "发生时间",
+                    },
+                    {
+                        field: "site",
+                        title: "发生地点",
+                    },
                     {
                         field: "model",
                         title: "产品型号",
@@ -149,6 +149,24 @@
                     {
                         field: "rd",
                         title: "设计方",
+                    },
+                    {
+                        field: "defect_rate",
+                        title: "不良率",
+                    },
+                    {
+                        field: "isline",
+                        title: "停线",
+                        formatter: function (value, row, index) {
+                            var a = "";
+                            if (value == "1") {
+                                var a = "是";
+                            }
+                            else if (value == "0") {
+                                var a = "否";
+                            }
+                            return a;
+                        }
                     },
                     {
                         field: "issue_category",
@@ -163,61 +181,78 @@
                         title: "创建人",
                     },
                     {
-                        field: "tracking_time",
-                        title: "发生日期",
+                        field: "create_time",
+                        title: "创建时间",
+                    },
+                    {
+                        field: "update_time",
+                        title: "更新时间",
                     },
                     {
                         field: "status",
                         title: "状态",
+                        formatter: function (value, row, index) {
+                            var a = "";
+                            if (value == "Ongoing") {
+                                var a = '<span style="color:#00B0F0">' + value + '</span>';
+                            }
+                            else if (value == "Tracking") {
+                                var a = '<span style="color:#FFC000">' + value + '</span>';
+                            }
+                            else if (value == "Closed") {
+                                var a = '<span style="color:#00B050">' + value + '</span>';
+                            }
+                            return a;
+                        }
                     },
                     //{
-                        //field: 'operator',
-                        //title: '操作',
-                        //align: 'center',
-                        //formatter: function (value, row, index) {
-                                
-                        //        return '<a href="/AdminReportEdit/Index?tracking_id=' + row.tracking_id + '" data-toggle="modal" title="查看">' +
-                        //        '<i class="glyphicon glyphicon-eye-open"></i> ' +
-                        //        '</a>';
-                            
-                                //+
-                                //'<a href="#">' +
-                                //'<a href="#editProject" data-toggle="modal" title="修改">' +
-                                //'<i class="glyphicon glyphicon-pencil"></i>' +
-                                //'</a>' +
-                                //'<a href="javascript:void(0)" title="删除">' +
-                                //'<i class="glyphicon glyphicon-trash text-danger"></i>' +
-                                //'</a>';
-                        //},
-                        //events: {
-                        //    'click a[title=删除]': function (e, value, row, index) {
-                        //        if (confirm('此操作不可逆，请确认是否删除？')) {
-                        //            var id = row.Id;
-                        //            $.ajax({
-                        //                url: "delete",
-                        //                data: { id: id },
-                        //                method: "get",
-                        //                success: function (result) {
-                        //                    $("#table").bootstrapTable('refresh');
-                        //                    alert(result.Message);
-                        //                }
-                        //            });
-                        //        }
-                        //    },
-                        //    'click a[title=修改]': function (e, value, row, index) {
-                                
-                        //        var tracking_id = row.tracking_id;
-                        //        $.ajax({
-                        //            url: "Update",
-                        //            data: { tracking_id: tracking_id },
-                        //            method: "get",
-                        //            success: function (result) {
-                        //                $("#parInformationSummaryModal-body").html(result);
-                        //                $("#ParInformationSummaryModal").modal();
-                        //            }
-                        //        });
-                        //    } 
-                        //}
+                    //field: 'operator',
+                    //title: '操作',
+                    //align: 'center',
+                    //formatter: function (value, row, index) {
+
+                    //        return '<a href="/AdminReportEdit/Index?tracking_id=' + row.tracking_id + '" data-toggle="modal" title="查看">' +
+                    //        '<i class="glyphicon glyphicon-eye-open"></i> ' +
+                    //        '</a>';
+
+                    //+
+                    //'<a href="#">' +
+                    //'<a href="#editProject" data-toggle="modal" title="修改">' +
+                    //'<i class="glyphicon glyphicon-pencil"></i>' +
+                    //'</a>' +
+                    //'<a href="javascript:void(0)" title="删除">' +
+                    //'<i class="glyphicon glyphicon-trash text-danger"></i>' +
+                    //'</a>';
+                    //},
+                    //events: {
+                    //    'click a[title=删除]': function (e, value, row, index) {
+                    //        if (confirm('此操作不可逆，请确认是否删除？')) {
+                    //            var id = row.Id;
+                    //            $.ajax({
+                    //                url: "delete",
+                    //                data: { id: id },
+                    //                method: "get",
+                    //                success: function (result) {
+                    //                    $("#table").bootstrapTable('refresh');
+                    //                    alert(result.Message);
+                    //                }
+                    //            });
+                    //        }
+                    //    },
+                    //    'click a[title=修改]': function (e, value, row, index) {
+
+                    //        var tracking_id = row.tracking_id;
+                    //        $.ajax({
+                    //            url: "Update",
+                    //            data: { tracking_id: tracking_id },
+                    //            method: "get",
+                    //            success: function (result) {
+                    //                $("#parInformationSummaryModal-body").html(result);
+                    //                $("#ParInformationSummaryModal").modal();
+                    //            }
+                    //        });
+                    //    }
+                    //}
                     //}
                 ],
                 onClickRow: function (row, $element) {
@@ -248,8 +283,7 @@
         }
 
 
-        function ParInformationSummarySubmit()
-        {
+        function ParInformationSummarySubmit() {
             $.ajax({
                 type: "POST",
                 dataType: "json",
@@ -259,7 +293,7 @@
                     if (result.Success == true) {
                         $("#ParInformationSummaryModal").modal('hide');
                         alert(result.Message);
-                        $('#table').bootstrapTable('refresh', { pageNumber: 1 });
+                        //$('#table').bootstrapTable('refresh', { pageNumber: 1 });
                     }
                     if (result.Success == false) {
                         alert(result.Message);
@@ -271,12 +305,11 @@
             });
         }
 
-        function ParInformationSummaryHide()
-        {
+        function ParInformationSummaryHide() {
             $("#ParInformationSummaryModal").modal('hide');
         }
 
-        
+
     </script>
 }
 

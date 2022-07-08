@@ -33,6 +33,7 @@ namespace Analyze.Shared.Bussiness.Services
                     machine = e.machine,
                     method = e.method,
                     environments = e.environments,
+                    materials = e.materials,
                     update_time = e.update_time,
                     log_result = e.log_result
                 }).FirstOrDefault();
@@ -53,6 +54,7 @@ namespace Analyze.Shared.Bussiness.Services
                 machine = parSmt.machine,
                 method = parSmt.method,
                 environments = parSmt.environments,
+                materials = parSmt.materials,
                 log_result = parSmt.log_result
             };
             Context.Set<par_smt>().Attach(parContext);

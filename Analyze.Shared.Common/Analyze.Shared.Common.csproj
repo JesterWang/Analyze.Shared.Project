@@ -122,6 +122,7 @@
     <Compile Include="SecurityMgr.cs" />
     <Compile Include="UriHelper.cs" />
     <Compile Include="User\CurrentUser.cs" />
+    <Compile Include="User\CurrentUserView.cs" />
     <Compile Include="User\CurrentUserDTO.cs" />
     <Compile Include="User\LoginUser.cs" />
     <Compile Include="User\MenuPermission.cs" />

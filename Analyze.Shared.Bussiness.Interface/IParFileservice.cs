@@ -24,6 +24,27 @@ namespace Analyze.Shared.Bussiness.Interface
         List<ViewParFile> GetQueryView(int tracking_id, int category_id_1, int category_id_2, int category_id_3, int category_id_4);
 
         /// <summary>
+        /// 查询视图报表-1个分类
+        /// </summary>
+        /// <param name="tracking_id"></param>
+        /// <param name="category_id_1"></param>
+        /// <returns></returns>
+        List<ViewParFile> GetQueryView_1(int tracking_id, int category_id_1);
+
+
+        /// <summary>
+        /// 查询视图报表-5个分类
+        /// </summary>
+        /// <param name="tracking_id"></param>
+        /// <param name="category_id_1"></param>
+        /// <param name="category_id_2"></param>
+        /// <param name="category_id_3"></param>
+        /// <param name="category_id_4"></param>
+        /// <param name="category_id_5"></param>
+        /// <returns></returns>
+        List<ViewParFile> GetQueryView_5(int tracking_id, int category_id_1, int category_id_2, int category_id_3, int category_id_4, int category_id_5);
+
+        /// <summary>
         /// 添加文件信息-单条
         /// </summary>
         /// <param name="parFileUpload"></param>

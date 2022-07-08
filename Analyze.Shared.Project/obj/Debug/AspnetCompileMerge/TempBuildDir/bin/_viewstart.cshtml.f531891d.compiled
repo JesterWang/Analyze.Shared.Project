@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Areas/SystemSetting/Views/_ViewStart.cshtml" hash="fffffffff3c9419c" filehash="3394523175d7" flags="110000" assembly="App_Web__viewstart.cshtml.f531891d" type="ASP._Page_Areas_SystemSetting_Views__ViewStart_cshtml">
+<preserve resultType="2" virtualPath="/Areas/SystemSetting/Views/_ViewStart.cshtml" hash="fffffffff3c9419c" filehash="3374ed03a565" flags="110000" assembly="App_Web__viewstart.cshtml.f531891d" type="ASP._Page_Areas_SystemSetting_Views__ViewStart_cshtml">
     <filedeps>
         <filedep name="/Areas/SystemSetting/Views/_ViewStart.cshtml" />
     </filedeps>

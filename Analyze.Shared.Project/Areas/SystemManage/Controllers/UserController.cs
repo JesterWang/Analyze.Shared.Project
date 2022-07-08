@@ -37,7 +37,7 @@ namespace Analyze.Shared.Project.Areas.SystemManage.Controllers
         [HttpPost]
         public ActionResult ParPagingList(PageQuery query)
         {
-            PageResult<CurrentUserDTO> result = _ISysUserService.ParPagingList(query);
+            PageResult<CurrentUserView> result = _ISysUserService.ParPagingList(query);
             return new JsonResult()
             {
                 Data = result,
@@ -71,6 +71,17 @@ namespace Analyze.Shared.Project.Areas.SystemManage.Controllers
             //验证
             if (username != "" && job_id != 0 && dept_id != 0)
             {
+                //判断用户名是否存在
+                if (_ISysUserService.GetUserIs(username) == true)
+                {
+                    jsonResult.Data = new AjaxResult()
+                    {
+                        Success = false,
+                        Message = "用户名已存在！"
+                    };
+                    return jsonResult;
+                }
+
                 CurrentUserDTO currentUser = new CurrentUserDTO()
                 {
                     username = username,
@@ -96,6 +107,7 @@ namespace Analyze.Shared.Project.Areas.SystemManage.Controllers
                         Success = false,
                         Message = "操作失败"
                     };
+                    return jsonResult;
                 }
             }
             else

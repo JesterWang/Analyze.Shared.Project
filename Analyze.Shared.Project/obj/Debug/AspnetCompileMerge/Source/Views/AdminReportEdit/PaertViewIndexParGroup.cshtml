@@ -104,12 +104,12 @@
                                     <label>设计方</label>
                                     @{
                                         List<SelectListItem> rd_list = new List<SelectListItem>();
-                                        rd_list.Add(new SelectListItem { Text = "Inhouse", Value = "Inhouse", Selected = ("Inhouse" == item.rd) });
+                                        rd_list.Add(new SelectListItem { Text = "INHOUSE", Value = "INHOUSE", Selected = ("INHOUSE" == item.rd) });
                                         rd_list.Add(new SelectListItem { Text = "HQ", Value = "HQ", Selected = ("HQ" == item.rd) });
                                         rd_list.Add(new SelectListItem { Text = "WT", Value = "WT", Selected = ("WT" == item.rd) });
                                         rd_list.Add(new SelectListItem { Text = "LC", Value = "LC", Selected = ("LC" == item.rd) });
                                         rd_list.Add(new SelectListItem { Text = "TN", Value = "TN", Selected = ("TN" == item.rd) });
-                                        rd_list.Add(new SelectListItem { Text = "CNCE", Value = "CNCE", Selected = ("CNCE" == item.rd) });
+                                        rd_list.Add(new SelectListItem { Text = "ZN", Value = "ZN", Selected = ("ZN" == item.rd) });
                                     }
                                     @Html.DropDownListFor(m => item.rd, rd_list, "---请选择---", new { @id = "txtRd", @class = "btn dropdown-toggle form-control" })
                                     @Html.ValidationMessage("rd", new { @style = "color:yellow"})

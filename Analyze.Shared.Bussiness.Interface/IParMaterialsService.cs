@@ -14,7 +14,7 @@ namespace Analyze.Shared.Bussiness.Interface
         /// </summary>
         /// <param name="_tracking_id"></param>
         /// <returns></returns>
-        ParMaterials GetQueryReport(int tracking_id);
+        List<ParMaterials> GetQueryReport(int tracking_id);
 
         /// <summary>
         /// 修改Materials问题分析报告
@@ -22,5 +22,26 @@ namespace Analyze.Shared.Bussiness.Interface
         /// <param name="id"></param>
         /// <returns></returns>
         bool GetUpdateReport(ParMaterials parMaterials);
+
+        /// <summary>
+        /// 添加Materials问题分析报告
+        /// </summary>
+        /// <param name="parMaterials"></param>
+        /// <returns></returns>
+        bool Insert(ParMaterials parMaterials);
+
+        /// <summary>
+        /// 修改Materials问题分析报告
+        /// </summary>
+        /// <param name="parMaterials"></param>
+        /// <returns></returns>
+        bool Update(ParMaterials parMaterials);
+
+        /// <summary>
+        /// 删除Materials信息-单条
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        bool Delete(int id);
     }
 }

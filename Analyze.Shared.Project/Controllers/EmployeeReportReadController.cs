@@ -3,6 +3,7 @@ using Analyze.Shared.Common;
 using Analyze.Shared.Common.Report;
 using Analyze.Shared.DataAccess;
 using Analyze.Shared.Project.Utility.Filters;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -128,27 +129,27 @@ namespace Analyze.Shared.Project.Controllers
         public ActionResult PaertViewIndexParMaterials(int tracking_id, byte category_id)
         {
             ParList parlist = new ParList();
-            List<ParMaterials> listParMaterials = new List<ParMaterials>();
-            ParMaterials parMaterials = _IParMaterialsService.GetQueryReport(tracking_id);
-            listParMaterials.Add(parMaterials);
+            List<ParMaterials> listParMaterials = _IParMaterialsService.GetQueryReport(tracking_id); ;
             parlist.ParMaterials = listParMaterials;
 
-            //这里需要传递四个category_id
+            //这里需要传递1个category_id
             int category_id_1 = 0;
-            int category_id_2 = 0;
-            int category_id_3 = 0;
-            int category_id_4 = 0;
-            if (category_id == 4 || category_id == 5 || category_id == 6 || category_id == 7)
-            {
-                category_id_1 = 4;
-                category_id_2 = 5;
-                category_id_3 = 6;
-                category_id_4 = 7;
-            }
-            List<ViewParFile> listViewParFile = _IParFileService.GetQueryView(tracking_id, category_id_1, category_id_2, category_id_3, category_id_4);
+            List<ViewParFile> listViewParFile = _IParFileService.GetQueryView_1(tracking_id, category_id_1);
             parlist.ViewParFile = listViewParFile;
 
             return base.PartialView("PaertViewIndexParMaterials", parlist);
+        }
+
+        /// <summary>
+        /// 详细信息查看
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult PaertViewIndexParMaterialsShow(int id)
+        {
+            par_materials par_materials = _IParMaterialsService.Find<par_materials>(id);
+            ParMaterials parMaterials = Mapper.Map<par_materials, ParMaterials>(par_materials);
+            return base.PartialView("PaertViewIndexParMaterialsShow", parMaterials);
         }
         #endregion
 
@@ -162,19 +163,21 @@ namespace Analyze.Shared.Project.Controllers
             listParSmt.Add(parSmt);
             parlist.ParSmt = listParSmt;
 
-            //这里需要传递四个category_id
+            //这里需要传递五个category_id
             int category_id_1 = 0;
             int category_id_2 = 0;
             int category_id_3 = 0;
             int category_id_4 = 0;
-            if (category_id == 8 || category_id == 9 || category_id == 10 || category_id == 11)
+            int category_id_5 = 0;
+            if (category_id == 8 || category_id == 9 || category_id == 10 || category_id == 11 || category_id == 21)
             {
                 category_id_1 = 8;
                 category_id_2 = 9;
                 category_id_3 = 10;
                 category_id_4 = 11;
+                category_id_5 = 21;
             }
-            List<ViewParFile> listViewParFile = _IParFileService.GetQueryView(tracking_id, category_id_1, category_id_2, category_id_3, category_id_4);
+            List<ViewParFile> listViewParFile = _IParFileService.GetQueryView_5(tracking_id, category_id_1, category_id_2, category_id_3, category_id_4, category_id_5);
             parlist.ViewParFile = listViewParFile;
 
             return base.PartialView("PaertViewIndexParSmt", parlist);

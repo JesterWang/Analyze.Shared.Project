@@ -18,8 +18,11 @@ D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Anal
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\Unity.Interception.Configuration.dll
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\Unity.Interception.dll
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\Analyze.Shared.Bussiness.Interface.pdb
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\Analyze.Shared.Bussiness.Interface.dll.config
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\Analyze.Shared.Common.pdb
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\Analyze.Shared.Common.dll.config
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\Analyze.Shared.DataAccess.pdb
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\Analyze.Shared.DataAccess.dll.config
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\AutoMapper.pdb
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\AutoMapper.xml
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\EntityFramework.xml
@@ -32,11 +35,8 @@ D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Anal
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\Unity.Container.pdb
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\Unity.Interception.pdb
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\Unity.Interception.Configuration.pdb
-D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\obj\Debug\Analyze.Shared.Bussiness.Services.dll
-D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\obj\Debug\Analyze.Shared.Bussiness.Services.pdb
-D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\Analyze.Shared.Bussiness.Interface.dll.config
-D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\Analyze.Shared.Common.dll.config
-D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\bin\Debug\Analyze.Shared.DataAccess.dll.config
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\obj\Debug\Analyze.Shared.Bussiness.Services.csprojAssemblyReference.cache
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\obj\Debug\Analyze.Shared.Bussiness.Services.csproj.CoreCompileInputs.cache
 D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\obj\Debug\Analyze.Shared.Bussiness.Services.csproj.CopyComplete
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\obj\Debug\Analyze.Shared.Bussiness.Services.dll
+D:\VS2019\Project\ASP.NET MVC\Analyze.Shared.Project\Analyze.Shared.Project\Analyze.Shared.Bussiness.Services\obj\Debug\Analyze.Shared.Bussiness.Services.pdb

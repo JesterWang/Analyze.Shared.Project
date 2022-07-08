@@ -8,121 +8,135 @@
                 new { @class = "form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
-        <div class="form-group">
+<div class="form-group">
 
-            @foreach (var item in Model.ParSmt)
-            {
-                <div class="text-center">
-                    <button class="btn btn-link btn-lg" type="button" onclick="showFile(8)"><i class="glyphicon glyphicon-refresh"></i>点击此处刷新当前模块</button>/
-                    <button class="btn btn-link btn-lg" type="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSmtLog">
-                        <i class="glyphicon glyphicon-list"></i>点击此处展开/收缩日志
-                    </button>
-                    <div id="collapseSmtLog" class="panel-collapse collapse">
-                        @Html.TextAreaFor(m => item.log_result, new { @class = "form-control", @id = "txtLogResultSmt", @autocomplete = "off", @readonly = "true", @rows = "5" })
-                    </div>
-                </div>
-                <div class="form-horizontal">
-                    <label>人员排查</label>
-                    @Html.TextAreaFor(m => item.man, new
-                        {
-                            @id = "txtSmt_man",
-                            @class = "form-control placeholder-no-fix",
-                            @autocomplete = "off",
-                            @rows = "5",
-                            @placeholder = "待补充人员排查步骤...",
-                            @readonly = true,
-                            @style = "background-color:white"
-                        })
-                </div>
-                <div class="form-horizontal">
-                    <label>设备排查</label>
-                    @Html.TextAreaFor(m => item.machine, new
-                                    {
-                                        @id = "txtSmt_machine",
-                                        @class = "form-control placeholder-no-fix",
-                                        @autocomplete = "off",
-                                        @rows = "5",
-                                        @placeholder = "待补充设备排查步骤...",
-                                        @readonly = true,
-                                        @style = "background-color:white"
-                                    })
-                </div>
-                <div class="form-horizontal">
-                    <label>方法排查</label>
-                    @Html.TextAreaFor(m => item.method, new
-                                    {
-                                        @id = "txtSmt_method",
-                                        @class = "form-control placeholder-no-fix",
-                                        @autocomplete = "off",
-                                        @rows = "5",
-                                        @placeholder = "待补充方法排查步骤...",
-                                        @readonly = true,
-                                        @style = "background-color:white"
-                                    })
-                </div>
-                <div class="form-horizontal">
-                    <label>环境排查</label>
-                    @Html.TextAreaFor(m => item.environments, new
-                                    {
-                                        @id = "txtSmt_environments",
-                                        @class = "form-control placeholder-no-fix",
-                                        @autocomplete = "off",
-                                        @rows = "5",
-                                        @placeholder = "待补充环境排查步骤...",
-                                        @readonly = true,
-                                        @style = "background-color:white"
-                                    })
-                </div>
-            }
-            <br />
-            @*执行成功/失败提示*@
-            <div id="saveSmtAlert"><br /></div>
-
-            @if (Model.ViewParFile != null)
-            {
-                <div class="form-horizontal">
-                    <br />
-                    <table class="table table-bordered table-hover" id="table_Smt">
-                        <caption class="text-center">
-                            <div class="input-group">
-                                <span class="input-group-addon">附件分类：</span>
-                                <select class="form-control" style="width:150px" onchange="onSearch(this)" value="">
-                                    <option value="">全选</option>
-                                    <option value="人员排查">人员排查</option>
-                                    <option value="设备排查">设备排查</option>
-                                    <option value="方法排查">方法排查</option>
-                                    <option value="环境排查">环境排查</option>
-                                </select>
-                            </div>
-                            附件列表
-                        </caption>
-                        <thead>
-                            <tr>
-                                <th>文件名称</th>
-                                <th>分类</th>
-                                <th>信息</th>
-                                <th>操作</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model.ViewParFile)
-                            {
-                                <tr>
-                                    <td>@Html.ActionLink(item.file_name, "ShowFile", new { filePath = item.file_url }, new { target = "_blank" })</td>
-                                    <td>@Html.DisplayFor(m => item.category_chil)</td>
-                                    <td>
-                                        @Html.DisplayFor(m => item.update_time)
-                                        <span>by</span>
-                                        @Html.DisplayFor(m => item.user_detailed)
-                                    </td>
-                                    <td>@Html.ActionLink("下载", "DownloadFile", new { filePath = item.file_url })</td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            }
+    @foreach (var item in Model.ParSmt)
+    {
+        <div class="text-center">
+            <button class="btn btn-link btn-lg" type="button" onclick="showFile(8)"><i class="glyphicon glyphicon-refresh"></i>点击此处刷新当前模块</button>/
+            <button class="btn btn-link btn-lg" type="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSmtLog">
+                <i class="glyphicon glyphicon-list"></i>点击此处展开/收缩日志
+            </button>
+            <div id="collapseSmtLog" class="panel-collapse collapse">
+                @Html.TextAreaFor(m => item.log_result, new { @class = "form-control", @id = "txtLogResultSmt", @autocomplete = "off", @readonly = "true", @rows = "5" })
+            </div>
         </div>
+        <div class="form-horizontal">
+            <label>人员排查</label>
+            @Html.TextAreaFor(m => item.man, new
+                {
+                    @id = "txtSmt_man",
+                    @class = "form-control placeholder-no-fix",
+                    @autocomplete = "off",
+                    @rows = "5",
+                    @placeholder = "待补充人员排查步骤...",
+                    @readonly = true,
+                    @style = "background-color:white"
+                })
+        </div>
+        <div class="form-horizontal">
+            <label>设备排查</label>
+            @Html.TextAreaFor(m => item.machine, new
+                            {
+                                @id = "txtSmt_machine",
+                                @class = "form-control placeholder-no-fix",
+                                @autocomplete = "off",
+                                @rows = "5",
+                                @placeholder = "待补充设备排查步骤...",
+                                @readonly = true,
+                                @style = "background-color:white"
+                            })
+        </div>
+        <div class="form-horizontal">
+            <label>方法排查</label>
+            @Html.TextAreaFor(m => item.method, new
+                            {
+                                @id = "txtSmt_method",
+                                @class = "form-control placeholder-no-fix",
+                                @autocomplete = "off",
+                                @rows = "5",
+                                @placeholder = "待补充方法排查步骤...",
+                                @readonly = true,
+                                @style = "background-color:white"
+                            })
+        </div>
+        <div class="form-horizontal">
+            <label>环境排查</label>
+            @Html.TextAreaFor(m => item.environments, new
+                            {
+                                @id = "txtSmt_environments",
+                                @class = "form-control placeholder-no-fix",
+                                @autocomplete = "off",
+                                @rows = "5",
+                                @placeholder = "待补充环境排查步骤...",
+                                @readonly = true,
+                                @style = "background-color:white"
+                            })
+        </div>
+        <div class="form-horizontal">
+            <label>物料排查</label>
+            @Html.TextAreaFor(m => item.materials, new
+                            {
+                                @id = "txtSmt_materials",
+                                @class = "form-control placeholder-no-fix",
+                                @autocomplete = "off",
+                                @rows = "5",
+                                @placeholder = "待补充物料排查步骤...",
+                                @readonly = true,
+                                @style = "background-color:white"
+                            })
+        </div>
+    }
+    <br />
+    @*执行成功/失败提示*@
+    <div id="saveSmtAlert"><br /></div>
+
+    @if (Model.ViewParFile != null)
+    {
+        <div class="form-horizontal">
+            <br />
+            <table class="table table-bordered table-hover" id="table_Smt">
+                <caption class="text-center">
+                    <div class="input-group">
+                        <span class="input-group-addon">附件分类：</span>
+                        <select class="form-control" style="width:150px" onchange="onSearch(this)" value="">
+                            <option value="">全选</option>
+                            <option value="人员排查">人员排查</option>
+                            <option value="设备排查">设备排查</option>
+                            <option value="方法排查">方法排查</option>
+                            <option value="环境排查">环境排查</option>
+                            <option value="物料排查">物料排查</option>
+                        </select>
+                    </div>
+                    附件列表
+                </caption>
+                <thead>
+                    <tr>
+                        <th>文件名称</th>
+                        <th>分类</th>
+                        <th>信息</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ViewParFile)
+                    {
+                        <tr>
+                            <td>@Html.ActionLink(item.file_name, "ShowFile", new { filePath = item.file_url }, new { target = "_blank" })</td>
+                            <td>@Html.DisplayFor(m => item.category_chil)</td>
+                            <td>
+                                @Html.DisplayFor(m => item.update_time)
+                                <span>by</span>
+                                @Html.DisplayFor(m => item.user_detailed)
+                            </td>
+                            <td>@Html.ActionLink("下载", "DownloadFile", new { filePath = item.file_url })</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
     }
 }
 

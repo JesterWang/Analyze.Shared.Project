@@ -1,0 +1,174 @@
+﻿@using Analyze.Shared.Common.Report
+@model ParMaterials
+
+
+<script src="~/Scripts/Validate/jquery.validate.min.js"></script>
+<script src="~/Scripts/Validate/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Html.BeginForm("PaertViewIndexParMaterialsInsert", "AdminReportEdit", FormMethod.Post, new { @class = "form-horizontal", @role = "form", id = "fromParMaterialsSubmit" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    
+<div class="form-body">
+    @Html.Hidden("tracking_id", ViewData["tracking_id"])
+    <div class="form-group form-md-line-input">
+        <label class="col-lg-3 control-label" for="form_control_1">
+            <font style="vertical-align:inherit;">
+                <font style="vertical-align:inherit;">
+                    @Html.DisplayName("tag_number")*
+                </font>
+            </font>
+        </label>
+        <div class="col-md-9">
+            @Html.TextArea("tag_number", "", new { @class = "form-control", @type = "text", @autocomplete = "off", @placeholder = "请输入..." })
+            @Html.ValidationMessage("tag_number", new { @style = "color:yellow" })
+        </div>
+    </div>
+    <div class="form-group form-md-line-input">
+        <label class="col-lg-3 control-label" for="form_control_1">
+            <font style="vertical-align:inherit;">
+                <font style="vertical-align:inherit;">
+                    @Html.DisplayName("lenovo_pn")*
+                </font>
+            </font>
+        </label>
+        <div class="col-md-9">
+            @Html.TextArea("lenovo_pn", "", new { @class = "form-control", @type = "text", @autocomplete = "off", @placeholder = "请输入..." })
+            @Html.ValidationMessage("lenovo_pn", new { @style = "color:yellow" })
+        </div>
+    </div>
+    <div class="form-group form-md-line-input">
+        <label class="col-lg-3 control-label" for="form_control_1">
+            <font style="vertical-align:inherit;">
+                <font style="vertical-align:inherit;">
+                    @Html.DisplayName("odm_pn")*
+                </font>
+            </font>
+        </label>
+        <div class="col-md-9">
+            @Html.TextArea("odm_pn", "", new { @class = "form-control", @type = "text", @autocomplete = "off", @placeholder = "请输入..." })
+            @Html.ValidationMessage("odm_pn", new { @style = "color:yellow" })
+        </div>
+    </div>
+    <div class="form-group form-md-line-input">
+        <label class="col-lg-3 control-label" for="form_control_1">
+            <font style="vertical-align:inherit;">
+                <font style="vertical-align:inherit;">
+                    @Html.DisplayName("supplier")*
+                </font>
+            </font>
+        </label>
+        <div class="col-md-9">
+            @Html.TextArea("supplier", "", new { @class = "form-control", @type = "text", @autocomplete = "off", @placeholder = "请输入..." })
+            @Html.ValidationMessage("supplier", new { @style = "color:yellow" })
+        </div>
+    </div>
+    <div class="form-group form-md-line-input">
+        <label class="col-lg-3 control-label" for="form_control_1">
+            <font style="vertical-align:inherit;">
+                <font style="vertical-align:inherit;">
+                    @Html.DisplayName("suspect_batch")*
+                </font>
+            </font>
+        </label>
+        <div class="col-md-9">
+            @Html.TextArea("suspect_batch", "", new { @class = "form-control", @type = "text", @autocomplete = "off", @placeholder = "请输入..." })
+            @Html.ValidationMessage("suspect_batch", new { @style = "color:yellow" })
+        </div>
+    </div>
+    <div class="form-group form-md-line-input">
+        <label class="col-lg-3 control-label" for="form_control_1">
+            <font style="vertical-align:inherit;">
+                <font style="vertical-align:inherit;">
+                    @Html.DisplayName("suspect_lot")*
+                </font>
+            </font>
+        </label>
+        <div class="col-md-9">
+            @Html.TextArea("suspect_lot", "", new { @class = "form-control", @type = "text", @autocomplete = "off", @placeholder = "请输入..." })
+            @Html.ValidationMessage("suspect_lot", new { @style = "color:yellow" })
+        </div>
+    </div>
+    <div class="form-group form-md-line-input">
+        <label class="col-lg-3 control-label" for="form_control_1">
+            <font style="vertical-align:inherit;">
+                <font style="vertical-align:inherit;">
+                    @Html.DisplayName("other_batch")*
+                </font>
+            </font>
+        </label>
+        <div class="col-md-9">
+            @Html.TextArea("other_batch", "", new { @class = "form-control", @type = "text", @autocomplete = "off", @placeholder = "请输入..." })
+            @Html.ValidationMessage("other_batch", new { @style = "color:yellow" })
+        </div>
+    </div>
+    <div class="form-group form-md-line-input">
+        <label class="col-lg-3 control-label" for="form_control_1">
+            <font style="vertical-align:inherit;">
+                <font style="vertical-align:inherit;">
+                    @Html.DisplayName("other_batch_number")*
+                </font>
+            </font>
+        </label>
+        <div class="col-md-9">
+            @Html.TextArea("other_batch_number", "", new { @class = "form-control", @type = "text", @autocomplete = "off", @placeholder = "请输入..." })
+            @Html.ValidationMessage("other_batch_number", new { @style = "color:yellow" })
+        </div>
+    </div>
+    <div class="form-group form-md-line-input">
+        <label class="col-lg-3 control-label" for="form_control_1">
+            <font style="vertical-align:inherit;">
+                <font style="vertical-align:inherit;">
+                    @Html.DisplayName("alternative_materials")*
+                </font>
+            </font>
+        </label>
+        <div class="col-md-9">
+            @Html.TextArea("alternative_materials", "", new { @class = "form-control", @type = "text", @autocomplete = "off", @placeholder = "请输入..." })
+            @Html.ValidationMessage("alternative_materials", new { @style = "color:yellow" })
+        </div>
+    </div>
+    <div class="form-group form-md-line-input">
+        <label class="col-lg-3 control-label" for="form_control_1">
+            <font style="vertical-align:inherit;">
+                <font style="vertical-align:inherit;">
+                    @Html.DisplayName("product")*
+                </font>
+            </font>
+        </label>
+        <div class="col-md-9">
+            @Html.TextArea("product", "", new { @class = "form-control", @type = "text", @autocomplete = "off", @placeholder = "请输入..." })
+            @Html.ValidationMessage("product", new { @style = "color:yellow" })
+        </div>
+    </div>
+    <div class="form-group form-md-line-input">
+        <label class="col-lg-3 control-label" for="form_control_1">
+            <font style="vertical-align:inherit;">
+                <font style="vertical-align:inherit;">
+                    @Html.DisplayName("is_npi_issue")*
+                </font>
+            </font>
+        </label>
+        <div class="col-md-9">
+            @Html.TextArea("is_npi_issue", "", new { @class = "form-control", @type = "text", @autocomplete = "off", @placeholder = "请输入..." })
+            @Html.ValidationMessage("is_npi_issue", new { @style = "color:yellow" })
+        </div>
+    </div>
+    <div class="form-group form-md-line-input">
+        <label class="col-lg-3 control-label" for="form_control_1">
+            <font style="vertical-align:inherit;">
+                <font style="vertical-align:inherit;">
+                    @Html.DisplayName("remark")
+                </font>
+            </font>
+        </label>
+        <div class="col-md-9">
+            @Html.TextArea("remark", new { @class = "form-control", @type = "text", @autocomplete = "off", @rows = "5", @placeholder = "请输入..." })
+            @Html.ValidationMessage("remark", new { @style = "color:yellow" })
+        </div>
+    </div>
+</div>
+}
+
+

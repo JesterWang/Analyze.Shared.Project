@@ -45,7 +45,7 @@ namespace Analyze.Shared.Project.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
-
+        
         /// <summary>
         /// 添加ParInformationSummary的页面
         /// </summary>
@@ -67,7 +67,7 @@ namespace Analyze.Shared.Project.Controllers
            string rd ,string issue_category,string product_category, string status, string problem_description, string root_cause, 
             string analysis_conclusion, string next_steps)
         {
-            JsonResult jsonResult = new JsonResult();
+               JsonResult jsonResult = new JsonResult();
             jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
             //验证
             if (title != "" && tracking_time != "" && site != "" && model != "" && defect_rate != "")

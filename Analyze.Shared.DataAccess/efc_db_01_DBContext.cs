@@ -167,19 +167,51 @@ namespace Analyze.Shared.DataAccess
                 .IsUnicode(false);
 
             modelBuilder.Entity<par_materials>()
-                .Property(e => e.materials_steps_1)
+                .Property(e => e.tag_number)
                 .IsUnicode(false);
 
             modelBuilder.Entity<par_materials>()
-                .Property(e => e.materials_steps_2)
+                .Property(e => e.lenovo_pn)
                 .IsUnicode(false);
 
             modelBuilder.Entity<par_materials>()
-                .Property(e => e.materials_steps_3)
+                .Property(e => e.odm_pn)
                 .IsUnicode(false);
 
             modelBuilder.Entity<par_materials>()
-                .Property(e => e.materials_steps_4)
+                .Property(e => e.supplier)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<par_materials>()
+                .Property(e => e.suspect_batch)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<par_materials>()
+                .Property(e => e.suspect_lot)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<par_materials>()
+                .Property(e => e.other_batch)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<par_materials>()
+                .Property(e => e.other_batch_number)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<par_materials>()
+                .Property(e => e.alternative_materials)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<par_materials>()
+                .Property(e => e.product)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<par_materials>()
+                .Property(e => e.is_npi_issue)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<par_materials>()
+                .Property(e => e.remark)
                 .IsUnicode(false);
 
             modelBuilder.Entity<par_materials>()
@@ -212,6 +244,10 @@ namespace Analyze.Shared.DataAccess
 
             modelBuilder.Entity<par_smt>()
                 .Property(e => e.environments)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<par_smt>()
+                .Property(e => e.materials)
                 .IsUnicode(false);
 
             modelBuilder.Entity<par_smt>()

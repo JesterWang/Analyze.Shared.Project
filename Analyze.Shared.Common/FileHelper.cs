@@ -43,7 +43,7 @@ namespace Analyze.Shared.Common
                return false;
         }
 
-        public static bool RequestUpload(HttpPostedFile imgFile, string AbsolutePath)
+        public static bool RequestUpload(HttpPostedFileBase imgFile, string AbsolutePath)
         {
             Stream uploadStream = null;
             FileStream fs = null;

@@ -9,26 +9,55 @@ namespace Analyze.Shared.DataAccess
     [Table("efc_db_01.par_materials")]
     public partial class par_materials
     {
-        [Key]
-        [Column(TypeName = "umediumint")]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int tracking_id { get; set; }
 
         [Column(TypeName = "text")]
         [StringLength(65535)]
-        public string materials_steps_1 { get; set; }
+        public string tag_number { get; set; }
 
         [Column(TypeName = "text")]
         [StringLength(65535)]
-        public string materials_steps_2 { get; set; }
+        public string lenovo_pn { get; set; }
 
         [Column(TypeName = "text")]
         [StringLength(65535)]
-        public string materials_steps_3 { get; set; }
+        public string odm_pn { get; set; }
 
         [Column(TypeName = "text")]
         [StringLength(65535)]
-        public string materials_steps_4 { get; set; }
+        public string supplier { get; set; }
+
+        [Column(TypeName = "text")]
+        [StringLength(65535)]
+        public string suspect_batch { get; set; }
+
+        [Column(TypeName = "text")]
+        [StringLength(65535)]
+        public string suspect_lot { get; set; }
+
+        [Column(TypeName = "text")]
+        [StringLength(65535)]
+        public string other_batch { get; set; }
+
+        [Column(TypeName = "text")]
+        [StringLength(65535)]
+        public string other_batch_number { get; set; }
+
+        [Column(TypeName = "text")]
+        [StringLength(65535)]
+        public string alternative_materials { get; set; }
+
+        [Column(TypeName = "text")]
+        [StringLength(65535)]
+        public string product { get; set; }
+
+        [Column(TypeName = "text")]
+        [StringLength(65535)]
+        public string is_npi_issue { get; set; }
+
+        [Column(TypeName = "text")]
+        [StringLength(65535)]
+        public string remark { get; set; }
 
         [Column(TypeName = "timestamp")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -37,5 +66,9 @@ namespace Analyze.Shared.DataAccess
         [Column(TypeName = "text")]
         [StringLength(65535)]
         public string log_result { get; set; }
+
+        [Column(TypeName = "umediumint")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int id { get; set; }
     }
 }

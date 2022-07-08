@@ -98,5 +98,61 @@ namespace Analyze.Shared.Bussiness.Services
             return listViewParFile;
         }
 
+        /// <summary>
+        /// 查询视图报表-1个分类
+        /// </summary>
+        /// <param name="tracking_id"></param>
+        /// <param name="category_id_1"></param>
+        /// <returns></returns>
+        public List<ViewParFile> GetQueryView_1(int tracking_id, int category_id_1)
+        {
+            List<ViewParFile> listViewParFile = new List<ViewParFile>();
+            listViewParFile = Context.Set<view_par_file>().Where(e => e.tracking_id == tracking_id && (e.category_id == category_id_1))
+                .Select(e => new ViewParFile
+                {
+                    id = e.id,
+                    tracking_id = e.tracking_id,
+                    file_url = e.file_url,
+                    file_name = e.file_name,
+                    create_time = e.create_time,
+                    update_time = e.update_time,
+                    user_detailed = e.user_detailed,
+                    category = e.category,
+                    category_chil = e.category_chil,
+                    category_id = e.category_id
+                }).OrderByDescending(e => e.create_time).ToList();
+            return listViewParFile;
+        }
+
+        /// <summary>
+        /// 查询视图报表-5个分类
+        /// </summary>
+        /// <param name="tracking_id"></param>
+        /// <param name="category_id_1"></param>
+        /// <param name="category_id_2"></param>
+        /// <param name="category_id_3"></param>
+        /// <param name="category_id_4"></param>
+        /// <param name="category_id_5"></param>
+        /// <returns></returns>
+        public List<ViewParFile> GetQueryView_5(int tracking_id, int category_id_1, int category_id_2, int category_id_3, int category_id_4, int category_id_5)
+        {
+            List<ViewParFile> listViewParFile = new List<ViewParFile>();
+            listViewParFile = Context.Set<view_par_file>().Where(e => e.tracking_id == tracking_id && (e.category_id == category_id_1 || e.category_id == category_id_2 || e.category_id == category_id_3 || e.category_id == category_id_4 || e.category_id == category_id_5))
+                .Select(e => new ViewParFile
+                {
+                    id = e.id,
+                    tracking_id = e.tracking_id,
+                    file_url = e.file_url,
+                    file_name = e.file_name,
+                    create_time = e.create_time,
+                    update_time = e.update_time,
+                    user_detailed = e.user_detailed,
+                    category = e.category,
+                    category_chil = e.category_chil,
+                    category_id = e.category_id
+                }).OrderByDescending(e => e.create_time).ToList();
+            return listViewParFile;
+        }
+
     }
 }

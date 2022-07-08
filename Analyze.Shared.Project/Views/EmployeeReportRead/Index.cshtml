@@ -328,6 +328,20 @@
             });
             $(this).unbind("click");
         });
+
+        function MaterialsShow(id) {//Update Get
+            var id = parseInt(id);
+            $.ajax({
+                url: "/EmployeeReportRead/PaertViewIndexParMaterialsShow",
+                data: { id: id },
+                method: "get",
+                success: function (result) {
+                    $("#parShowMaterialsModal-body").html(result);
+                    $("#ParShowMaterialsModal").modal();
+                }
+            });
+        }
+
         //Smt Report
         $("#btnToSmt").click(function () {
             var category_id = 8;

@@ -1,6 +1,19 @@
 ﻿@using Analyze.Shared.Common.Report;
 @model ParList
 
+<style type="text/css">
+    #table_Materials {
+        table-layout: fixed;
+        font-size: 6px;
+    }
+
+        #table_Materials td {
+            word-break: keep-all; /* 不换行 */
+            white-space: nowrap; /* 不换行 */
+            overflow: hidden; /* 内容超出宽度时隐藏超出部分的内容 */
+            text-overflow: ellipsis; /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用*/
+        }
+</style>
 @*基础信息保存*@
 @if (Model.ParMaterials != null)
 {
@@ -10,68 +23,61 @@
         @Html.AntiForgeryToken()
         <div class="form-group">
 
-            @foreach (var item in Model.ParMaterials)
-            {
-                <div class="text-center">
-                    <button class="btn btn-link btn-lg" type="button" onclick="showFile(4)"><i class="glyphicon glyphicon-refresh"></i>点击此处刷新当前模块</button>/
-                    <button class="btn btn-link btn-lg" type="button" data-toggle="collapse" data-parent="#accordion" href="#collapseMaterialsLog">
-                        <i class="glyphicon glyphicon-list"></i>点击此处展开/收缩日志
-                    </button>
-                    <div id="collapseMaterialsLog" class="panel-collapse collapse">
-                        @Html.TextAreaFor(m => item.log_result, new { @class = "form-control", @id = "txtLogResultMaterials", @autocomplete = "off", @readonly = "true", @rows = "5" })
-                    </div>
-                </div>
-                <div class="form-horizontal">
-                    <label>物料1排查步骤</label>
-                    @Html.TextAreaFor(m => item.materials_steps_1, new
-                        {
-                            @id = "txtMaterials_steps_1",
-                            @class = "form-control placeholder-no-fix",
-                            @autocomplete = "off",
-                            @rows = "5",
-                            @placeholder = "请输入物料1排查步骤..."
-                        })
-                    @Html.ValidationMessage("materials_steps_1", new { style = "color: red" })
-                </div>
-                <div class="form-horizontal">
-                    <label>物料2排查步骤</label>
-                    @Html.TextAreaFor(m => item.materials_steps_2, new
-                                    {
-                                        @id = "txtMaterials_steps_2",
-                                        @class = "form-control placeholder-no-fix",
-                                        @autocomplete = "off",
-                                        @rows = "5",
-                                        @placeholder = "请输入物料2排查步骤..."
-                                    })
-                    @Html.ValidationMessage("materials_steps_2", new { style = "color: red" })
-                </div>
-                <div class="form-horizontal">
-                    <label>物料3排查步骤</label>
-                    @Html.TextAreaFor(m => item.materials_steps_3, new
-                                    {
-                                        @id = "txtMaterials_steps_3",
-                                        @class = "form-control placeholder-no-fix",
-                                        @autocomplete = "off",
-                                        @rows = "5",
-                                        @placeholder = "请输入物料3排查步骤..."
-                                    })
-                    @Html.ValidationMessage("materials_steps_3", new { style = "color: red" })
-                </div>
-                <div class="form-horizontal">
-                    <label>物料4排查步骤</label>
-                    @Html.TextAreaFor(m => item.materials_steps_4, new
-                                    {
-                                        @id = "txtMaterials_steps_4",
-                                        @class = "form-control placeholder-no-fix",
-                                        @autocomplete = "off",
-                                        @rows = "5",
-                                        @placeholder = "请输入物料4排查步骤..."
-                                    })
-                    @Html.ValidationMessage("materials_steps_4", new { style = "color: red" })
-                </div>
-                <br />
-            <button type="button" id="btnSaveMaterials" class="btn btn-primary">确认保存</button>
-            }
+            <div class="text-center">
+                <button class="btn btn-link btn-lg" type="button" onclick="showFile(4)"><i class="glyphicon glyphicon-refresh"></i>点击此处刷新当前模块</button>
+            </div>
+            <div class="btn-group">
+                <a href="javascript:void(0)" data-toggle="modal" id="createMaterials" onclick="MaterialsInsert()" class="btn btn-success" role="button">
+                    新增&nbsp;<i class="glyphicon glyphicon-plus-sign"></i>
+                </a>
+            </div>
+
+            <table class="table table-bordered table-hover" id="table_Materials">
+                <thead>
+                    <tr>
+                        <th>异常位号</th>
+                        <th>Lenovo P/N</th>
+                        <th>ODM P/N</th>
+                        <th>供应商</th>
+                        <th>嫌疑批次</th>
+                        <th>嫌疑Lot号</th>
+                        <th>其他批次</th>
+                        <th>其他批次数量</th>
+                        <th>替代料</th>
+                        <th>使用产品</th>
+                        <th>近期2月/试产有无相同问题</th>
+                        <th>备注</th>
+                        <th colspan="2">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ParMaterials)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(m => item.tag_number)</td>
+                            <td>@Html.DisplayFor(m => item.lenovo_pn)</td>
+                            <td>@Html.DisplayFor(m => item.odm_pn)</td>
+                            <td>@Html.DisplayFor(m => item.supplier)</td>
+                            <td>@Html.DisplayFor(m => item.suspect_batch)</td>
+                            <td>@Html.DisplayFor(m => item.suspect_lot)</td>
+                            <td>@Html.DisplayFor(m => item.other_batch)</td>
+                            <td>@Html.DisplayFor(m => item.other_batch_number)</td>
+                            <td>@Html.DisplayFor(m => item.alternative_materials)</td>
+                            <td>@Html.DisplayFor(m => item.product)</td>
+                            <td>@Html.DisplayFor(m => item.is_npi_issue)</td>
+                            <td>@Html.DisplayFor(m => item.remark)</td>
+                            <td>
+                                @Html.ActionLink("编辑", "", null, new { href = "javascript:void(0)", onclick = "MaterialsUpdate('" + item.id + "')" })
+                            </td>
+                            <td>
+                                @Ajax.ActionLink("删除", "PaertViewIndexParMaterialsDelete", "AdminReportEdit", new { id = item.id },
+                                     new AjaxOptions() { UpdateTargetId = "collapseExampleMaterials", HttpMethod = "Post", Confirm = " 您确定要删除该记录吗？该操作不可恢复！" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
             <br />
             @*执行成功/失败提示*@
             <div id="saveMaterialsAlert"><br /></div>
@@ -82,22 +88,11 @@
                     <br />
                     <table class="table table-bordered table-hover" id="table_Materials">
                         <caption class="text-center">
-                            <div class="input-group">
-                                <span class="input-group-addon">附件分类：</span>
-                                <select class="form-control" style="width:150px" onchange="onSearch(this)" value="">
-                                    <option value="">全选</option>
-                                    <option value="物料1">物料1</option>
-                                    <option value="物料2">物料2</option>
-                                    <option value="物料3">物料3</option>
-                                    <option value="物料4">物料4</option>
-                                </select>
-                            </div>
                             附件列表
                         </caption>
                         <thead>
                             <tr>
                                 <th>文件名称</th>
-                                <th>分类</th>
                                 <th>信息</th>
                                 <th colspan="2">操作</th>
                             </tr>
@@ -107,7 +102,6 @@
                             {
                                 <tr>
                                     <td>@Html.ActionLink(item.file_name, "ShowFile", new { filePath = item.file_url }, new { target = "_blank" })</td>
-                                    <td>@Html.DisplayFor(m => item.category_chil)</td>
                                     <td>
                                         @Html.DisplayFor(m => item.update_time)
                                         <span>by</span>
@@ -125,85 +119,60 @@
                 </div>
             }
         </div>
+
+
     }
 }
 
-        @*文件列表*@
-        @using (Html.BeginForm("Index", "AdminReportEdit", FormMethod.Post,
-    new { @class = "form-horizontal", id = "formFileMaterials", role = "form", enctype = "multipart/form-data" }))
-        {
-            @Html.AntiForgeryToken()
-            <div class="form-group">
-                <label>上传附件-物料1</label>
-                @Html.TextBox("file", "", new { type = "file", id = "UpFileMaterials_1" })<br />
-                <button type="button" class="btn btn-primary" onclick='upFile(4)'>确认上传</button><hr />
-            </div>
-            <div class="form-group">
-                <label>上传附件-物料2</label>
-                @Html.TextBox("file", "", new { type = "file", id = "UpFileMaterials_2" })<br />
-                <button type="button" class="btn btn-primary" onclick='upFile(5)'>确认上传</button><hr />
-            </div>
-            <div class="form-group">
-                <label>上传附件-物料3</label>
-                @Html.TextBox("file", "", new { type = "file", id = "UpFileMaterials_3" })<br />
-                <button type="button" class="btn btn-primary" onclick='upFile(6)'>确认上传</button><hr />
-            </div>
-            <div class="form-group">
-                <label>上传附件-物料4</label>
-                @Html.TextBox("file", "", new { type = "file", id = "UpFileMaterials_4" })<br />
-                <button type="button" class="btn btn-primary" onclick='upFile(7)'>确认上传</button>
-            </div>
-        }
+@*文件列表*@
+@using (Html.BeginForm("Index", "AdminReportEdit", FormMethod.Post,
+new { @class = "form-horizontal", id = "formFileMaterials", role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label>上传附件</label>
+        @Html.TextBox("file", "", new { type = "file", id = "UpFileMaterials_1" })<br />
+        <button type="button" class="btn btn-primary" onclick='upFile(4)'>确认上传</button><hr />
+    </div>
+}
 
-        <script type="text/javascript">
-            $("#btnSaveMaterials").click(function () {
-                var alertId = "saveMaterialsAlert";
-                var materials_steps_1 = $("#txtMaterials_steps_1").val().replace(' ', ' ');
-                var materials_steps_2 = $("#txtMaterials_steps_2").val().replace(' ', ' ');
-                var materials_steps_3 = $("#txtMaterials_steps_3").val().replace(' ', ' ');
-                var materials_steps_4 = $("#txtMaterials_steps_4").val().replace(' ', ' ');
-                var log_result = $("#txtLogResultMaterials").val();
-                if (materials_steps_1 == "" && materials_steps_2 == "" && materials_steps_3 == "" && materials_steps_4 == "") {
-                    var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>请最少填写一条信息保存。</div>";
-                    failAlert(boarddiv, alertId);
-                    return;
-                }
-                $.ajax({
-                    type: 'POST',
-                    url: '/AdminReportEdit/PaertViewIndexParMaterialsUpdate',
-                    data: JSON.stringify({ tracking_id: tracking_id, materials_steps_1: materials_steps_1, materials_steps_2: materials_steps_2, materials_steps_3: materials_steps_3, materials_steps_4: materials_steps_4, log_result: log_result, user: user_detailed }),
-                    dataType: "json",
-                    contentType: 'application/json;charset=utf-8',
-                    async: true,
-                    beforeSend: beforeSend,//发送请求
-                    success: function (data) {
-                        $("#txtLogResultMaterials").val(data);
-                        var boarddiv = "<div id='success-alert' class='alert alert-success'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>成功！</strong>填写结果已保存。</div>";
-                        successAlert(boarddiv, alertId);
-                    },
-                    error: function (data) {
-                        var boarddiv = "<div id='warning-alert' class='alert alert-warning'><a href='#' class='close' data-dismiss='alert'>&times;</a><strong>警告！</strong>服务器请求超时。</div>";
-                        failAlert(boarddiv, alertId);
-                    },
-                    complete: complete//请求完成
-                });
-            });
+<div class="modal fade" id="ParMaterialsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document" style="background-color:#fff">
+        <div class="modal-header">
+            <button type="button" class="close" data-dissmiss="modal" aria-label="Close">
+                <span aria-hidden="true"></span>
+            </button>
+            <h4 class="modal-title" id="ParMaterialsModalLabel">新增</h4>
+        </div>
+        <div class="modal-body" id="parMaterialsModal-body">
 
-            //下拉筛选
-            function onSearch(obj) {//js函数开始
-                setTimeout(function () {//因为是即时查询，需要用setTimeout进行延迟，让值写入到input内，再读取
-                    var storeId = document.getElementById('table_Materials');//获取table的id标识
-                    var rowsLength = storeId.rows.length;//表格总共有多少行
-                    var key = obj.value;//获取输入框的值
-                    var searchCol = 1;//要搜索的哪一列，这里是第一列，从0开始数起
-                    for (var i = 1; i < rowsLength; i++) {//按表的行数进行循环，第一行是标题，所以i=1，从第二行开始筛选（从0数起）
-                        var searchText = storeId.rows[i].cells[searchCol].innerHTML;//取得table行，列的值
-                        if (searchText.match(key)) {//用match函数进行筛选，如果input的值，即变量 key的值为空，返回的是ture，
-                            storeId.rows[i].style.display = '';//显示行操作，
-                        } else {
-                            storeId.rows[i].style.display = 'none';//隐藏行操作
-                        }
-                    }
-                }, 200);//200为延时时间
-            }
-        </script>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" onclick="MaterialsInsertHide()">关闭</button>
+            <button type="button" class="btn btn-primary" onclick="ParMaterialsSubmit()">提交</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="ParUpdateMaterialsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document" style="background-color:#fff">
+        <div class="modal-header">
+            <button type="button" class="close" data-dissmiss="modal" aria-label="Close">
+                <span aria-hidden="true"></span>
+            </button>
+            <h4 class="modal-title" id="ParUpdateMaterialsModalLabel">修改</h4>
+        </div>
+        <div class="modal-body" id="parUpdateMaterialsModal-body">
+
+        </div>
+
+        <div>
+            @*<div class="modal-footer" style="float:left;"><button type="button" class="btn btn-danger">删除</button></div>*@
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" onclick="MaterialsUpdateHide()">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="ParUpdateMaterialsSubmit()">提交</button>
+            </div>
+        </div>
+    </div>
+</div>

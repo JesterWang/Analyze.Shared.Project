@@ -1,0 +1,199 @@
+﻿@using Analyze.Shared.Common.Report
+@model ParMaterials
+
+
+@using (Html.BeginForm("Index", "EmployeeReportRead", FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="form-body">
+        @Html.HiddenFor(model => model.id, new { id = "txtId" })
+
+        <div class="form-group form-md-line-input">
+            <label class="col-lg-3 control-label" for="form_control_1">
+                <font style="vertical-align:inherit;" class="redStar">
+                    <font style="vertical-align:inherit;">
+                        @Html.DisplayNameFor(c => c.tag_number)*
+                    </font>
+                </font>
+            </label>
+            <div class="col-md-9">
+                @Html.TextAreaFor(m => m.tag_number, new { id = "txtTag_number", @class = "form-control", @type = "text", @autocomplete = "off", @placeholder = "请输入..." })
+                @Html.ValidationMessage("tag_number", new { @style = "color:yellow" })
+            </div>
+        </div>
+        <div class="form-group form-md-line-input">
+            <label class="col-lg-3 control-label" for="form_control_1">
+                <font style="vertical-align:inherit;" class="redStar">
+                    <font style="vertical-align:inherit;">
+                        @Html.DisplayNameFor(c => c.lenovo_pn)*
+                    </font>
+                </font>
+            </label>
+            <div class="col-md-9">
+                @Html.TextAreaFor(m => m.lenovo_pn, new { id = "txtLenovo_pn", @class = "form-control", @type = "text", @autocomplete = "off", @placeholder = "请输入..." })
+                @Html.ValidationMessage("lenovo_pn", new { @style = "color:yellow" })
+            </div>
+        </div>
+        <div class="form-group form-md-line-input">
+            <label class="col-lg-3 control-label" for="form_control_1">
+                <font style="vertical-align:inherit;" class="redStar">
+                    <font style="vertical-align:inherit;">
+                        @Html.DisplayNameFor(c => c.odm_pn)*
+                    </font>
+                </font>
+            </label>
+            <div class="col-md-9">
+                @Html.TextAreaFor(m => m.odm_pn, new { id = "txtOdm_pn", @class = "form-control", @type = "text", @autocomplete = "off", @placeholder = "请输入..." })
+                @Html.ValidationMessage("odm_pn", new { @style = "color:yellow" })
+            </div>
+        </div>
+        <div class="form-group form-md-line-input">
+            <label class="col-lg-3 control-label" for="form_control_1">
+                <font style="vertical-align:inherit;" class="redStar">
+                    <font style="vertical-align:inherit;">
+                        @Html.DisplayNameFor(c => c.supplier)*
+                    </font>
+                </font>
+            </label>
+            <div class="col-md-9">
+                @Html.TextAreaFor(m => m.supplier, new { id = "txtSupplier", @class = "form-control", @type = "text", @autocomplete = "off", @placeholder = "请输入..." })
+                @Html.ValidationMessage("supplier", new { @style = "color:yellow" })
+            </div>
+        </div>
+        <div class="form-group form-md-line-input">
+            <label class="col-lg-3 control-label" for="form_control_1">
+                <font style="vertical-align:inherit;" class="redStar">
+                    <font style="vertical-align:inherit;">
+                        @Html.DisplayNameFor(c => c.suspect_batch)*
+                    </font>
+                </font>
+            </label>
+            <div class="col-md-9">
+                @Html.TextAreaFor(m => m.suspect_batch, new { id = "txtSuspect_batch", @class = "form-control", @type = "text", @autocomplete = "off", @placeholder = "请输入..." })
+                @Html.ValidationMessage("suspect_batch", new { @style = "color:yellow" })
+            </div>
+        </div>
+        <div class="form-group form-md-line-input">
+            <label class="col-lg-3 control-label" for="form_control_1">
+                <font style="vertical-align:inherit;" class="redStar">
+                    <font style="vertical-align:inherit;">
+                        @Html.DisplayNameFor(c => c.suspect_lot)*
+                    </font>
+                </font>
+            </label>
+            <div class="col-md-9">
+                @Html.TextAreaFor(m => m.suspect_lot, new { id = "txtSuspect_lot", @class = "form-control", @type = "text", @autocomplete = "off", @placeholder = "请输入..." })
+                @Html.ValidationMessage("suspect_lot", new { @style = "color:yellow" })
+            </div>
+        </div>
+        <div class="form-group form-md-line-input">
+            <label class="col-lg-3 control-label" for="form_control_1">
+                <font style="vertical-align:inherit;" class="redStar">
+                    <font style="vertical-align:inherit;">
+                        @Html.DisplayNameFor(c => c.other_batch)*
+                    </font>
+                </font>
+            </label>
+            <div class="col-md-9">
+                @Html.TextAreaFor(m => m.other_batch, new { id = "txtOther_batch", @class = "form-control", @type = "text", @autocomplete = "off", @placeholder = "请输入..." })
+                @Html.ValidationMessage("other_batch", new { @style = "color:yellow" })
+            </div>
+        </div>
+        <div class="form-group form-md-line-input">
+            <label class="col-lg-3 control-label" for="form_control_1">
+                <font style="vertical-align:inherit;" class="redStar">
+                    <font style="vertical-align:inherit;">
+                        @Html.DisplayNameFor(c => c.other_batch_number)*
+                    </font>
+                </font>
+            </label>
+            <div class="col-md-9">
+                @Html.TextAreaFor(m => m.other_batch_number, new { id = "txtOther_batch_number", @class = "form-control", @type = "text", @autocomplete = "off", @placeholder = "请输入..." })
+                @Html.ValidationMessage("other_batch_number", new { @style = "color:yellow" })
+            </div>
+        </div>
+        <div class="form-group form-md-line-input">
+            <label class="col-lg-3 control-label" for="form_control_1">
+                <font style="vertical-align:inherit;" class="redStar">
+                    <font style="vertical-align:inherit;">
+                        @Html.DisplayNameFor(c => c.alternative_materials)*
+                    </font>
+                </font>
+            </label>
+            <div class="col-md-9">
+                @Html.TextAreaFor(m => m.alternative_materials, new { id = "txtAlternative_materials", @class = "form-control", @type = "text", @autocomplete = "off", @placeholder = "请输入..." })
+                @Html.ValidationMessage("alternative_materials", new { @style = "color:yellow" })
+            </div>
+        </div>
+        <div class="form-group form-md-line-input">
+            <label class="col-lg-3 control-label" for="form_control_1">
+                <font style="vertical-align:inherit;" class="redStar">
+                    <font style="vertical-align:inherit;">
+                        @Html.DisplayNameFor(c => c.product)*
+                    </font>
+                </font>
+            </label>
+            <div class="col-md-9">
+                @Html.TextAreaFor(m => m.product, new { id = "txtProduct", @class = "form-control", @type = "text", @autocomplete = "off", @placeholder = "请输入..." })
+                @Html.ValidationMessage("product", new { @style = "color:yellow" })
+            </div>
+        </div>
+        <div class="form-group form-md-line-input">
+            <label class="col-lg-3 control-label" for="form_control_1">
+                <font style="vertical-align:inherit;" class="redStar">
+                    <font style="vertical-align:inherit;">
+                        @Html.DisplayNameFor(c => c.is_npi_issue)*
+                    </font>
+                </font>
+            </label>
+            <div class="col-md-9">
+                @Html.TextAreaFor(m => m.is_npi_issue, new { id = "txtIs_npi_issue", @class = "form-control", @type = "text", @autocomplete = "off", @placeholder = "请输入..." })
+                @Html.ValidationMessage("is_npi_issue", new { @style = "color:yellow" })
+            </div>
+        </div>
+        <div class="form-group form-md-line-input">
+            <label class="col-lg-3 control-label" for="form_control_1">
+                <font style="vertical-align:inherit;" class="redStar">
+                    <font style="vertical-align:inherit;">
+                        @Html.DisplayNameFor(c => c.remark)
+                    </font>
+                </font>
+            </label>
+            <div class="col-md-9">
+                @Html.TextAreaFor(m => m.remark, new { id = "txtRemark", @class = "form-control", @type = "text", @autocomplete = "off", @placeholder = "请输入..." })
+                @Html.ValidationMessage("remark", new { @style = "color:yellow" })
+            </div>
+        </div>
+        <div class="form-group form-md-line-input">
+            <label class="col-lg-3 control-label" for="form_control_1">
+                <font style="vertical-align:inherit;" class="redStar">
+                    <font style="vertical-align:inherit;">
+                        @Html.DisplayNameFor(c => c.update_time)
+                    </font>
+                </font>
+            </label>
+            <div class="col-md-9">
+                @Html.TextAreaFor(m => m.update_time, new { id = "txtUpdate_time", @class = "form-control", @type = "text", @autocomplete = "off"})
+                @Html.ValidationMessage("update_time", new { @style = "color:yellow" })
+            </div>
+        </div>
+        <div class="form-group form-md-line-input">
+            <label class="col-lg-3 control-label" for="form_control_1">
+                <font style="vertical-align:inherit;" class="redStar">
+                    <font style="vertical-align:inherit;">
+                        @Html.DisplayNameFor(c => c.log_result)
+                    </font>
+                </font>
+            </label>
+            <div class="col-md-9">
+                @Html.TextAreaFor(m => m.log_result, new { id = "txtLog_result", @class = "form-control", @type = "text", @autocomplete = "off" })
+                @Html.ValidationMessage("log_result", new { @style = "color:yellow" })
+            </div>
+        </div>
+        @Html.HiddenFor(model => model.tracking_id, new { id = "txtTracking_id" })
+    </div>
+}
+
+
+

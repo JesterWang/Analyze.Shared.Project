@@ -125,7 +125,7 @@ namespace Analyze.Shared.Common.Report
         /// 更新时间
         /// </summary>
         [Display(Name = "更新时间")]
-        public DateTime update_time { get; set; }
+        public string update_time { get; set; }
         /// <summary>
         /// 操作日志
         /// </summary>

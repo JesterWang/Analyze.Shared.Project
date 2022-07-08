@@ -365,6 +365,105 @@
             });
             $(this).unbind("click");
         });
+        function MaterialsInsert() {//Insert Get
+
+            $.ajax({
+                url: "PaertViewIndexParMaterialsInsert",
+                data: { "tracking_id": tracking_id},
+                method: "get",
+                success: function (result) {
+                    $("#parMaterialsModal-body").html(result);
+                    $("#ParMaterialsModal").modal();
+                }
+            });
+        }
+        function ParMaterialsSubmit() {//Insert Post
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "PaertViewIndexParMaterialsInsert",
+                data: $("#fromParMaterialsSubmit").serialize(),
+                success: function (result) {
+                    if (result.Success == true) {
+                        $("#ParMaterialsModal").modal('hide');
+                        alert(result.Message);
+                        showFile(4);
+                    }
+                    if (result.Success == false) {
+                        alert(result.Message);
+                    }
+                },
+                error: function (event) {
+                    alert("异常！");
+                }
+            });
+        }
+
+        function MaterialsInsertHide() {//Insert Hide
+            $("#ParMaterialsModal").modal('hide');
+        }
+
+        function MaterialsUpdate(id) {//Update Get
+            var id = parseInt(id);
+                $.ajax({
+                    url: "/AdminReportEdit/PaertViewIndexParMaterialsUpdate",
+                    data: { id: id },
+                    method: "get",
+                    success: function (result) {
+                        $("#parUpdateMaterialsModal-body").html(result);
+                        $("#ParUpdateMaterialsModal").modal();
+                    }
+                });
+        }
+
+        function ParUpdateMaterialsSubmit() {//Insert Post
+
+            var id = parseInt($("#txtId").val());
+            var tracking_id = parseInt($("#txtTracking_id").val());
+            var tag_number = $("#txtTag_number").val();
+            var lenovo_pn = $("#txtLenovo_pn").val();
+            var odm_pn = $("#txtOdm_pn").val();
+            var supplier = $("#txtSupplier").val();
+            var suspect_batch = $("#txtSuspect_batch").val();
+            var suspect_lot = $("#txtSuspect_lot").val();
+            var other_batch = $("#txtOther_batch").val();
+            var other_batch_number = $("#txtOther_batch_number").val();
+            var alternative_materials = $("#txtAlternative_materials").val();
+            var product = $("#txtProduct").val();
+            var is_npi_issue = $("#txtIs_npi_issue").val();
+            var remark = $("#txtRemark").val();
+            var log_result = $("#txtLog_result").val();
+            $.ajax({
+                type: "POST",
+                url: "/AdminReportEdit/PaertViewIndexParMaterialsUpdate",
+                dataType: "json",
+                contentType: 'application/json;charset=utf-8',
+                async: true,
+                data: JSON.stringify({
+                    id: id, tracking_id: tracking_id, tag_number: tag_number, lenovo_pn: lenovo_pn, odm_pn: odm_pn, supplier: supplier,
+                    suspect_batch: suspect_batch, suspect_lot: suspect_lot, other_batch: other_batch, other_batch_number: other_batch_number,
+                    alternative_materials: alternative_materials, product: product, is_npi_issue: is_npi_issue, remark: remark, log_result: log_result
+                }),
+                success: function (result) {
+                    if (result.Success == true) {
+                        $("#ParUpdateMaterialsModal").modal('hide');
+                        alert(result.Message);
+                        showFile(4);
+                    }
+                    if (result.Success == false) {
+                        alert(result.Message);
+                    }
+                },
+                error: function (event) {
+                    alert("异常！");
+                }
+            });
+        }
+
+        function MaterialsUpdateHide() {//Update Hide
+            $("#ParUpdateMaterialsModal").modal('hide');
+        }
+
         //Smt Report
         $("#btnToSmt").click(function () {
             var category_id = 8;
@@ -438,9 +537,6 @@
                 case 2: _id = "#formFileMe"; alertId = "saveMeAlert"; _upfile_id = "UpFileMe"; break;
                 case 3: _id = "#formFileEe"; alertId = "saveEeAlert"; _upfile_id = "UpFileEe"; break;
                 case 4: _id = "#formFileMaterials"; alertId = "saveMaterialsAlert"; _upfile_id = "UpFileMaterials_1"; break;
-                case 5: _id = "#formFileMaterials"; alertId = "saveMaterialsAlert"; _upfile_id = "UpFileMaterials_2"; break;
-                case 6: _id = "#formFileMaterials"; alertId = "saveMaterialsAlert"; _upfile_id = "UpFileMaterials_3"; break;
-                case 7: _id = "#formFileMaterials"; alertId = "saveMaterialsAlert"; _upfile_id = "UpFileMaterials_4"; break;
                 case 8: _id = "#formFileSmt"; alertId = "saveSmtAlert"; _upfile_id = "UpFileSmt_man"; break;
                 case 9: _id = "#formFileSmt"; alertId = "saveSmtAlert"; _upfile_id = "UpFileSmt_machine"; break;
                 case 10: _id = "#formFileSmt"; alertId = "saveSmtAlert"; _upfile_id = "UpFileSmt_method"; break;
@@ -454,6 +550,7 @@
                 case 18: _id = "#formFileTest"; alertId = "saveTestAlert"; _upfile_id = "UpFileTest_cfc"; break;
                 case 19: _id = "#formFileTest"; alertId = "saveTestAlert"; _upfile_id = "UpFileTest_sdbu"; break;
                 case 20: _id = "#formFileGroup"; alertId = "saveGroupAlert"; _upfile_id = "UpFileGroup"; break;
+                case 21: _id = "#formFileSmt"; alertId = "saveSmtAlert"; _upfile_id = "UpFileSmt_materials"; break;
             }
 
             var file = document.getElementById(_upfile_id).files[0];
@@ -489,9 +586,6 @@
                             case 2: insertFile(2, data); break;
                             case 3: insertFile(3, data); break;
                             case 4: insertFile(4, data); break;
-                            case 5: insertFile(5, data); break;
-                            case 6: insertFile(6, data); break;
-                            case 7: insertFile(7, data); break;
                             case 8: insertFile(8, data); break;
                             case 9: insertFile(9, data); break;
                             case 10: insertFile(10, data); break;
@@ -505,6 +599,7 @@
                             case 18: insertFile(18, data); break;
                             case 19: insertFile(19, data); break;
                             case 20: insertFile(20, data); break;
+                            case 21: insertFile(21, data); break;
                         }
                     }
                 },
@@ -529,9 +624,6 @@
                         case 2: showFile(2); break;
                         case 3: showFile(3); break;
                         case 4: showFile(4); break;
-                        case 5: showFile(5); break;
-                        case 6: showFile(6); break;
-                        case 7: showFile(7); break;
                         case 8: showFile(8); break;
                         case 9: showFile(9); break;
                         case 10: showFile(10); break;
@@ -545,6 +637,7 @@
                         case 18: showFile(18); break;
                         case 19: showFile(19); break;
                         case 20: showFile(20); break;
+                        case 21: showFile(21); break;
                     }
                 },
                 error: function (data) {
@@ -563,9 +656,6 @@
                 case 2: _url = '/AdminReportEdit/PaertViewIndexParMe'; alertId = "saveMeAlert"; collapseExample = "#collapseExampleMe"; break;
                 case 3: _url = '/AdminReportEdit/PaertViewIndexParEe'; alertId = "saveEeAlert"; collapseExample = "#collapseExampleEe"; break;
                 case 4: _url = '/AdminReportEdit/PaertViewIndexParMaterials'; alertId = "saveMaterialsAlert"; collapseExample = "#collapseExampleMaterials"; break;
-                case 5: _url = '/AdminReportEdit/PaertViewIndexParMaterials'; alertId = "saveMaterialsAlert"; collapseExample = "#collapseExampleMaterials"; break;
-                case 6: _url = '/AdminReportEdit/PaertViewIndexParMaterials'; alertId = "saveMaterialsAlert"; collapseExample = "#collapseExampleMaterials"; break;
-                case 7: _url = '/AdminReportEdit/PaertViewIndexParMaterials'; alertId = "saveMaterialsAlert"; collapseExample = "#collapseExampleMaterials"; break;
                 case 8: _url = '/AdminReportEdit/PaertViewIndexParSmt'; alertId = "saveSmtAlert"; collapseExample = "#collapseExampleSmt"; break;
                 case 9: _url = '/AdminReportEdit/PaertViewIndexParSmt'; alertId = "saveSmtAlert"; collapseExample = "#collapseExampleSmt"; break;
                 case 10: _url = '/AdminReportEdit/PaertViewIndexParSmt'; alertId = "saveSmtAlert"; collapseExample = "#collapseExampleSmt"; break;
@@ -579,6 +669,7 @@
                 case 18: _url = '/AdminReportEdit/PaertViewIndexParTest'; alertId = "saveTestAlert"; collapseExample = "#collapseExampleTest"; break;
                 case 19: _url = '/AdminReportEdit/PaertViewIndexParTest'; alertId = "saveTestAlert"; collapseExample = "#collapseExampleTest"; break;
                 case 20: _url = '/AdminReportEdit/PaertViewIndexParGroup'; alertId = "saveGroupAlert"; collapseExample = "#collapseExampleGroup"; break;
+                case 21: _url = '/AdminReportEdit/PaertViewIndexParSmt'; alertId = "saveSmtAlert"; collapseExample = "#collapseExampleSmt"; break;
             }
 
             $.ajax({

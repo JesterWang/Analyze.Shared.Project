@@ -30,6 +30,10 @@ namespace Analyze.Shared.DataAccess
         [StringLength(65535)]
         public string environments { get; set; }
 
+        [Column(TypeName = "text")]
+        [StringLength(65535)]
+        public string materials { get; set; }
+
         [Column(TypeName = "timestamp")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime update_time { get; set; }
